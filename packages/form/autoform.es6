@@ -1,5 +1,5 @@
 import React from 'react';
-import AutoSizer from '@filou/ui/autosizer';
+import AutoSizer from '@filou/core/autosizer';
 import Form from './form';
 
 export default ({ layout = 'auto', ...rest }) =>

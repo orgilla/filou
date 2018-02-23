@@ -1,6 +1,6 @@
 import React from 'react';
 import { createComponent, ThemeProvider } from 'react-fela';
-import { getColor } from '@filou/ui/colors-provider';
+import { getColor } from '@filou/core/colors-provider';
 import useTheme from './theme';
 
 const Header = createComponent(

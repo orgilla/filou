@@ -1,7 +1,7 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
 import tinycolor from 'tinycolor2';
-import Portal from '@filou/portal';
+import Portal from './portal';
 
 const Modal = ({ className, logo, isOffline, isServerDown }) =>
   isOffline ? (

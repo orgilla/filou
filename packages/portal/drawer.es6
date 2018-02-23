@@ -2,7 +2,7 @@ import React, { Fragment, cloneElement } from 'react';
 import { createComponent, withStyle } from '@powr/fela';
 import { withState, compose } from 'recompose';
 import Swipeable from 'react-swipeable';
-import { getColor } from '@filou/ui/colors-provider';
+import { getColor } from '@filou/core/colors-provider';
 import Portal from './portal';
 
 export const Navigation = createComponent(

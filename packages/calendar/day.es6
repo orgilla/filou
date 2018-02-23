@@ -1,7 +1,7 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
 import tinycolor from 'tinycolor2';
-import { getColor } from '@filou/ui/colors-provider';
+import { getColor } from '@filou/core/colors-provider';
 import Field from './field';
 
 export default createComponent(

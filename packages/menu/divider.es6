@@ -1,5 +1,5 @@
 import { createComponent } from 'react-fela';
-import { border } from '@filou/ui/utils';
+import { border } from '@filou/core/utils';
 
 export default createComponent(
   ({ theme, marginBottom }) => ({

@@ -1,6 +1,6 @@
 import React, { Children, Component, cloneElement } from 'react';
 import { createComponent } from 'react-fela';
-import { getColor } from '@filou/ui/colors-provider';
+import { getColor } from '@filou/core/colors-provider';
 import { get } from 'lodash';
 import { withState, compose, withPropsOnChange } from 'recompose';
 
@@ -17,10 +17,10 @@ const TabsButtons = createComponent(
       {
         condition: compact,
         style: {
-          marginTop: theme.space2,
-        },
-      },
-    ],
+          marginTop: theme.space2
+        }
+      }
+    ]
   }),
   'div',
   ({ basic, fluid, compact, color, activeInnerIndex, ...p }) => Object.keys(p)
@@ -40,23 +40,23 @@ const Tab = createComponent(
     marginBottom: !!basic && -2,
     cursor: 'pointer',
     '&:last-child': {
-      marginRight: 0,
+      marginRight: 0
     },
     onHover: {
       backgroundColor:
         active && !basic
           ? getColor(theme, color, (palette || theme.palette) + 1)
-          : theme.dark5,
+          : theme.dark5
     },
     extend: [
       {
         condition: compact,
         style: {
           paddingY: theme.space1,
-          paddingX: theme.space2,
-        },
-      },
-    ],
+          paddingX: theme.space2
+        }
+      }
+    ]
   }),
   ({ title, ...p }) => <div {...p}>{title}</div>,
   ({ right, color, active, palette, basic, compact, ...p }) => Object.keys(p)
@@ -66,7 +66,7 @@ Tab.displayName = 'TabsTab';
 const Group = createComponent(
   ({ right }) => ({
     display: 'flex',
-    marginLeft: !!right && 'auto',
+    marginLeft: !!right && 'auto'
   }),
   ({ className, children, ...p }) => (
     <div className={className}>
@@ -83,7 +83,7 @@ Group.displayName = 'TabsGroup';
 const Content = createComponent(
   ({ theme, visible, innerStyle = () => {} }) => ({
     display: !visible && 'none',
-    ...innerStyle(theme),
+    ...innerStyle(theme)
   }),
   'div',
   ({ visible, innerStyle, ...p }) => Object.keys(p)
@@ -96,9 +96,7 @@ const enhance = compose(
     ['activeIndex', 'activeInnerIndex'],
     ({ activeIndex, activeInnerIndex }) => ({
       activeIndex:
-        activeIndex !== undefined
-          ? parseInt(activeIndex, 10)
-          : activeInnerIndex,
+        activeIndex !== undefined ? parseInt(activeIndex, 10) : activeInnerIndex
     })
   )
 );
@@ -113,7 +111,7 @@ class Tabs extends Component {
       palette,
       basic,
       compact,
-      onChange,
+      onChange
     } = this.props;
 
     if (get(child, 'type.displayName') === 'TabsGroup') {
@@ -144,7 +142,7 @@ class Tabs extends Component {
       color,
       palette,
       basic,
-      compact,
+      compact
     });
   };
 

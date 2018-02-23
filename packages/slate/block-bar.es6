@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FaExpand, FaCode, FaCompress, FaCube } from '@filou/icons';
 import { createReplaceQuery } from '@powr/router';
 import Menu from '@filou/menu';
-import { AutoSidebar } from '@filou/ui';
+import { AutoSidebar } from '@filou/core';
 import { withPropsOnChange } from 'recompose';
 import { sortBy } from 'lodash';
 import { connect } from 'react-redux';

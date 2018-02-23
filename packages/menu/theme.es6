@@ -1,6 +1,6 @@
 import { compose, withPropsOnChange } from 'recompose';
 import { withTheme } from 'react-fela';
-import { getColor } from '@filou/ui/colors-provider';
+import { getColor } from '@filou/core/colors-provider';
 
 const enhance = compose(
   withTheme,

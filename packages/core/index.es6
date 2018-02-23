@@ -1,9 +1,7 @@
 export * from './heading';
 export { default as withTheme } from './with-theme';
 export { default as withPulse } from './with-pulse';
-export { default as Offline } from './offline';
 export { default as Container } from './container';
-export { default as Print } from './print';
 export { default as Sidebar, AutoSidebar } from './sidebar';
 export { default as scrollTop, scrollTopHelper } from './scroll-top';
 export { default as Nav } from './nav';

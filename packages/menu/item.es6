@@ -3,7 +3,7 @@ import { createComponent } from 'react-fela';
 import { Icon } from 'antd';
 import tinycolor from 'tinycolor2';
 import Tappable from 'react-tappable';
-import { getColor } from '@filou/ui/colors-provider';
+import { getColor } from '@filou/core/colors-provider';
 import Image from './image';
 
 const LoaderContainer = createComponent(

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createComponent, withTheme } from 'react-fela';
 import { CompactPicker } from 'react-color';
-import { getColor } from '@filou/ui/colors-provider';
+import { getColor } from '@filou/core/colors-provider';
 
 const Edit = createComponent(
   ({ custom }) => ({

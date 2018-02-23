@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createComponent } from 'react-fela';
-import Portal from '@filou/portal';
+import Portal from './portal';
 
 let ipc = null;
 if (process.env.IS_ELECTRON) {
