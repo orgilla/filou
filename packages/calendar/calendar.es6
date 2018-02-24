@@ -21,7 +21,7 @@ import {
 } from 'date-fns';
 import { Menu, Dropdown } from 'antd';
 import { compose, withPropsOnChange } from 'recompose';
-import { FaChevronLeft, FaChevronRight } from 'icon88';
+import { FaChevronLeft, FaChevronRight } from '@filou/icons';
 import Swipeable from 'react-swipeable';
 import Caption from './caption';
 import Header from './header';
