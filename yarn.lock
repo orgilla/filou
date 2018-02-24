@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@alpacka/cli@^0.9.19":
-  version "0.9.19"
-  resolved "https://registry.npmjs.org/@alpacka/cli/-/cli-0.9.19.tgz#8c4f03b4c94067a105f89c281803f506f7c8c580"
+"@alpacka/cli@^0.9.20":
+  version "0.9.20"
+  resolved "https://registry.npmjs.org/@alpacka/cli/-/cli-0.9.20.tgz#3e68a7437c73fc7913ceac5d119264b836e04317"
   dependencies:
     chalk "^2.3.1"
     gulp "^3.9.1"
@@ -30,9 +30,9 @@
     eslint-plugin-prettier "^2.6.0"
     eslint-plugin-react "^7.6.1"
 
-"@alpacka/plugin-babel-react@^0.9.14":
-  version "0.9.14"
-  resolved "https://registry.npmjs.org/@alpacka/plugin-babel-react/-/plugin-babel-react-0.9.14.tgz#81536203759337c2dc43cbaf737b35729c830258"
+"@alpacka/plugin-babel-react@^0.9.21":
+  version "0.9.21"
+  resolved "https://registry.npmjs.org/@alpacka/plugin-babel-react/-/plugin-babel-react-0.9.21.tgz#00a6b233f657c25fb272a882faf823e4290cf144"
   dependencies:
     babel-core "6.25.0"
     babel-loader "^7.1.2"
