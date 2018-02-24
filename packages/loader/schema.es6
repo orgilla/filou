@@ -1,8 +1,8 @@
 import React, { Children } from 'react';
 import { createComponent } from 'react-fela';
 import Container from '@filou/core/container';
+import Grid from '@filou/grid';
 import ContentLoader from './content';
-import Grid from '../grid';
 
 // const loaderSchema2 = `450,[c[m5[100,200,400]]g]`
 const Panel = createComponent(
