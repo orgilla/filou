@@ -149,17 +149,8 @@ export default class AntForm extends Component {
   };
 
   render() {
-    const {
-      layout = 'vertical',
-      hideRequiredMark,
-      resolve,
-      isLoading
-    } = this.props;
+    const { layout = 'vertical', hideRequiredMark, resolve } = this.props;
     const composedResolver = compose(resolve);
-
-    if (isLoading) {
-      return <div>Lädt...</div>;
-    }
 
     return (
       <Form layout={layout} hideRequiredMark={hideRequiredMark}>

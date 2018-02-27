@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { createComponent } from 'react-fela';
 import { Drawer } from '@filou/portal';
 import Menu, { StackedMenu } from '@filou/menu';
@@ -8,7 +8,7 @@ import {
   FaTimes,
   FaTrashAlt,
   FaArrowLeft,
-  FaAngleRight,
+  FaAngleRight
 } from '@filou/icons';
 import { compose, withState, withPropsOnChange } from 'recompose';
 import { Icon } from 'antd';
@@ -19,8 +19,8 @@ const Wrapper = createComponent(
   ({ theme }) => ({
     paddingX: theme.space3,
     '& .ant-form-item-label': {
-      textAlign: 'left',
-    },
+      textAlign: 'left'
+    }
   }),
   'div'
 );
@@ -41,7 +41,7 @@ const flatten = (fields, activeKeys = [], wrap) => {
       flattenFields[key] = {
         ...f[fieldName],
         key,
-        hidden: k !== active,
+        hidden: k !== active
       };
     });
 
@@ -52,7 +52,7 @@ const flatten = (fields, activeKeys = [], wrap) => {
 const enhance = compose(
   withState('keys', 'setKeys', []),
   withPropsOnChange(['fields', 'keys', 'wrap'], ({ fields, keys, wrap }) => ({
-    fields: flatten(fields, keys, wrap),
+    fields: flatten(fields, keys, wrap)
   })),
   withPropsOnChange(
     ['title', 'subtitle', 'keys', 'fields', 'wrap'],
@@ -63,7 +63,7 @@ const enhance = compose(
 
       return {
         title: keys.length ? field.label : title,
-        subtitle: keys.length ? title : subtitle,
+        subtitle: keys.length ? title : subtitle
       };
     }
   ),
@@ -72,7 +72,7 @@ const enhance = compose(
       .map(
         key => (fields[key].edit === 'form' ? { key, ...fields[key] } : null)
       )
-      .filter(x => x),
+      .filter(x => x)
   })),
   withPropsOnChange(['open'], ({ setKeys }) => {
     setKeys([]);
@@ -116,46 +116,49 @@ export default class DrawerForm extends Component {
     const {
       layout,
       form,
-      isLoading,
       title,
       subtitle,
       fields,
       keys,
       setKeys,
+      loader
     } = this.props;
     const [lastKey, ...restKeys] = [...keys].reverse();
 
     return (
-      <Menu
-        header={
-          !!title && (
-            <Menu.Item large subtitle={subtitle}>
-              {title}
-            </Menu.Item>
-          )
-        }
-      >
-        <Wrapper>
-          <Form
-            layout={layout}
-            fields={fields}
-            resolve={args => this.resolve(args)}
-            form={form}
-            isLoading={isLoading}
-          />
-        </Wrapper>
+      <Fragment>
+        {loader}
 
-        {!!lastKey && <Menu.Space />}
-        {!!lastKey && (
-          <Menu.Item
-            key="back"
-            icon={<FaArrowLeft />}
-            onClick={() => setKeys([...restKeys])}
-          >
-            Zurück
-          </Menu.Item>
-        )}
-      </Menu>
+        <Menu
+          header={
+            !!title && (
+              <Menu.Item large subtitle={subtitle}>
+                {title}
+              </Menu.Item>
+            )
+          }
+        >
+          <Wrapper>
+            <Form
+              layout={layout}
+              fields={fields}
+              resolve={args => this.resolve(args)}
+              form={form}
+            />
+          </Wrapper>
+
+          {!!lastKey && <Menu.Space />}
+          {!!lastKey && (
+            <Menu.Item
+              key="back"
+              icon={<FaArrowLeft />}
+              onClick={() => setKeys([...restKeys])}
+            >
+              Zurück
+            </Menu.Item>
+          )}
+        </Menu>
+      </Fragment>
     );
   };
 
@@ -173,11 +176,10 @@ export default class DrawerForm extends Component {
       color = true,
       form,
       hasChanged = form.isFieldsTouched(),
-      isLoading,
       keys,
       setKeys,
       formTabs,
-      wrap,
+      wrap
     } = this.props;
     const [lastKey, ...restKeys] = [...keys].reverse();
 
@@ -245,11 +247,7 @@ export default class DrawerForm extends Component {
           </Menu>
         }
       >
-        <StackedMenu
-          isLoading={isLoading}
-          keys={keys}
-          renderMenu={this.renderMenu}
-        />
+        <StackedMenu keys={keys} renderMenu={this.renderMenu} />
       </Drawer>
     );
   }
