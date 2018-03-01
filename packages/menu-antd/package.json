@@ -1,5 +1,5 @@
 {
-  "version": "0.9.3",
+  "version": "0.9.5",
   "name": "@filou/menu-antd",
   "description": "",
   "author": "Philipp Achenbach <olymp@philipp-achenbach.de>",
@@ -9,6 +9,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "antd": "^3.2.1"
+    "antd": "^3.2.2"
   }
 }
