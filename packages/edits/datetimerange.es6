@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  isBefore,
   startOfDay,
   endOfDay,
   addMilliseconds,
@@ -12,6 +13,7 @@ import EditDuration from './duration';
 
 const Edit = ({ value = [], onChange, mode, slots, ...props }) => {
   const [start, end] = value;
+  const endFn = (!!end && (isBefore(start, end) ? end : start)) || undefined;
 
   if (mode === 'slots') {
     return (
@@ -20,7 +22,7 @@ const Edit = ({ value = [], onChange, mode, slots, ...props }) => {
           value={start}
           onChange={v => {
             const s = differenceInMilliseconds(start, startOfDay(start));
-            const e = differenceInMilliseconds(end, startOfDay(end));
+            const e = differenceInMilliseconds(endFn, startOfDay(endFn));
 
             return onChange([
               addMilliseconds(startOfDay(v), s),
@@ -36,7 +38,7 @@ const Edit = ({ value = [], onChange, mode, slots, ...props }) => {
             start && end
               ? [
                   differenceInMilliseconds(start, startOfDay(start)),
-                  differenceInMilliseconds(end, startOfDay(end))
+                  differenceInMilliseconds(endFn, startOfDay(endFn))
                 ]
               : undefined
           }
@@ -45,7 +47,7 @@ const Edit = ({ value = [], onChange, mode, slots, ...props }) => {
               Array.isArray(v) && v[0] && v[1]
                 ? [
                     addMilliseconds(startOfDay(start || new Date()), v[0]),
-                    addMilliseconds(startOfDay(end || new Date()), v[1])
+                    addMilliseconds(startOfDay(endFn || new Date()), v[1])
                   ]
                 : undefined
             )
@@ -67,13 +69,13 @@ const Edit = ({ value = [], onChange, mode, slots, ...props }) => {
         <EditDuration
           mode={mode}
           value={
-            start && end ? differenceInMilliseconds(end, start) : undefined
+            start && endFn ? differenceInMilliseconds(endFn, start) : undefined
           }
           onChange={v => onChange([start, addMilliseconds(new Date(start), v)])}
         />
       ) : (
         <EditDateTime
-          value={end}
+          value={endFn}
           onChange={v => onChange([start, endOfDay(v)])}
           {...props}
         />
