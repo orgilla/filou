@@ -30,7 +30,7 @@ class Edit extends Component {
   componentWillReceiveProps({ value }) {
     if (this.props.value !== value) {
       this.setState({
-        input: !value ? undefined : getTimeString(value)
+        input: !!value !== undefined ? getTimeString(value) : value
       });
     }
   }
