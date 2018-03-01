@@ -5,7 +5,7 @@ import EditDate from './date';
 
 const Edit = ({ value = [], onChange, ...props }) => {
   const [start, end] = value;
-  const endFn = isBefore(end, start) ? end || new Date() : start || new Date();
+  const endFn = isBefore(start, end) ? end : start;
 
   return (
     <Row gutter={16}>
@@ -14,7 +14,7 @@ const Edit = ({ value = [], onChange, ...props }) => {
       </Col>
       <Col span={12}>
         <EditDate
-          value={start ? endFn : undefined}
+          value={end ? endFn : undefined}
           onChange={v => onChange([start, endOfDay(v)])}
           {...props}
         />
