@@ -37,10 +37,10 @@
   "homepage": "https://github.com/bkniffler/filou#readme",
   "dependencies": {},
   "devDependencies": {
-    "@alpacka/cli": "^0.9.20",
-    "@alpacka/eslint-config": "^0.9.12",
-    "@alpacka/plugin-babel-react": "^0.9.21",
+    "@alpacka/cli": "^0.10.4",
+    "@alpacka/eslint-config": "^0.10.4",
+    "@alpacka/plugin-babel-react": "^0.10.4",
     "jest": "^22.3.0",
-    "lerna": "^2.9.0"
+    "lerna": "^3.0.0-alpha.1"
   }
 }
