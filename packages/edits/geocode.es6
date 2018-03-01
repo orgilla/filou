@@ -55,7 +55,7 @@ const enhance = compose(
 @enhance
 class Edit extends Component {
   static defaultProps = {
-    forceLatLng: true
+    forceLatLng: false
   };
 
   componentWillMount() {
