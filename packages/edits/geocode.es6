@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { AutoComplete, Input } from 'antd';
+import React, { Component, Fragment } from 'react';
+import { AutoComplete, Input, Row, Col } from 'antd';
 import { get, debounce } from 'lodash';
-import { withApollo, graphql } from 'react-apollo';
+import { withApollo } from 'react-apollo';
 import { createComponent } from 'react-fela';
 import { compose, withState, withPropsOnChange } from 'recompose';
 import gql from 'graphql-tag';
@@ -27,49 +27,33 @@ const StyleAutoComplete = createComponent(
 const enhance = compose(
   withApollo,
   withState('input', 'setInput'),
-  withState('geocodeLoading', 'setGeocodeLoading'),
+  withState('loading', 'setLoading'),
+  withState('dataSource', 'setDataSource', []),
   withState(
     'location',
     'setLocation',
     ({ lat, lng }) =>
       lat !== undefined && lng !== undefined ? `${lat},${lng}` : undefined
   ),
-  graphql(
-    gql`
-      query places($input: String!, $location: String) {
-        places(input: $input, location: $location) {
-          placeId
-          description
-        }
-      }
-    `,
-    {
-      options: ({ input, location }) => ({
-        skip: !input || location === undefined,
-        variables: {
-          input,
-          location
-        }
-      }),
-      props: ({ ownProps, data }) => ({
-        ...ownProps,
-        placesLoading: data.loading,
-        dataSource: (data.places || []).map(x => ({
-          value: x.placeId,
-          text: x.description
-        }))
-      })
+  withPropsOnChange(
+    ['value', 'input'],
+    ({
+      value: { id, formattedAddress } = {},
+      input,
+      dataSource = [],
+      setDataSource
+    }) => {
+      const data = dataSource.filter(d => d.value !== id);
+
+      setDataSource(
+        !input && id ? [{ value: id, text: formattedAddress }, ...data] : data
+      );
     }
   ),
   withPropsOnChange(
-    ['value', 'input', 'dataSource'],
-    ({ value: { id, formattedAddress } = {}, input, dataSource = [] }) => {
-      const data = dataSource.filter(d => d.value !== id);
-
-      return {
-        dataSource:
-          !input && id ? [{ value: id, text: formattedAddress }, ...data] : data
-      };
+    ['value'],
+    ({ value: { formattedAddress } = {}, setInput }) => {
+      setInput(formattedAddress);
     }
   )
 );
@@ -84,10 +68,10 @@ class Edit extends Component {
     }
   };
 
-  onSelect = id => {
-    const { client, onChange, setInput, setGeocodeLoading } = this.props;
+  getPlace = id => {
+    const { client, onChange, setLoading } = this.props;
 
-    setGeocodeLoading(true);
+    setLoading(true);
     client
       .query({
         query: gql(`
@@ -115,27 +99,51 @@ class Edit extends Component {
         }
       })
       .then(({ data, loading }) => {
-        setGeocodeLoading(loading);
+        setLoading(loading);
 
         if (data.place) {
           onChange(data.place);
-          setInput();
         }
       })
       .catch(err => console.log(err));
   };
 
+  getPlaces = input => {
+    const { client, location, setLoading, setDataSource } = this.props;
+
+    setLoading(true);
+    client
+      .query({
+        query: gql(`
+      query places($input: String!, $location: String) {
+        places(input: $input, location: $location) {
+          placeId
+          description
+        }
+      }
+    `),
+        variables: {
+          input,
+          location
+        }
+      })
+      .then(({ data, loading }) => {
+        setLoading(loading);
+        setDataSource(
+          (data.places || []).map(x => ({
+            value: x.placeId,
+            text: x.description
+          }))
+        );
+      })
+      .catch(err => console.log(err));
+  };
+
   getLocation = (force = true) => {
-    const {
-      client,
-      onChange,
-      setInput,
-      setLocation,
-      setGeocodeLoading
-    } = this.props;
+    const { client, onChange, setLocation, setLoading } = this.props;
 
     if (navigator && navigator.geolocation) {
-      setGeocodeLoading(true);
+      setLoading(true);
 
       navigator.geolocation.getCurrentPosition(({ coords }) => {
         const location = `${coords.latitude},${coords.longitude}`;
@@ -167,13 +175,12 @@ class Edit extends Component {
             }
           })
           .then(({ data, loading }) => {
-            setGeocodeLoading(loading);
+            setLoading(loading);
             const geocode = get(data, 'geocode.0');
 
             if (geocode) {
               if (force) {
                 onChange(geocode);
-                setInput();
               }
               setLocation(location);
             }
@@ -185,10 +192,15 @@ class Edit extends Component {
     }
   };
 
-  handleSearch = debounce(input => this.props.setInput(input), 500, {
-    trailing: true,
-    leading: false
-  });
+  handleSearch = input => {
+    const { setInput } = this.props;
+
+    setInput(input);
+    debounce(i => this.getPlaces(i), 800, {
+      trailing: true,
+      leading: false
+    })(input);
+  };
 
   render() {
     const {
@@ -197,34 +209,74 @@ class Edit extends Component {
       value = {},
       location,
       placesLoading,
-      geocodeLoading,
+      loading,
       onChange,
+      extended,
       ...rest
     } = this.props;
 
     return (
-      <StyleAutoComplete
-        dataSource={dataSource}
-        onSelect={this.onSelect}
-        onSearch={this.handleSearch}
-        onChange={this.onChange}
-        defaultValue={value.id}
-        {...rest}
-      >
-        <Input
-          suffix={
-            placesLoading || geocodeLoading ? (
-              <FormIcon type="loading" />
-            ) : (
-              <FormIcon
-                type="environment-o"
-                isActive={!location}
-                onClick={this.getLocation}
-              />
-            )
-          }
-        />
-      </StyleAutoComplete>
+      <Fragment>
+        <StyleAutoComplete
+          dataSource={dataSource}
+          onSelect={this.getPlace}
+          onSearch={this.handleSearch}
+          onChange={this.onChange}
+          value={input}
+          {...rest}
+        >
+          <Input
+            suffix={
+              placesLoading || loading ? (
+                <FormIcon type="loading" />
+              ) : (
+                <FormIcon
+                  type="environment-o"
+                  isActive={!location}
+                  onClick={this.getLocation}
+                />
+              )
+            }
+          />
+        </StyleAutoComplete>
+
+        {!!extended &&
+          value.id && (
+            <Row gutter={16} style={{ marginTop: '1rem' }}>
+              <Col span={16}>
+                <Input value={value.route} disabled />
+              </Col>
+              <Col span={8}>
+                <Input value={value.streetNumber} disabled />
+              </Col>
+            </Row>
+          )}
+        {!!extended &&
+          value.id && (
+            <Row
+              gutter={16}
+              style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}
+            >
+              <Col span={10}>
+                <Input value={value.postalCode} disabled />
+              </Col>
+              <Col span={14}>
+                <Input value={value.locality} disabled />
+              </Col>
+            </Row>
+          )}
+        {!!extended &&
+          value.id && (
+            <Row gutter={16}>
+              <Col span={12}>
+                <Input value={value.administrativeAreaLevel1} disabled />
+              </Col>
+              <Col span={12}>
+                <Input value={value.country} disabled />
+              </Col>
+            </Row>
+          )}
+      </Fragment>
     );
   }
 }
