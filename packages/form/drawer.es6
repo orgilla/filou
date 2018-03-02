@@ -89,7 +89,7 @@ export default class DrawerForm extends Component {
   handleClose = () => {
     const { form, hasChanged = form.isFieldsTouched(), onClose } = this.props;
 
-    if (!hasChanged || window.confirm('Formular wirklich schließen?')) {
+    if (!hasChanged || window.confirm('Schließen und ungespeicherte Änderungen verwerfen?')) {
       onClose();
     }
   };
