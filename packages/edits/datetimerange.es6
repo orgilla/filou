@@ -21,8 +21,12 @@ const Edit = ({ value = [], onChange, mode, slots, ...props }) => {
         <EditDate
           value={start}
           onChange={v => {
-            const s = differenceInMilliseconds(start, startOfDay(start));
-            const e = differenceInMilliseconds(endFn, startOfDay(endFn));
+            const s = start
+              ? differenceInMilliseconds(start, startOfDay(start))
+              : 0;
+            const e = endFn
+              ? differenceInMilliseconds(endFn, startOfDay(endFn))
+              : 0;
 
             return onChange([
               addMilliseconds(startOfDay(v), s),
