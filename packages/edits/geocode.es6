@@ -3,17 +3,24 @@ import { AutoComplete, Input } from 'antd';
 import { get, debounce } from 'lodash';
 import { withApollo, graphql } from 'react-apollo';
 import { createComponent } from 'react-fela';
-import { compose, withState } from 'recompose';
+import { compose, withState, withPropsOnChange } from 'recompose';
 import gql from 'graphql-tag';
 import FormIcon from '../form/form-icon';
 
-const StyledInput = createComponent(
+const StyleAutoComplete = createComponent(
   ({ theme }) => ({
-    '> input': {
+    width: '100%',
+    '& .ant-select-selection__placeholder': {
+      marginX: `${theme.space3} !important`
+    },
+    '& .ant-input-suffix': {
+      right: theme.space3
+    },
+    '& input': {
       paddingRight: `${theme.space3} !important`
     }
   }),
-  p => <Input {...p} />,
+  p => <AutoComplete {...p} />,
   p => Object.keys(p)
 );
 
@@ -24,7 +31,8 @@ const enhance = compose(
   withState(
     'location',
     'setLocation',
-    ({ lat, lng }) => lat !== undefined && lng !== undefined && `${lat},${lng}`
+    ({ lat, lng }) =>
+      lat !== undefined && lng !== undefined ? `${lat},${lng}` : undefined
   ),
   graphql(
     gql`
@@ -37,34 +45,44 @@ const enhance = compose(
     `,
     {
       options: ({ input, location }) => ({
-        skip: !input,
+        skip: !input || location === undefined,
         variables: {
           input,
           location
         }
       }),
-      props: ({ ownProps: props, data }) => ({
-        ...props,
+      props: ({ ownProps, data }) => ({
+        ...ownProps,
         placesLoading: data.loading,
-        items: get(data, 'places', [])
+        dataSource: (data.places || []).map(x => ({
+          value: x.placeId,
+          text: x.description
+        }))
       })
+    }
+  ),
+  withPropsOnChange(
+    ['value', 'input', 'dataSource'],
+    ({ value: { id, formattedAddress } = {}, input, dataSource = [] }) => {
+      const data = dataSource.filter(d => d.value !== id);
+
+      return {
+        dataSource:
+          !input && id ? [{ value: id, text: formattedAddress }, ...data] : data
+      };
     }
   )
 );
 
 @enhance
 class Edit extends Component {
-  static defaultProps = {
-    forceLatLng: false
-  };
+  onChange = () => {
+    const { location } = this.props;
 
-  componentWillMount() {
-    const { forceLatLng } = this.props;
-
-    if (forceLatLng) {
-      this.getLatLng(false);
+    if (location === undefined) {
+      this.getLocation(false);
     }
-  }
+  };
 
   onSelect = id => {
     const { client, onChange, setInput, setGeocodeLoading } = this.props;
@@ -107,10 +125,9 @@ class Edit extends Component {
       .catch(err => console.log(err));
   };
 
-  getLatLng = (force = true) => {
+  getLocation = (force = true) => {
     const {
       client,
-      value,
       onChange,
       setInput,
       setLocation,
@@ -153,62 +170,48 @@ class Edit extends Component {
             setGeocodeLoading(loading);
             const geocode = get(data, 'geocode.0');
 
-            if (geocode && (force || !get(value, 'id'))) {
-              onChange(geocode);
-              setInput();
+            if (geocode) {
+              if (force) {
+                onChange(geocode);
+                setInput();
+              }
+              setLocation(location);
             }
           })
           .catch(err => console.log(err));
-
-        setLocation(location);
       });
+    } else {
+      setLocation(null);
     }
   };
 
-  handleSearch = debounce(input => this.props.setInput(input), 800, {
+  handleSearch = debounce(input => this.props.setInput(input), 500, {
     trailing: true,
     leading: false
   });
 
-  renderOption = ({ placeId, description }) => (
-    <AutoComplete.Option key={placeId} text={description}>
-      <div style={{ whiteSpace: 'initial', display: 'flex' }}>
-        {description}
-      </div>
-    </AutoComplete.Option>
-  );
-
   render() {
     const {
       input,
-      items,
-      value,
+      dataSource = [],
+      value = {},
       location,
       placesLoading,
       geocodeLoading,
+      onChange,
       ...rest
     } = this.props;
 
-    const dataSource = [...(items || [])];
-
-    if (value && value.id)
-      dataSource.push({
-        placeId: value.id,
-        description: value.formattedAddress
-      });
-
     return (
-      <AutoComplete
-        style={{ width: '100%' }}
-        dataSource={dataSource.map(this.renderOption)}
+      <StyleAutoComplete
+        dataSource={dataSource}
         onSelect={this.onSelect}
         onSearch={this.handleSearch}
-        optionLabelProp="text"
-        value={input || get(value, 'id')}
-        disabled={placesLoading || geocodeLoading}
+        onChange={this.onChange}
+        defaultValue={value.id}
         {...rest}
       >
-        <StyledInput
+        <Input
           suffix={
             placesLoading || geocodeLoading ? (
               <FormIcon type="loading" />
@@ -216,13 +219,12 @@ class Edit extends Component {
               <FormIcon
                 type="environment-o"
                 isActive={!location}
-                onClick={this.getLatLng}
+                onClick={this.getLocation}
               />
             )
           }
-          disabled={placesLoading || geocodeLoading}
         />
-      </AutoComplete>
+      </StyleAutoComplete>
     );
   }
 }
