@@ -12,7 +12,7 @@ export default (name, transform) => {
     mapPropsToFields: props => {
       let value = props[name] || {};
       if (transform) {
-        value = transform(value) || value;
+        value = transform(value, props) || value;
       }
 
       const obj = {};

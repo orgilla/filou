@@ -13,8 +13,8 @@ const LoaderContainer = createComponent(
     marginX: theme.space2,
     overflow: 'hidden',
     '> i.anticon': {
-      color: theme.color,
-    },
+      color: theme.color
+    }
   }),
   'div'
 );
@@ -32,8 +32,8 @@ const Content = createComponent(
       marginTop: `-${theme.space1}`,
       color: (inverted !== undefined ? inverted : theme.inverted)
         ? theme.light2
-        : theme.dark2,
-    },
+        : theme.dark2
+    }
   }),
   'div',
   ({ ellipsis, inverted, collapsed, ...props }) => Object.keys(props)
@@ -52,7 +52,7 @@ export default createComponent(
     disabled,
     ellipsis,
     collapsed,
-    inverted = !!color,
+    inverted = color ? !!color || color === 0 : undefined
   }) => {
     const bgColor = getColor(theme, color, palette);
     const alpha = tinycolor(bgColor).getAlpha();
@@ -84,8 +84,8 @@ export default createComponent(
       color: !!inverted && theme.light,
       userSelect: 'none',
       onHover: {
-        backgroundColor: !!onClick && !disabled && hoverColor,
-      },
+        backgroundColor: !!onClick && !disabled && hoverColor
+      }
     };
   },
   ({
