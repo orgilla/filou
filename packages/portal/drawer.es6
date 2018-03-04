@@ -19,8 +19,8 @@ export const Navigation = createComponent(
       right: right ? 0 : undefined,
       left: right ? undefined : 0,
       height: '100%',
-      flexWidth: !collapsed ? width : 72,
-    },
+      flexWidth: !collapsed ? width : 72
+    }
   }),
   ({ children, className, setCollapsed, right }) => (
     <div className={className}>
@@ -54,11 +54,11 @@ const enhance = compose(
         ? {
             right: (right !== true && right) || 0,
             justifyContent: 'flex-end',
-            transform: open ? null : 'translateX(101%)',
+            transform: open ? null : 'translateX(101%)'
           }
         : {
             left: (left !== true && left) || 0,
-            transform: open ? null : 'translateX(-101%)',
+            transform: open ? null : 'translateX(-101%)'
           },
     width,
     maxWidth: '100%',
@@ -69,7 +69,7 @@ const enhance = compose(
       getColor(theme, color, palette) || theme.inverted
         ? theme.light
         : theme.dark,
-    display: 'flex',
+    display: 'flex'
   }))
 );
 
@@ -94,6 +94,7 @@ const Drawer = enhance(
         e.stopPropagation();
         if (onClick) onClick(e);
       }}
+      xy={console.log(2, open)}
     >
       {children}
       <Navigation
@@ -108,7 +109,7 @@ const Drawer = enhance(
 );
 
 const Dimmer = createComponent(
-  ({ theme, top = 0, open, inverted }) => ({
+  ({ theme, open, inverted }) => ({
     top: 0,
     bottom: 0,
     position: 'absolute',
@@ -118,7 +119,7 @@ const Dimmer = createComponent(
     zIndex: 14,
     opacity: !open ? 0 : 1,
     transition: 'opacity 200ms ease-out',
-    pointerEvents: !open ? 'none' : undefined,
+    pointerEvents: !open ? 'none' : undefined
   }),
   'div',
   ['onClick']

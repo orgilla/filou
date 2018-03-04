@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'antd';
+import { withPropsOnChange } from 'recompose';
 import { get, set } from 'lodash';
 import DefaultEdits from './default-edits';
 import defaultPattern from './default-pattern';
@@ -112,9 +113,12 @@ const compose = (resolvers = []) => {
   return (initial, props) => reduce(r, initial, props);
 };
 
+@withPropsOnChange(['resolve'], ({ resolve }) => ({
+  resolve: compose(resolve)
+}))
 export default class AntForm extends Component {
-  renderEdits = resolve => {
-    const { fields = [], form, layout = 'vertical' } = this.props;
+  renderEdits = () => {
+    const { fields = [], form, layout = 'vertical', resolve } = this.props;
 
     return Object.keys(fields).map(fieldName => {
       const {
@@ -124,7 +128,7 @@ export default class AntForm extends Component {
         component: Edit,
         hidden,
         ...field
-      } = resolve(get(fields, [fieldName]), this.props);
+      } = resolve(get(fields, [fieldName]));
 
       if (edit === 'form')
         return !hidden ? (
@@ -149,12 +153,11 @@ export default class AntForm extends Component {
   };
 
   render() {
-    const { layout = 'vertical', hideRequiredMark, resolve } = this.props;
-    const composedResolver = compose(resolve);
+    const { layout = 'vertical', hideRequiredMark } = this.props;
 
     return (
       <Form layout={layout} hideRequiredMark={hideRequiredMark}>
-        {this.renderEdits(composedResolver)}
+        {this.renderEdits()}
       </Form>
     );
   }

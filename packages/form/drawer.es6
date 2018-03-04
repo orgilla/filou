@@ -74,8 +74,10 @@ const enhance = compose(
       )
       .filter(x => x)
   })),
-  withPropsOnChange(['open'], ({ setKeys }) => {
-    setKeys([]);
+  withPropsOnChange(['open'], ({ open, keys, setKeys }) => {
+    if (open && keys.length > 0) {
+      setKeys([]);
+    }
   })
 );
 
@@ -89,7 +91,10 @@ export default class DrawerForm extends Component {
   handleClose = () => {
     const { form, hasChanged = form.isFieldsTouched(), onClose } = this.props;
 
-    if (!hasChanged || window.confirm('Schließen und ungespeicherte Änderungen verwerfen?')) {
+    if (
+      !hasChanged ||
+      window.confirm('Schließen und ungespeicherte Änderungen verwerfen?')
+    ) {
       onClose();
     }
   };
@@ -142,7 +147,7 @@ export default class DrawerForm extends Component {
             <Form
               layout={layout}
               fields={fields}
-              resolve={args => this.resolve(args)}
+              resolve={this.resolve}
               form={form}
             />
           </Wrapper>
