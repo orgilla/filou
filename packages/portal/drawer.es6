@@ -94,7 +94,6 @@ const Drawer = enhance(
         e.stopPropagation();
         if (onClick) onClick(e);
       }}
-      xy={console.log(2, open)}
     >
       {children}
       <Navigation

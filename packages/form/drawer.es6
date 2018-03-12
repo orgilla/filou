@@ -41,7 +41,7 @@ const flatten = (fields, activeKeys = [], wrap) => {
       flattenFields[key] = {
         ...f[fieldName],
         key,
-        hidden: k !== active
+        hidden: k !== active || f[fieldName].hidden
       };
     });
 
@@ -104,11 +104,12 @@ export default class DrawerForm extends Component {
     const result = { ...args };
 
     if (args.edit === 'form')
-      result.component = ({ id, preview, placeholder }) =>
+      result.component = ({ id, preview, placeholder, disabled }) =>
         preview || (
           <Menu.Item
             onClick={() => setKeys(wrap ? id.split('.') : [...keys, id])}
             extra={<FaAngleRight />}
+            disabled={disabled}
           >
             {placeholder || args.label}
           </Menu.Item>
