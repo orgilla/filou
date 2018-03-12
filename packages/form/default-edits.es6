@@ -15,6 +15,7 @@ import datetimerange from '@filou/edits/datetimerange';
 import duration from '@filou/edits/duration';
 import input from '@filou/edits/mask-input';
 import select from '@filou/edits/select';
+import radio from '@filou/edits/radio';
 import currency from '@filou/edits/currency';
 import form from './autoform';
 
@@ -66,6 +67,7 @@ export default {
   number,
   currency,
   select,
+  radio,
   form,
   // slate,
   geocode,
@@ -80,5 +82,5 @@ export default {
   duration,
   bool,
   week,
-  month,
+  month
 };
