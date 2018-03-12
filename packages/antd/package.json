@@ -12,7 +12,7 @@
     "antd": "^3.2.3",
     "moment": "^2.21.0",
     "react-color": "^2.14.0",
-    "text-mask-addons": "^3.7.1",
+    "text-mask-addons": "^3.7.2",
     "text-mask-core": "^5.0.1"
   }
 }
