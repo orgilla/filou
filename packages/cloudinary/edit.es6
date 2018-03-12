@@ -12,7 +12,6 @@ export default renderFn =>
   enhance(props => {
     const { onChange, value, isOpen, setOpen, multi } = props;
 
-    console.log(multi, value, isOpen);
     return (
       <div>
         <div

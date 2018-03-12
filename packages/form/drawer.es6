@@ -175,6 +175,7 @@ export default class DrawerForm extends Component {
       sublabel,
       open,
       onSave,
+      onSaveClose,
       onClose,
       onDelete,
       layout,
@@ -185,7 +186,8 @@ export default class DrawerForm extends Component {
       keys,
       setKeys,
       formTabs,
-      wrap
+      wrap,
+      loading
     } = this.props;
     const [lastKey, ...restKeys] = [...keys].reverse();
 
@@ -231,15 +233,26 @@ export default class DrawerForm extends Component {
               ))}
             {!!wrap && !!formTabs.length && <Menu.Divider />}
 
-            {!!onSave && (
-              <Menu.Item
-                icon={<FaCheck />}
-                onClick={onSave}
-                disabled={!hasChanged}
-              >
-                Speichern
-              </Menu.Item>
-            )}
+            {!!onSave &&
+              !loading && (
+                <Menu.Item
+                  icon={<FaCheck />}
+                  onClick={onSave}
+                  disabled={!hasChanged}
+                >
+                  Speichern
+                </Menu.Item>
+              )}
+            {!!onSaveClose &&
+              !loading && (
+                <Menu.Item
+                  icon={<FaCheck />}
+                  onClick={onSaveClose}
+                  disabled={!hasChanged}
+                >
+                  Speichern & Schließen
+                </Menu.Item>
+              )}
             {!!onClose && (
               <Menu.Item icon={<FaTimes />} onClick={onClose}>
                 Abbrechen
