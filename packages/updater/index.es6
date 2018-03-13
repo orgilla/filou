@@ -9,13 +9,12 @@ if (process.env.IS_ELECTRON) {
 export default class Updater extends Component {
   componentDidMount() {
     if (ipcRenderer) {
-      ipcRenderer.send('gdt', { status: 'start' });
       ipcRenderer.on('update', this.onUpdate);
+      ipcRenderer.send('update', { type: 'check' });
     }
   }
   componentWillUnmount() {
     if (ipcRenderer) {
-      ipcRenderer.send('gdt', { status: 'stop' });
       ipcRenderer.removeListener('gdt', this.onReceiveGdtPatient);
     }
   }
@@ -29,7 +28,7 @@ export default class Updater extends Component {
         <Button
           type="primary"
           size="small"
-          onClick={() => ipcRenderer.send('update-install')}
+          onClick={() => ipcRenderer.send('update', { type: 'install' })}
         >
           Beenden & installieren
         </Button>
