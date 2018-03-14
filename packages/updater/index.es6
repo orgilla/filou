@@ -37,11 +37,12 @@ export default class Updater extends Component {
           Beenden & installieren
         </Button>
       );
-      notification.success({
+      notification.open({
         message: 'Update bereit',
         description:
           'Ein Update wurde runtergeladen. Die Installation dauert nur wenige Augenblicke, aber das Programm wird dabei geschlossen. Möchten Sie das Update jetzt installieren?',
         btn,
+        placement: 'bottomRight',
         duration: 0
       });
     }
