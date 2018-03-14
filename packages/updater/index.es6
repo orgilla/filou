@@ -38,9 +38,9 @@ export default class Updater extends Component {
         </Button>
       );
       notification.success({
-        message: 'Notification Title',
+        message: 'Update bereit',
         description:
-          'Ein Update wurde heruntergeladen. Möchten Sie es jetzt installieren?',
+          'Ein Update wurde runtergeladen. Die Installation dauert nur wenige Augenblicke, aber das Programm wird dabei geschlossen. Möchten Sie das Update jetzt installieren?',
         btn,
         duration: 0
       });
