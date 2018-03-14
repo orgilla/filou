@@ -43,7 +43,8 @@ export default class Updater extends Component {
           'Ein Update wurde installiert, aber das Programm muss neu gestartet werden um die neue Version zu nutzen.',
         btn,
         placement: 'bottomRight',
-        duration: 0
+        duration: 0,
+        key: 'update'
       });
     }
     if (type === 'error') {
