@@ -1,8 +1,6 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "version": "0.9.0",
   "name": "filou",
   "description": "",
@@ -13,7 +11,7 @@
     "up": "yarn upgrade-interactive --latest",
     "init": "lerna init --independent",
     "lb": "lerna bootstrap",
-    "lp": "lerna publish --access public",
+    "lp": "lerna publish",
     "lpf": "lerna publish --force-publish --access public",
     "lc": "lerna exec --concurrency 1 -- del 'package-lock.json' 'node_modules'"
   },
@@ -22,13 +20,7 @@
     "type": "git",
     "url": "https://github.com/bkniffler/filou.git"
   },
-  "keywords": [
-    "react",
-    "universal",
-    "javascript",
-    "express",
-    "webpack"
-  ],
+  "keywords": ["react", "universal", "javascript", "express", "webpack"],
   "author": "Benjamin Kniffler <bkniffler@me.com>",
   "license": "MIT",
   "bugs": {

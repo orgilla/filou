@@ -15,7 +15,10 @@ export default class Updater extends Component {
   }
   componentWillUnmount() {
     if (ipcRenderer) {
-      ipcRenderer.removeListener('gdt', this.onUpdate);
+      if (this.hide) {
+        this.hide();
+      }
+      ipcRenderer.removeListener('update', this.onUpdate);
     }
   }
   onUpdate = (event, { type, data }) => {
@@ -23,7 +26,6 @@ export default class Updater extends Component {
       if (this.hide) {
         this.hide();
       }
-      const key = `open${Date.now()}`;
       const btn = (
         <Button
           type="primary"
@@ -33,24 +35,25 @@ export default class Updater extends Component {
           Beenden & installieren
         </Button>
       );
-      notification.open({
+      notification.success({
         message: 'Notification Title',
         description:
           'Ein Update wurde heruntergeladen. Möchten Sie es jetzt installieren?',
         btn,
-        key
+        duration: 0
       });
     }
     if (type === 'error') {
       if (this.hide) {
         this.hide();
       }
+      // this.hide = message.info('Neues Update verfügbar.', 0);
     }
     if (type === 'available') {
       if (this.hide) {
         this.hide();
       }
-      this.hide = message.loading('Neues Update wird heruntergeladen..', 0);
+      // this.hide = message.info('Neues Update verfügbar.', 0);
     }
   };
   render() {
