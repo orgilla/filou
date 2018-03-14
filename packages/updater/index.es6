@@ -15,7 +15,7 @@ export default class Updater extends Component {
   }
   componentWillUnmount() {
     if (ipcRenderer) {
-      ipcRenderer.removeListener('gdt', this.onReceiveGdtPatient);
+      ipcRenderer.removeListener('gdt', this.onUpdate);
     }
   }
   onUpdate = (event, { type, data }) => {
