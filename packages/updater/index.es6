@@ -34,13 +34,13 @@ export default class Updater extends Component {
           size="small"
           onClick={() => ipcRenderer.send('update', { type: 'install' })}
         >
-          Beenden & installieren
+          Neu starten
         </Button>
       );
       notification.open({
         message: 'Update bereit',
         description:
-          'Ein Update wurde runtergeladen. Die Installation dauert nur wenige Augenblicke, aber das Programm wird dabei geschlossen. Möchten Sie das Update jetzt installieren?',
+          'Ein Update wurde installiert, aber das Programm muss neu gestartet werden um die neue Version zu nutzen.',
         btn,
         placement: 'bottomRight',
         duration: 0
