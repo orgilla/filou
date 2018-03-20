@@ -8,7 +8,9 @@ import {
   FaTimes,
   FaTrashAlt,
   FaArrowLeft,
-  FaAngleRight
+  FaAngleRight,
+  FaAngleLeft,
+  FaHome
 } from '@filou/icons';
 import { compose, withState, withPropsOnChange } from 'recompose';
 import { Icon } from 'antd';
@@ -40,7 +42,7 @@ const flatten = (fields, activeKeys = [], wrap) => {
 
       flattenFields[key] = {
         ...f[fieldName],
-        key,
+        key: k ? `${k}.${fieldName}` : fieldName,
         hidden: k !== active || f[fieldName].hidden
       };
     });
@@ -127,7 +129,9 @@ export default class DrawerForm extends Component {
       fields,
       keys,
       setKeys,
-      loader
+      loader,
+      wrap,
+      tabs
     } = this.props;
     const [lastKey, ...restKeys] = [...keys].reverse();
 
@@ -138,7 +142,15 @@ export default class DrawerForm extends Component {
         <Menu
           header={
             !!title && (
-              <Menu.Item large subtitle={subtitle}>
+              <Menu.Item
+                large
+                subtitle={subtitle}
+                icon={
+                  !!lastKey && (
+                    <FaAngleLeft onClick={() => setKeys([...restKeys])} />
+                  )
+                }
+              >
                 {title}
               </Menu.Item>
             )
@@ -152,17 +164,6 @@ export default class DrawerForm extends Component {
               form={form}
             />
           </Wrapper>
-
-          {!!lastKey && <Menu.Space />}
-          {!!lastKey && (
-            <Menu.Item
-              key="back"
-              icon={<FaArrowLeft />}
-              onClick={() => setKeys([...restKeys])}
-            >
-              Zurück
-            </Menu.Item>
-          )}
         </Menu>
       </Fragment>
     );
@@ -187,6 +188,7 @@ export default class DrawerForm extends Component {
       setKeys,
       formTabs,
       wrap,
+      tabs,
       loading
     } = this.props;
     const [lastKey, ...restKeys] = [...keys].reverse();
@@ -208,31 +210,6 @@ export default class DrawerForm extends Component {
               </Menu.Item>
             }
           >
-            {!!lastKey && (
-              <Menu.Item
-                key="back"
-                icon={<FaArrowLeft />}
-                onClick={() => setKeys([...restKeys].reverse())}
-              >
-                Zurück
-              </Menu.Item>
-            )}
-            {!!lastKey && <Menu.Divider />}
-
-            {!!wrap &&
-              formTabs.map(field => (
-                <Menu.Item
-                  key={field.key}
-                  icon={this.getIcon(field.icon)}
-                  onClick={() =>
-                    setKeys(wrap ? field.key.split('.') : [...keys, field.key])
-                  }
-                >
-                  {field.label}
-                </Menu.Item>
-              ))}
-            {!!wrap && !!formTabs.length && <Menu.Divider />}
-
             {!!onSave &&
               !loading && (
                 <Menu.Item
@@ -263,6 +240,41 @@ export default class DrawerForm extends Component {
                 Löschen
               </Menu.Item>
             )}
+
+            {!!lastKey && !tabs && <Menu.Divider />}
+            {!!lastKey &&
+              !tabs && (
+                <Menu.Item
+                  key="back"
+                  icon={<FaArrowLeft />}
+                  onClick={() => setKeys([...restKeys].reverse())}
+                >
+                  Zurück
+                </Menu.Item>
+              )}
+            {!!tabs && <Menu.Divider />}
+            {!!tabs && (
+              <Menu.Item
+                key="back"
+                icon={<FaHome />}
+                onClick={() => setKeys([...restKeys].reverse())}
+              >
+                Übersicht
+              </Menu.Item>
+            )}
+
+            {!!tabs && !!formTabs.length && <Menu.Divider />}
+
+            {!!tabs &&
+              formTabs.map(field => (
+                <Menu.Item
+                  key={field.key}
+                  icon={this.getIcon(field.icon)}
+                  onClick={() => setKeys(field.key.split('.'))}
+                >
+                  {field.label}
+                </Menu.Item>
+              ))}
           </Menu>
         }
       >
