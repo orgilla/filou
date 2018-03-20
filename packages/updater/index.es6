@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { message, Button, notification } from 'antd';
+import { Button, notification } from 'antd';
 
 let ipcRenderer;
 if (process.env.IS_ELECTRON) {
@@ -10,7 +10,7 @@ export default class Updater extends Component {
   componentDidMount() {
     if (ipcRenderer) {
       ipcRenderer.on('update', this.onUpdate);
-      this.interval = setInterval(this.check, 1000 * 60);
+      this.interval = setInterval(this.check, 1000 * 60 * 5);
       this.check();
     }
   }
@@ -34,13 +34,13 @@ export default class Updater extends Component {
           size="small"
           onClick={() => ipcRenderer.send('update', { type: 'install' })}
         >
-          Neu starten
+          Jetzt starten
         </Button>
       );
       notification.open({
-        message: 'Update bereit',
+        message: 'Update installiert',
         description:
-          'Ein Update wurde installiert, aber das Programm muss neu gestartet werden um die neue Version zu nutzen.',
+          'Nach Programm-Neustart kann die neue Version genutzt werden.',
         btn,
         placement: 'bottomRight',
         duration: 0,

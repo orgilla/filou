@@ -80,7 +80,7 @@ export default createComponent(
       borderRadius: collapsed ? '50%' : theme.borderRadius,
       opacity: disabled ? 0.67 : 1,
       backgroundColor:
-        (bgColor && active && hoverColor) || bgColor || (active && theme.dark5),
+        (bgColor && active && hoverColor) || bgColor || (active && theme.dark4),
       color: !!inverted && theme.light,
       userSelect: 'none',
       onHover: {

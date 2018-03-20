@@ -1,7 +1,17 @@
 import React from 'react';
 import { Select } from 'antd';
 
-const Edit = ({ data, items, children, value, onChange, mode, ...rest }) =>
+const Edit = ({
+  data,
+  items,
+  children,
+  value,
+  onChange,
+  mode,
+  valueProp = 'id',
+  displayProp = 'name',
+  ...rest
+}) =>
   items && items.length ? (
     <Select
       value={value}
@@ -15,8 +25,8 @@ const Edit = ({ data, items, children, value, onChange, mode, ...rest }) =>
       style={{ width: '100%' }}
     >
       {items.map(item => (
-        <Select.Option key={item.id} value={item.id}>
-          {item.name}
+        <Select.Option key={item[valueProp]} value={item[valueProp]}>
+          {item[displayProp]}
         </Select.Option>
       ))}
     </Select>

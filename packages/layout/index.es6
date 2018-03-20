@@ -1,11 +1,12 @@
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 import {
   compose,
   withState,
   getContext,
   withProps,
-  withPropsOnChange,
+  withPropsOnChange
 } from 'recompose';
 import { withStyle, withTheme, createComponent } from '@powr/fela';
 import { connect } from 'react-redux';
@@ -23,7 +24,7 @@ export const Icon = createComponent(
     width: '100%',
     display: 'none',
     ifSmallDown: {
-      display: 'block',
+      display: 'block'
     },
     '> svg': {
       position: 'absolute',
@@ -32,8 +33,8 @@ export const Icon = createComponent(
       left: 0,
       padding: 1,
       transform: 'translate(4px, -50%)',
-      borderRadius: '100%',
-    },
+      borderRadius: '100%'
+    }
   }),
   ({ className, color, size, icon: Icon, onClick }) => (
     <Tappable className={className} onTap={onClick}>
@@ -50,7 +51,7 @@ export const ContentContainer = createComponent(
     flex: 1,
     overflowX: overflowX || overflow,
     overflowY: overflowY || overflow,
-    '-webkit-overflow-scrolling': 'touch',
+    '-webkit-overflow-scrolling': 'touch'
   }),
   ({ children, className }) => <div className={className}>{children}</div>,
   []
@@ -67,15 +68,15 @@ export const Navigation = createComponent(
       zIndex: 5,
       position: 'absolute',
       height: '100%',
-      flexWidth: !collapsed ? width : 72,
+      flexWidth: !collapsed ? width : 72
     },
     ifSmallDown: {
       flexWidth: 24,
       overflow: collapsed ? 'hidden' : undefined,
       '> div > div > *': collapsed && {
-        display: 'none',
-      },
-    },
+        display: 'none'
+      }
+    }
   }),
   ({ children, className, setCollapsed, collapsed }) => (
     <div className={className}>
@@ -105,9 +106,9 @@ export const Sidebar = createComponent(
       flexWidth: hasContent ? 24 : '100%',
       overflow: 'hidden',
       '> div > *': {
-        display: hasContent ? 'none' : undefined,
-      },
-    },
+        display: hasContent ? 'none' : undefined
+      }
+    }
   }),
   ({ children, className, goBack, hasContent }) => (
     <Swipeable
@@ -137,8 +138,8 @@ export const Section = createComponent(
     display: 'flex',
     overflow: 'hidden',
     ifSmallDown: placeholder && {
-      display: 'none',
-    },
+      display: 'none'
+    }
   }),
   props => <div {...props} />,
   ({ placeholder, ...p }) => Object.keys(p)
@@ -151,57 +152,55 @@ const enhance = compose(
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
-    overflow: 'hidden',
-  }),
-  getContext({
-    renderer: PropTypes.object,
+    overflow: 'hidden'
   }),
   withTheme,
-  withProps(({ renderer, theme }) => {
-    renderer.renderStatic(
-      {
-        overflow: 'hidden',
-        padding: 0,
-        margin: 0,
-        /* padding: [
-          0,
-          `0 constant(safe-area-inset-right) constant(safe-area-inset-bottom) constant(safe-area-inset-left)`,
-          `0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)`
-        ], */
-      },
-      'html'
-    );
-    renderer.renderStatic(
-      {
-        overflow: 'hidden',
-        backgroundColor: theme.color,
-        padding: 0,
-        margin: 0,
-        '-webkit-overflow-scrolling': 'touch',
-      },
-      'body'
-    );
-    renderer.renderStatic(
-      {
-        display: 'flex',
-        flexDirection: 'row',
-        backgroundColor: 'white',
-        position: 'relative',
-      },
-      '#app'
-    );
-  }),
   withState('collapsed', 'setCollapsed', true),
   connect(({ location }) => ({
-    url: location.url,
+    url: location.url
   })),
   withPropsOnChange(['url'], ({ collapsed, setCollapsed }) => ({
-    xy: !collapsed ? setCollapsed(true) : null,
+    xy: !collapsed ? setCollapsed(true) : null
   }))
 );
+
+// padding: 0,  `0 constant(safe-area-inset-right) constant(safe-area-inset-bottom) constant(safe-area-inset-left)`, `0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)`]
+
 export default enhance(
-  ({ className, setCollapsed, collapsed, menu, children, width = 240 }) => (
+  ({
+    className,
+    setCollapsed,
+    collapsed,
+    menu,
+    children,
+    width = 240,
+    theme
+  }) => (
     <div className={className}>
+      <Helmet>
+        <style type="text/css">
+          {`
+            html {
+              overflow: hidden; 
+              padding: 0;
+              margin: 0;
+            }
+            body {
+              overflow: hidden;
+              background-color: ${theme.color};
+              padding: 0;
+              margin: 0;
+              -webkit-overflow-scrolling: touch;
+            }
+            #app {
+              display: flex;
+              flex-direction: row,
+              background-color: white;
+              position: relative
+            }
+          `}
+        </style>
+      </Helmet>
       <Navigation
         setCollapsed={setCollapsed}
         collapsed={collapsed}
@@ -224,7 +223,7 @@ export const Area = ({
   overflowX,
   overflowY,
   goBack = () => {},
-  className,
+  className
 }) => (
   <ContentContainer
     overflow={overflow}
