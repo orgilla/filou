@@ -12,7 +12,7 @@ export const getColor = (theme, color, palette) =>
   theme[color] ||
   (!!theme.colors &&
     !!theme.colors[color] &&
-    theme.colors[color][palette || theme.palette]) ||
+    theme.colors[color][palette !== undefined ? palette : theme.palette]) ||
   (color === true && theme.color) ||
   color;
 
