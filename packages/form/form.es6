@@ -120,7 +120,7 @@ export default class AntForm extends Component {
   renderEdits = () => {
     const { fields = [], form, layout = 'vertical', resolve } = this.props;
 
-    return Object.keys(fields).map(fieldName => {
+    return Object.keys(fields).map((fieldName, i) => {
       const {
         edit,
         decoratorProps,
@@ -131,11 +131,11 @@ export default class AntForm extends Component {
       } = resolve(get(fields, [fieldName]));
 
       if (edit === 'form')
-        return !hidden ? <Edit {...editProps} id={fieldName} /> : null;
+        return !hidden ? <Edit {...editProps} key={i} id={fieldName} /> : null;
 
       return (
         <FormItem
-          key={fieldName}
+          key={i}
           layout={layout}
           {...field}
           style={hidden ? { display: 'none' } : field.style}
