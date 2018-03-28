@@ -6,7 +6,7 @@ import {
   FaCube,
   FaCheck,
   FaTimes,
-  FaTrashAlt,
+  FaTrash,
   FaArrowLeft,
   FaAngleRight,
   FaAngleLeft,
@@ -236,7 +236,7 @@ export default class DrawerForm extends Component {
               </Menu.Item>
             )}
             {!!onDelete && (
-              <Menu.Item icon={<FaTrashAlt />} onClick={onDelete}>
+              <Menu.Item icon={<FaTrash />} onClick={onDelete}>
                 Löschen
               </Menu.Item>
             )}

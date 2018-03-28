@@ -147,6 +147,7 @@ export default class AntForm extends Component {
       );
     });
   };
+  
 
   render() {
     const { layout = 'vertical', hideRequiredMark } = this.props;
