@@ -51,8 +51,7 @@ const flatten = (fields, activeKeys = [], wrap) => {
   return flattenFields;
 };
 
-const enhance = compose(
-  withState('keys', 'setKeys', []),
+const enhanceFields = compose(
   withPropsOnChange(['fields', 'keys', 'wrap'], ({ fields, keys, wrap }) => ({
     fields: flatten(fields, keys, wrap)
   })),
@@ -68,14 +67,50 @@ const enhance = compose(
         subtitle: keys.length ? title : subtitle
       };
     }
-  ),
-  withPropsOnChange(['fields'], ({ fields }) => ({
-    formTabs: Object.keys(fields)
+  )
+);
+
+const Fields = enhanceFields(
+  ({ layout, fields, form, resolve, title, subtitle, keys, setKeys }) => (
+    <Menu
+      header={
+        !!title && (
+          <Menu.Item
+            large
+            subtitle={subtitle}
+            icon={
+              keys.length > 0 && (
+                <FaAngleLeft
+                  onClick={() => setKeys(keys.splice(0, keys.length - 1))}
+                />
+              )
+            }
+          >
+            {title}
+          </Menu.Item>
+        )
+      }
+    >
+      <Wrapper>
+        <Form layout={layout} fields={fields} resolve={resolve} form={form} />
+      </Wrapper>
+    </Menu>
+  )
+);
+
+const enhance = compose(
+  withState('keys', 'setKeys', []),
+  withPropsOnChange(['fields'], ({ fields }) => {
+    const tabs = Object.keys(fields)
       .map(
         key => (fields[key].edit === 'form' ? { key, ...fields[key] } : null)
       )
-      .filter(x => x)
-  })),
+      .filter(x => x);
+    return {
+      formTabs: tabs,
+      first: tabs.map(x => x.key).filter((x, i) => i === 0)
+    };
+  }),
   withPropsOnChange(['open'], ({ open, keys, setKeys }) => {
     if (open && keys.length > 0) {
       setKeys([]);
@@ -120,51 +155,13 @@ export default class DrawerForm extends Component {
     return resolve ? resolve(result) : result;
   };
 
-  renderMenu = () => {
-    const {
-      layout,
-      form,
-      title,
-      subtitle,
-      fields,
-      keys,
-      setKeys,
-      loader,
-      wrap,
-      tabs
-    } = this.props;
-    const [lastKey, ...restKeys] = [...keys].reverse();
+  renderMenu = (keys, key) => {
+    const { loader, first } = this.props;
 
     return (
       <Fragment>
         {loader}
-
-        <Menu
-          header={
-            !!title && (
-              <Menu.Item
-                large
-                subtitle={subtitle}
-                icon={
-                  !!lastKey && (
-                    <FaAngleLeft onClick={() => setKeys([...restKeys])} />
-                  )
-                }
-              >
-                {title}
-              </Menu.Item>
-            )
-          }
-        >
-          <Wrapper>
-            <Form
-              layout={layout}
-              fields={fields}
-              resolve={this.resolve}
-              form={form}
-            />
-          </Wrapper>
-        </Menu>
+        <Fields {...this.props} resolve={this.resolve} keys={keys} />
       </Fragment>
     );
   };
@@ -187,11 +184,12 @@ export default class DrawerForm extends Component {
       keys,
       setKeys,
       formTabs,
-      wrap,
       tabs,
       loading
     } = this.props;
     const [lastKey, ...restKeys] = [...keys].reverse();
+
+    const isTabbbed = formTabs.length > 0;
 
     return (
       <Drawer
@@ -252,33 +250,38 @@ export default class DrawerForm extends Component {
                   Zurück
                 </Menu.Item>
               )}
-            {!!tabs && <Menu.Divider />}
-            {!!tabs && (
-              <Menu.Item
-                key="back"
-                icon={<FaHome />}
-                onClick={() => setKeys([...restKeys].reverse())}
-              >
-                Übersicht
-              </Menu.Item>
-            )}
-
-            {!!tabs && !!formTabs.length && <Menu.Divider />}
-
-            {!!tabs &&
-              formTabs.map(field => (
+            {isTabbbed && (
+              <Fragment>
+                <Menu.Divider />
                 <Menu.Item
-                  key={field.key}
-                  icon={this.getIcon(field.icon)}
-                  onClick={() => setKeys(field.key.split('.'))}
+                  key="back"
+                  icon={<FaHome />}
+                  onClick={() => setKeys([...restKeys].reverse())}
                 >
-                  {field.label}
+                  Übersicht
                 </Menu.Item>
-              ))}
+
+                <Menu.Divider />
+
+                {formTabs.map(field => (
+                  <Menu.Item
+                    key={field.key}
+                    icon={this.getIcon(field.icon)}
+                    onClick={() => setKeys(field.key.split('.'))}
+                  >
+                    {field.label}
+                  </Menu.Item>
+                ))}
+              </Fragment>
+            )}
           </Menu>
         }
       >
-        <StackedMenu keys={keys} renderMenu={this.renderMenu} />
+        {isTabbbed ? (
+          <StackedMenu keys={keys} renderMenu={this.renderMenu} />
+        ) : (
+          this.renderMenu(keys)
+        )}
       </Drawer>
     );
   }
