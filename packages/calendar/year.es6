@@ -5,21 +5,19 @@ import {
   format,
   startOfWeek,
   endOfWeek,
-  endOfMonth,
+  endOfYear,
   compareAsc,
   addDays,
-  addMonths,
-  subMonths,
-  isSameMonth,
-  setYear,
+  addYears,
+  subYears,
+  isSameYear,
   getYear,
-  setMonth,
   getMonth,
   isSunday,
   isSameDay,
   startOfDay
 } from 'date-fns';
-import { Menu, Dropdown } from 'antd';
+import { Dropdown } from 'antd';
 import { compose, withPropsOnChange } from 'recompose';
 import { FaChevronLeft, FaChevronRight } from '@filou/icons';
 import Swipeable from 'react-swipeable';
@@ -28,46 +26,19 @@ import Header from './header';
 import KW from './kw';
 import Day from './day';
 import Container from './container';
-
-const menuMonths = (date, setDate) => (
-  <Menu onClick={({ key }) => setDate(setMonth(date, key))}>
-    <Menu.Item key={0}>Januar</Menu.Item>
-    <Menu.Item key={1}>Februar</Menu.Item>
-    <Menu.Item key={2}>März</Menu.Item>
-    <Menu.Item key={3}>April</Menu.Item>
-    <Menu.Item key={4}>Mai</Menu.Item>
-    <Menu.Item key={5}>Juni</Menu.Item>
-    <Menu.Item key={6}>Juli</Menu.Item>
-    <Menu.Item key={7}>August</Menu.Item>
-    <Menu.Item key={8}>September</Menu.Item>
-    <Menu.Item key={9}>Oktober</Menu.Item>
-    <Menu.Item key={10}>November</Menu.Item>
-    <Menu.Item key={11}>Dezember</Menu.Item>
-  </Menu>
-);
-
-export const menuYears = (date, setDate) => (
-  <Menu onClick={({ key }) => setDate(setYear(date, key))}>
-    {Array.from(Array(10)).map((x, y) => {
-      const year = parseInt(getYear(date), 10) - 4 + y;
-
-      return <Menu.Item key={year}>{year}</Menu.Item>;
-    })}
-  </Menu>
-);
+import { menuYears } from './calendar';
 
 const enhance = (...enhancers) =>
   compose(
     withPropsOnChange(['date'], ({ date, onChange }) => {
       const year = getYear(date);
-      const month = getMonth(date); // 0 = Januar, ...
       const start = startOfWeek(
-        isSunday(new Date(year, month, 1))
-          ? new Date(year, month, 2)
-          : new Date(year, month, 1),
+        isSunday(new Date(year, 0, 1))
+          ? new Date(year, 0, 2)
+          : new Date(year, 0, 1),
         { weekStartsOn: 1 }
       );
-      const end = endOfWeek(endOfMonth(new Date(year, month, 1)), {
+      const end = endOfWeek(endOfYear(new Date(year, 0, 1)), {
         weekStartsOn: 1
       });
       let i = 0;
@@ -79,24 +50,28 @@ const enhance = (...enhancers) =>
           days.push({
             date: date2,
             isSunday: true,
-            key: format(addDays(start, i), 'WW'),
+            key: format(addDays(start, i), `WW.${i}`),
             label: format(addDays(start, i), 'WW')
           });
         } else {
           days.push({
             date: date2,
-            disabled: !isSameMonth(date2, new Date(year, month, 1)),
+            disabled: !isSameYear(date2, new Date(year, 0, 1)),
             today: isSameDay(date2, new Date()),
             onClick: () => onChange(date2),
             key: format(date2, 'X'),
-            label: format(date2, 'DD')
+            label: (
+              <span>
+                {format(date2, 'DD')}.
+                <small>{format(date2, 'M')}</small>
+              </span>
+            )
           });
         }
         i += 1;
       }
       return {
         year,
-        month,
         start: +start,
         end: +end,
         days
@@ -134,7 +109,7 @@ const enhance = (...enhancers) =>
     })
   );
 
-const Calendar = (...enhancers) =>
+const Year = (...enhancers) =>
   enhance(...enhancers)(
     createComponent(
       ({ theme }) => ({
@@ -165,29 +140,26 @@ const Calendar = (...enhancers) =>
         <Swipeable
           className={className}
           onSwipedRight={() => {
-            setDate(subMonths(date, 1));
+            setDate(subYears(date, 1));
           }}
           onSwipedLeft={() => {
-            setDate(addMonths(date, 1));
+            setDate(addYears(date, 1));
           }}
         >
           <h4>
-            <Dropdown overlay={menuMonths(date, setDate)}>
-              <span>{format(date, 'MMMM', { locale })}</span>
-            </Dropdown>{' '}
             <Dropdown overlay={menuYears(date, setDate)}>
               <span>{format(date, 'YYYY', { locale })}</span>
             </Dropdown>
             {!!arrows && (
               <FaChevronLeft
                 size={12}
-                onClick={() => setDate(subMonths(date, 1))}
+                onClick={() => setDate(subYears(date, 1))}
               />
             )}
             {!!arrows && (
               <FaChevronRight
                 size={12}
-                onClick={() => setDate(addMonths(date, 1))}
+                onClick={() => setDate(addYears(date, 1))}
               />
             )}
           </h4>
@@ -207,5 +179,5 @@ const Calendar = (...enhancers) =>
     )
   );
 
-export const createCalendar = Calendar;
-export default Calendar();
+export const createYear = Year;
+export default Year();
