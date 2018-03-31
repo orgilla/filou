@@ -131,7 +131,11 @@ export default class AntForm extends Component {
       } = resolve(get(fields, [fieldName]));
 
       if (edit === 'form')
-        return !hidden ? <Edit {...editProps} key={i} id={fieldName} /> : null;
+        return !hidden ? (
+          <FormItem key={fieldName} layout={layout} {...field}>
+            <Edit {...editProps} id={fieldName} />
+          </FormItem>
+        ) : null;
 
       return (
         <FormItem
@@ -147,7 +151,6 @@ export default class AntForm extends Component {
       );
     });
   };
-  
 
   render() {
     const { layout = 'vertical', hideRequiredMark } = this.props;

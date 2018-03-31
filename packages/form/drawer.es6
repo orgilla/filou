@@ -250,34 +250,35 @@ export default class DrawerForm extends Component {
                   Zurück
                 </Menu.Item>
               )}
-            {isTabbbed && (
-              <Fragment>
-                <Menu.Divider />
-                <Menu.Item
-                  key="back"
-                  icon={<FaHome />}
-                  onClick={() => setKeys([...restKeys].reverse())}
-                >
-                  Übersicht
-                </Menu.Item>
-
-                <Menu.Divider />
-
-                {formTabs.map(field => (
+            {!!tabs &&
+              isTabbbed && (
+                <Fragment>
+                  <Menu.Divider />
                   <Menu.Item
-                    key={field.key}
-                    icon={this.getIcon(field.icon)}
-                    onClick={() => setKeys(field.key.split('.'))}
+                    key="back"
+                    icon={<FaHome />}
+                    onClick={() => setKeys([...restKeys].reverse())}
                   >
-                    {field.label}
+                    Übersicht
                   </Menu.Item>
-                ))}
-              </Fragment>
-            )}
+
+                  <Menu.Divider />
+
+                  {formTabs.map(field => (
+                    <Menu.Item
+                      key={field.key}
+                      icon={this.getIcon(field.icon)}
+                      onClick={() => setKeys(field.key.split('.'))}
+                    >
+                      {field.label}
+                    </Menu.Item>
+                  ))}
+                </Fragment>
+              )}
           </Menu>
         }
       >
-        {isTabbbed ? (
+        {!!tabs && isTabbbed ? (
           <StackedMenu keys={keys} renderMenu={this.renderMenu} />
         ) : (
           this.renderMenu(keys)
