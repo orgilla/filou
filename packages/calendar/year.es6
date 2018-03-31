@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { createComponent } from 'react-fela';
 import locale from 'date-fns/locale/de';
 import {
@@ -12,7 +12,6 @@ import {
   subYears,
   isSameYear,
   getYear,
-  getMonth,
   isSunday,
   isSameDay,
   startOfDay
@@ -62,8 +61,8 @@ const enhance = (...enhancers) =>
             key: format(date2, 'X'),
             label: (
               <span>
-                {format(date2, 'DD')}.
-                <small>{format(date2, 'M')}</small>
+                {format(date2, 'DD')}
+                {/* <small>{format(date2, 'M')}</small> */}
               </span>
             )
           });
@@ -84,6 +83,7 @@ const enhance = (...enhancers) =>
     withPropsOnChange(['days', 'value', 'data'], props => {
       const { value, days, getDayProps } = props;
 
+      let lastMonth = -1;
       return {
         days: days.map(({ label, isSunday, date, key, ...rest }) => {
           if (isSunday) {
@@ -94,11 +94,18 @@ const enhance = (...enhancers) =>
             );
           }
           const dayProps = (getDayProps && getDayProps(date, props)) || {};
+          const isOdd = date.getMonth() % 2;
+
+          const isNewMonth = lastMonth !== date.getMonth();
+          lastMonth = date.getMonth();
+          const active = !compareAsc(date, value);
           return (
             <Day
               key={key}
+              isOdd={isOdd}
               {...rest}
-              active={!compareAsc(date, value)}
+              active={active}
+              placeholder={isNewMonth ? format(date, 'MMM.', { locale }) : null}
               {...dayProps}
             >
               {label}

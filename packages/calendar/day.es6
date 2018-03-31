@@ -14,39 +14,41 @@ export default createComponent(
     color,
     backgroundColor,
     bold,
-    palette,
+    palette
   }) => ({
-    color:
-      (!!active && theme.light) ||
-      (disabled && theme.dark4) ||
-      (color && getColor(theme, color, palette)),
-    backgroundColor:
-      (backgroundColor && getColor(theme, backgroundColor, palette)) ||
-      (!!active && theme.color) ||
-      (!!today && theme.dark4),
-    fontWeight: bold ? 'bold' : undefined,
-    borderRadius: '50%',
-    cursor: 'pointer',
-    '> .content': {
-      '> .points': {
-        centerX: true,
-        top: 10,
-        color:
-          (!!active && theme.light2) ||
-          (pointColor && getColor(theme, pointColor, palette)) ||
-          (disabled && theme.dark5) ||
-          theme.dark2,
-        fontSize: '90%',
-      },
-    },
-    onHover: {
+    '> div': {
+      color:
+        (!!active && theme.light) ||
+        (disabled && theme.dark4) ||
+        (color && getColor(theme, color, palette)),
       backgroundColor:
-        (!!active &&
-          tinycolor(theme.color)
-            .setAlpha(0.8)
-            .toString()) ||
-        theme.dark4,
-    },
+        (backgroundColor && getColor(theme, backgroundColor, palette)) ||
+        (!!active && theme.color) ||
+        (!!today && theme.dark4),
+      fontWeight: bold ? 'bold' : undefined,
+      borderRadius: '50%',
+      cursor: 'pointer',
+      '> .content': {
+        '> .points': {
+          centerX: true,
+          top: 10,
+          color:
+            (!!active && theme.light2) ||
+            (pointColor && getColor(theme, pointColor, palette)) ||
+            (disabled && theme.dark5) ||
+            theme.dark2,
+          fontSize: '90%'
+        }
+      },
+      onHover: {
+        backgroundColor:
+          (!!active &&
+            tinycolor(theme.color)
+              .setAlpha(0.8)
+              .toString()) ||
+          theme.dark4
+      }
+    }
   }),
   ({ children, points, color, ...p }) => (
     <Field {...p}>
