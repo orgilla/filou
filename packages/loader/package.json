@@ -11,7 +11,7 @@
   "dependencies": {
     "@filou/grid": "^0.9.3",
     "react-fela": "^7.1.0",
-    "react-swipeable": "^4.2.0",
+    "react-swipeable": "^4.2.1",
     "tinycolor2": "^1.4.1"
   }
 }
