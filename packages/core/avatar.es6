@@ -20,17 +20,17 @@ const getInitials = name => {
 };
 
 export default createComponent(
-  ({ theme, name, size }) => ({
+  ({ theme, name, size = 30 }) => ({
     display: 'block',
     borderRadius: '50%',
     background: `url(https://invatar0.appspot.com/svg/${getInitials(
       name
-    )}.jpg?s=${Math.round((size || 30) * 0.8)}&bg=${encodeURIComponent(
+    )}.jpg?s=${Math.round(size * 0.8)}&bg=${encodeURIComponent(
       theme.color
     )}&color=${encodeURIComponent(theme.light)}) center center no-repeat, ${
       theme.color
     }`
   }),
-  ({ size, ...p }) => <Gravatar  {...p} protocol="https://" size={size || 30} />,
+  ({ size, ...p }) => <Gravatar {...p} protocol="https://" size={size} />,
   ['email', 'name', 'default', 'size']
 );

@@ -9,6 +9,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "aphrodite": "^1.2.5"
+    "aphrodite": "^2.1.0"
   }
 }
