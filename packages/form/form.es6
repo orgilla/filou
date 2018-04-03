@@ -131,20 +131,17 @@ export default class AntForm extends Component {
         ...field
       } = resolve(get(fields, [fieldName]));
 
-      if (edit === 'form') {
-        const editField = <Edit {...editProps} id={fieldName} />;
-
+      if (edit === 'form')
         return (
           !hidden &&
           (hideLabel ? (
-            editField
+            <Edit key={fieldName} {...editProps} id={fieldName} />
           ) : (
             <FormItem key={fieldName} layout={layout} {...field}>
-              {editField}
+              <Edit {...editProps} id={fieldName} />
             </FormItem>
           ))
         );
-      }
 
       return (
         <FormItem
