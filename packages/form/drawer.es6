@@ -63,7 +63,7 @@ const enhanceFields = compose(
         : fields[keys[keys.length - 1]];
 
       return {
-        title: keys.length ? field.label : title,
+        title: keys.length && field ? field.label : title,
         subtitle: keys.length ? title : subtitle
       };
     }
@@ -140,13 +140,24 @@ export default class DrawerForm extends Component {
     const { resolve, wrap, keys, setKeys } = this.props;
     const result = { ...args };
 
+    if (!args.edit) result.component = () => null;
+    if (args.edit === 'divider') result.component = () => <Menu.Divider />;
+    if (args.edit === 'spacer') result.component = () => <Menu.Spacer />;
     if (args.edit === 'form')
-      result.component = ({ id, preview, placeholder, disabled }) =>
+      result.component = ({
+        id,
+        preview,
+        placeholder,
+        subtitle,
+        extra,
+        disabled
+      }) =>
         preview || (
           <Menu.Item
             onClick={() => setKeys(wrap ? id.split('.') : [...keys, id])}
-            extra={<FaAngleRight />}
+            extra={extra || <FaAngleRight />}
             disabled={disabled}
+            subtitle={subtitle}
           >
             {placeholder || args.label}
           </Menu.Item>
@@ -155,8 +166,8 @@ export default class DrawerForm extends Component {
     return resolve ? resolve(result) : result;
   };
 
-  renderMenu = (keys, key) => {
-    const { loader, first } = this.props;
+  renderMenu = keys => {
+    const { loader } = this.props;
 
     return (
       <Fragment>
