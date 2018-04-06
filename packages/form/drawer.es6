@@ -141,7 +141,10 @@ export default class DrawerForm extends Component {
     const result = { ...args };
 
     if (!args.edit) result.component = () => null;
-    if (args.edit === 'divider') result.component = () => <Menu.Divider />;
+    if (args.edit === 'divider') {
+      result.component = () => <Menu.Divider />;
+      return result;
+    }
     if (args.edit === 'spacer') result.component = () => <Menu.Spacer />;
     if (args.edit === 'form')
       result.component = ({

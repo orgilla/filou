@@ -1,16 +1,9 @@
 import React, { cloneElement } from 'react';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import {
-  compose,
-  withState,
-  getContext,
-  withProps,
-  withPropsOnChange
-} from 'recompose';
+import { compose, withState, withPropsOnChange } from 'recompose';
 import { withStyle, withTheme, createComponent } from '@powr/fela';
 import { connect } from 'react-redux';
-import { FaChevronLeft, FaEllipsisV } from '@filou/icons';
+import { FaClose, FaEllipsisV } from '@filou/icons';
 import Tappable from 'react-tappable';
 import Swipeable from 'react-swipeable';
 import './bouncefix';
@@ -49,9 +42,10 @@ export const ContentContainer = createComponent(
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
-    overflowX: overflowX || overflow,
-    overflowY: overflowY || overflow,
-    '-webkit-overflow-scrolling': 'touch'
+    overflow: 'hidden'
+    // overflowX: overflowX || overflow,
+    // overflowY: overflowY || overflow,
+    // '-webkit-overflow-scrolling': 'touch'
   }),
   ({ children, className }) => <div className={className}>{children}</div>,
   []
@@ -97,13 +91,33 @@ export const Navigation = createComponent(
   ['setCollapsed', 'collapsed']
 );
 
-export const Sidebar = createComponent(
+export const BackButton = createComponent(
   ({ hasContent, width = 240 }) => ({
+    width: 40,
+    height: 40,
+    right: 15,
+    top: 15,
+    borderRadius: '100%',
+    border: '1px solid gray',
+    zIndex: 4,
+    backgroundColor: 'white',
+    position: 'fixed'
+  }),
+  ({ children, className, onClick, hasContent }) => (
+    <div onClick={onClick} className={className}>
+      <FaClose size={14} color="dark" />
+    </div>
+  ),
+  ['onClick']
+);
+
+export const Sidebar = createComponent(
+  ({ hasContent, width = 240, overflow }) => ({
     transition: 'all 200ms cubic-bezier(0.165, 0.84, 0.44, 1)',
     width,
     position: 'relative',
     ifSmallDown: {
-      flexWidth: hasContent ? 24 : '100%',
+      flexWidth: hasContent ? 0 : '100%',
       overflow: 'hidden',
       '> div > *': {
         display: hasContent ? 'none' : undefined
@@ -111,6 +125,16 @@ export const Sidebar = createComponent(
     }
   }),
   ({ children, className, goBack, hasContent }) => (
+    <Swipeable
+      onSwipedRight={() => goBack()}
+      className={className}
+      onTap={hasContent ? () => goBack() : null}
+    >
+      {hasContent && <BackButton onClick={() => goBack()} />}
+      {children}
+    </Swipeable>
+  ),
+  /* ({ children, className, goBack, hasContent }) => (
     <Swipeable
       onSwipedRight={() => goBack()}
       className={className}
@@ -126,17 +150,18 @@ export const Sidebar = createComponent(
       )}
       {children}
     </Swipeable>
-  ),
+  ), */
   ['goBack', 'hasContent']
 );
 
 export const Section = createComponent(
-  ({ placeholder }) => ({
+  ({ placeholder, overflow }) => ({
     flex: 1,
     backgroundColor: 'white',
     height: '100%',
     display: 'flex',
-    overflow: 'hidden',
+    '-webkit-overflow-scrolling': 'touch',
+    overflow: overflow || 'hidden',
     ifSmallDown: placeholder && {
       display: 'none'
     }
@@ -152,7 +177,8 @@ const enhance = compose(
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    backgroundColor: 'white'
   }),
   withTheme,
   withState('collapsed', 'setCollapsed', true),
@@ -239,9 +265,11 @@ export const Area = ({
       {menu}
     </Sidebar>
     {hasContent ? (
-      <Section>{children}</Section>
+      <Section overflow={overflow}>{children}</Section>
     ) : (
-      <Section placeholder>{placeholder || children}</Section>
+      <Section overflow={overflow} placeholder>
+        {placeholder || children}
+      </Section>
     )}
   </ContentContainer>
 );

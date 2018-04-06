@@ -69,7 +69,7 @@ const enhance = compose(
       getColor(theme, color, palette) || theme.inverted
         ? theme.light
         : theme.dark,
-    display: 'flex'
+    display: open ? 'flex' : 'none'
   }))
 );
 
@@ -116,6 +116,7 @@ const Dimmer = createComponent(
     left: 0,
     backgroundColor: inverted ? theme.light2 : theme.dark3,
     zIndex: 14,
+    display: open ? undefined : 'none',
     opacity: !open ? 0 : 1,
     transition: 'opacity 200ms ease-out',
     pointerEvents: !open ? 'none' : undefined
