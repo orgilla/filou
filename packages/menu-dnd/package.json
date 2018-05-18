@@ -9,6 +9,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "react-beautiful-dnd": "^6.0.2"
+    "react-beautiful-dnd": "^7.1.2"
   }
 }
