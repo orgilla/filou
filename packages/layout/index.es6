@@ -220,9 +220,9 @@ export default enhance(
             }
             #app {
               display: flex;
-              flex-direction: row,
+              flex-direction: row;
               background-color: white;
-              position: relative
+              position: relative;
             }
           `}
         </style>
