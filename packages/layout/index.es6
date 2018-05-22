@@ -130,7 +130,7 @@ export const Sidebar = createComponent(
       className={className}
       onTap={hasContent ? () => goBack() : null}
     >
-      {hasContent && <BackButton onClick={() => goBack()} />}
+      {!!goBack && !!hasContent && <BackButton onClick={() => goBack()} />}
       {children}
     </Swipeable>
   ),
@@ -248,7 +248,7 @@ export const Area = ({
   overflow,
   overflowX,
   overflowY,
-  goBack = () => {},
+  goBack,
   className
 }) => (
   <ContentContainer
