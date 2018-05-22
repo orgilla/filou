@@ -157,6 +157,7 @@ export const Sidebar = createComponent(
 export const Section = createComponent(
   ({ placeholder, overflow }) => ({
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: 'white',
     height: '100%',
     display: 'flex',

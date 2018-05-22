@@ -68,7 +68,7 @@ const Menu = createComponent(
         <Header
           marginBottom={headerMarginBottom}
           paddingBottom={headerPaddingBottom}
-          color={headerColor || color}
+          color={headerColor !== undefined ? headerColor : color}
           collapsed={collapsed}
           inverted={headerInverted || inverted}
         >
