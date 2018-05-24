@@ -21,18 +21,18 @@ const Header = createComponent(
     backgroundColor: getColor(theme, color, palette),
     color: theme.inverted ? theme.light : theme.dark,
     '& svg': {
-      size: 40,
+      size: 40
     },
     '& img': {
       size: 50,
-      borderRadius: theme.borderRadius,
-    },
+      borderRadius: theme.borderRadius
+    }
   }),
   'div'
 );
 
-export default useTheme(({ inverted, color, theme, ...props }) => (
+export default useTheme(({ inverted, theme, ...props }) => (
   <ThemeProvider theme={theme}>
-    <Header color={color} {...props} />
+    <Header {...props} />
   </ThemeProvider>
 ));

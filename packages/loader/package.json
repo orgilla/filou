@@ -10,8 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "@filou/grid": "^0.9.3",
-    "react-fela": "^7.2.0",
-    "react-swipeable": "^4.2.1",
+    "react-fela": "^7.3.0",
+    "react-swipeable": "^4.3.0",
     "tinycolor2": "^1.4.1"
   }
 }

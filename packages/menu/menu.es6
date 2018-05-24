@@ -53,9 +53,11 @@ const Menu = createComponent(
     className,
     children,
     color,
+    palette,
     inverted,
     header,
     headerColor,
+    headerPalette,
     headerPaddingBottom,
     headerMarginBottom,
     headerInverted,
@@ -69,6 +71,7 @@ const Menu = createComponent(
           marginBottom={headerMarginBottom}
           paddingBottom={headerPaddingBottom}
           color={headerColor !== undefined ? headerColor : color}
+          palette={headerPalette !== undefined ? headerPalette : palette}
           collapsed={collapsed}
           inverted={headerInverted || inverted}
         >
