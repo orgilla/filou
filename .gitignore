@@ -3,6 +3,7 @@
 .DS_Store
 _old
 .rpt2_cache
+dist
 
 # Logs
 logs

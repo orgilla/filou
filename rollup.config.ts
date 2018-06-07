@@ -1,3 +1,4 @@
+import camelCase from 'lodash/camelCase';
 import typescript from 'rollup-plugin-typescript2';
 import commonjs from 'rollup-plugin-commonjs';
 import external from 'rollup-plugin-peer-deps-external';
@@ -5,42 +6,27 @@ import resolve from 'rollup-plugin-node-resolve';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import json from 'rollup-plugin-json';
 
+const pkg = require('./package.json');
+
 export default {
-  input: './index.ts',
+  input: `src/${pkg.name}.ts`,
   output: [
     {
-      file: './index.browser.js',
-      name: 'filou',
-      format: 'umd',
-      sourcemap: false,
-      exports: 'named',
-    },
-    {
-      file: './index.umd.js',
-      name: 'filou',
+      file: pkg.main,
+      name: camelCase(pkg.name),
       format: 'umd',
       sourcemap: true,
-      exports: 'named',
     },
-    {
-      file: './index.es5.js',
-      format: 'es',
-      sourcemap: true,
-      exports: 'named',
-    },
+    { file: pkg.module, format: 'es', sourcemap: true },
   ],
   watch: {
-    include: ['*.ts', '*.tsx'],
+    include: ['src'],
   },
   plugins: [
     json(),
     external(),
-    typescript({
-      outDir: './dist',
-    }),
-    resolve({
-      extensions: ['.ts', '.tsx', '.js', '.json'],
-    }),
+    typescript({ useTsconfigDeclarationDir: true }),
+    resolve({}),
     commonjs(),
     sourceMaps(),
   ],
