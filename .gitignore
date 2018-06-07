@@ -2,6 +2,7 @@
 .env
 .DS_Store
 _old
+.rpt2_cache
 
 # Logs
 logs
@@ -37,5 +38,6 @@ flow-typed/
 # Flow Coverage Report
 flow-coverage/
 
-# Lerna
-packages/**/*.js
+**/*.js
+**/*.js.map
+**/*.d.ts

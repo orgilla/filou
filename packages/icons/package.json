@@ -1,8 +1,0 @@
-{
-  "version": "0.9.3",
-  "name": "@filou/icons",
-  "description": "",
-  "main": "./index",
-  "author": "Benjamin Kniffler <bkniffler@me.com>",
-  "license": "MIT"
-}
