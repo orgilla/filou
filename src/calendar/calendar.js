@@ -71,7 +71,7 @@ const enhance = (...enhancers) =>
         weekStartsOn: 1
       });
       let i = 0;
-      const days: object[] = [];
+      const days = [];
       while (compareAsc(addDays(start, i), end) < 0) {
         const date2 = addDays(start, i - 1);
 

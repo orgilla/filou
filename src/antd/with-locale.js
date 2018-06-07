@@ -1,26 +1,19 @@
-import * as React from 'react';
-// import * as types from 'prop-types';
+import React from 'react';
+import * as types from 'prop-types';
 import get from 'lodash/get';
 
-export interface LocaleProviderProps {
-  locale: object;
-  children?: React.ReactNode;
-}
-
-export default class LocaleProvider extends React.Component<
-  LocaleProviderProps
-> {
+export default class LocaleProvider extends React.Component {
   static childContextTypes = {
-    // locale: types.func
+    locale: types.func
   };
 
   getChildContext() {
     return {
-      // locale: this.caller
+      locale: this.caller
     };
   }
 
-  caller = (fnOrString: string | Function, ...rest: any[]) => {
+  caller = (fnOrString, ...rest) => {
     const { locale } = this.props;
     if (typeof fnOrString === 'function') {
       return fnOrString(...rest, { locale });

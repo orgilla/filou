@@ -62,5 +62,5 @@ export default createComponent(
     ],
   }),
   'div',
-  ({ height, marginTop, ...p }) => Object.keys(p),
+  ({ height, marginTop, ...p }) => Object.keys(p)
 );

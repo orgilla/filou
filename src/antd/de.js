@@ -8,9 +8,7 @@ import LocaleProvider from './with-locale';
 
 moment.locale('de');
 
-export default (LANG = {}) => (WrappedComponent: React.ComponentType<any>) => (
-  props: any
-) => (
+export default (LANG = {}) => WrappedComponent => props => (
   <AntLocaleProvider locale={deDE}>
     <LocaleProvider locale={{ ...LANG, ...dateLocale }}>
       <WrappedComponent {...props} />

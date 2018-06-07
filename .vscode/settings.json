@@ -8,22 +8,6 @@
     "**/.svn": true,
     "**/.hg": true,
     "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/index.umd.js": true,
-    "**/index.es5.js": true,
-    "**/*.js": {
-      "when": "$(basename).tsx"
-    },
-    "**/**.jsq": {
-      "when": "$(basename).ts"
-    },
-    "**/*.d.tsq": {
-      "when": "$(basename).tsx"
-    },
-    "**/**.d.tsq": {
-      "when": "$(basename).ts"
-    },
-    "**/*.js.mapq": true,
-    "**/*.es.jsq": true
+    "**/.DS_Store": true
   }
 }
