@@ -6,12 +6,12 @@ export default class AutoSizer extends React.PureComponent {
     onResize: () => {},
     disableHeight: true,
     disableWidth: false,
-    style: {}
+    style: {},
   };
 
   state = {
     height: this.props.defaultHeight || 0,
-    width: this.props.defaultWidth || 0
+    width: this.props.defaultWidth || 0,
   };
 
   componentDidMount() {
@@ -57,7 +57,7 @@ export default class AutoSizer extends React.PureComponent {
       disableHeight,
       disableWidth,
       style,
-      steps
+      steps,
     } = this.props;
     const { height, width, step } = this.state;
 
@@ -90,7 +90,7 @@ export default class AutoSizer extends React.PureComponent {
         ref={this._setRef}
         style={{
           ...outerStyle,
-          ...style
+          ...style,
         }}
       >
         {children(childParams)}
@@ -100,7 +100,7 @@ export default class AutoSizer extends React.PureComponent {
 
   _onResize = debounce((...args) => this.onResize(...args), 100, {
     trailing: true,
-    leading: false
+    leading: false,
   });
 
   onResize = () => {
@@ -131,7 +131,7 @@ export default class AutoSizer extends React.PureComponent {
         if (!steps.length) {
           this.setState({
             // height: height - paddingTop - paddingBottom,
-            width: width - paddingLeft - paddingRight
+            width: width - paddingLeft - paddingRight,
           });
           // onResize({ height, width });
           onResize({ width });
@@ -144,7 +144,7 @@ export default class AutoSizer extends React.PureComponent {
             this.setState({
               // height: height - paddingTop - paddingBottom,
               width: width - paddingLeft - paddingRight,
-              step: step[0] || steps[0]
+              step: step[0] || steps[0],
             });
             // onResize({ height, width });
             onResize({ width });
@@ -385,6 +385,6 @@ function createDetectElementResize(nonce) {
 
   return {
     addResizeListener,
-    removeResizeListener
+    removeResizeListener,
   };
 }

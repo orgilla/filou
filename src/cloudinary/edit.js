@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash';
 const enhance = compose(
   withState('isOpen', 'setOpen', false),
   withPropsOnChange(['value'], ({ value }) => ({
-    value: (Array.isArray(value) ? value : [value]).filter(x => !isEmpty(x))
+    value: (Array.isArray(value) ? value : [value]).filter(x => !isEmpty(x)),
   }))
 );
 export default renderFn =>

@@ -14,16 +14,16 @@
     "**/*.js": {
       "when": "$(basename).tsx"
     },
-    "**/**.js": {
+    "**/**.jsq": {
       "when": "$(basename).ts"
     },
-    "**/*.d.ts": {
+    "**/*.d.tsq": {
       "when": "$(basename).tsx"
     },
-    "**/**.d.ts": {
+    "**/**.d.tsq": {
       "when": "$(basename).ts"
     },
-    "**/*.js.map": true,
-    "**/*.es.js": true
+    "**/*.js.mapq": true,
+    "**/*.es.jsq": true
   }
 }
