@@ -1,0 +1,28 @@
+{
+  presets: ['env', 'react'],
+  plugins: [
+    [
+      'import',
+      {
+        libraryName: 'antd',
+        style: true
+      }
+    ],
+    'babel-plugin-lodash',
+    [
+      'babel-plugin-transform-imports',
+      {
+        antd: {
+          transform: 'antd/lib/${member}',
+          kebabCase: true,
+          preventFullImport: true
+        },
+        'date-fns': {
+          transform: 'date-fns/${member}',
+          preventFullImport: true,
+          camelCase: true
+        }
+      }
+    ]
+  ]
+}

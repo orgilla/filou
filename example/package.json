@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "antd": "^3.1.0",
+    "filou": "^0.10.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.0.0-beta.49",
+    "babel-plugin-import": "^1.6.3",
+    "babel-plugin-lodash": "^3.3.3",
+    "babel-plugin-transform-imports": "^1.5.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "less": "^2.7.3",
+    "parcel-bundler": "^1.4.1"
+  }
+}
