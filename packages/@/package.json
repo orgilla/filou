@@ -1,0 +1,27 @@
+{
+  "version": "0.10.0",
+  "name": "filou",
+  "description": "",
+  "author": "Orgilla <hi@orgil.la>",
+  "contributors": [
+    "Benjamin Kniffler <bkniffler@me.com>",
+    "Philipp Achenbach <github@philipp-achenbach.de>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@filou/core": "^0.10.0",
+    "fela": "^6.1.8",
+    "fela-monolithic": "^5.0.22",
+    "fela-plugin-custom-property": "^7.0.3",
+    "fela-plugin-embedded": "^5.2.8",
+    "fela-plugin-extend": "^6.0.6",
+    "fela-plugin-fallback-value": "^5.0.18",
+    "fela-plugin-friendly-pseudo-class": "^5.0.17",
+    "fela-plugin-named-keys": "^1.0.3",
+    "fela-plugin-prefixer": "^5.0.19",
+    "fela-plugin-remove-undefined": "^5.0.20",
+    "fela-plugin-unit": "^5.0.17",
+    "react-fela": "^7.3.0",
+    "tinycolor2": "^1.4.1"
+  }
+}
