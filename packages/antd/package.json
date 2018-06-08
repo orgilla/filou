@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "antd": "^3.5.0",
-    "moment": "^2.22.1",
+    "moment": "^2.22.2",
     "react-color": "^2.14.1",
     "text-mask-addons": "^3.7.2",
     "text-mask-core": "^5.1.0"
