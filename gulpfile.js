@@ -1,3 +1,4 @@
+const json5 = require('require-json5');
 const gulp = require('gulp');
 const sourcemaps = require('gulp-sourcemaps');
 const plumber = require('gulp-plumber');
@@ -5,7 +6,7 @@ const newer = require('gulp-changed');
 const babel = require('gulp-babel');
 const watch = require('gulp-watch');
 const debug = require('gulp-debug');
-const babelrc = require('./.babelrc');
+const babelrc = json5.parse(require('fs').readFileSync('./.babelrc'));
 
 process.env.NODE_ENV = 'production';
 
@@ -19,7 +20,7 @@ const compile = (glp, force) =>
     .pipe(newer(dest, { extension: force ? '.xyz' : '.js' }))
     .pipe(sourcemaps.init())
     .pipe(babel(babelrc))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(dest));
 
 gulp.task('watch', () => {

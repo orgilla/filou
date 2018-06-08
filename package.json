@@ -14,7 +14,7 @@
   "scripts": {
     "build": "gulp build",
     "watch": "gulp watch",
-    "clean": "del packages/**/*.js",
+    "clean": "del packages/**/*.js && del packages/**/*.js.map",
     "prepublishOnly": "npm run build",
     "up": "yarn upgrade-interactive --latest",
     "publish": "lerna publish",
@@ -60,6 +60,7 @@
     "gulp-plumber": "^1.2.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-watch": "^5.0.0",
-    "lerna": "^2.11.0"
+    "lerna": "^2.11.0",
+    "require-json5": "^1.0.2"
   }
 }

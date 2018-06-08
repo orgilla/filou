@@ -1,27 +1,11 @@
-module.exports = {
+{
   presets: [
-    [
-      '@babel/preset-react',
-      {
-        development: process.env.NODE_ENV === 'development',
-      },
-    ],
-    [
-      '@babel/env',
-      {
-        // modules: process.env.BABEL_ENV === 'es' ? false : undefined,
-        modules: false,
-      },
-    ],
-    [
-      '@babel/preset-stage-0',
-      {
-        decoratorsLegacy: true,
-      },
-    ],
+    '@babel/env',
+    '@babel/preset-react',
+    ['@babel/stage-0', { decoratorsLegacy: true }],
   ],
   plugins: [
-    ['@babel/plugin-transform-runtime', {}],
+    '@babel/plugin-transform-runtime',
     [
       'import-7',
       {
@@ -51,4 +35,4 @@ module.exports = {
       },
     ],
   ],
-};
+}
