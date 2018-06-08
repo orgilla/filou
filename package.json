@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "filou",
   "workspaces": [
     "packages/*"
   ],
@@ -9,7 +10,6 @@
     "../alpacka/packages/*"
   ],
   "version": "0.9.0",
-  "name": "filou",
   "description": "",
   "scripts": {
     "build": "gulp build",
@@ -17,6 +17,7 @@
     "clean": "del packages/**/*.js",
     "prepublishOnly": "npm run build",
     "up": "yarn upgrade-interactive --latest",
+    "publish": "lerna publish",
     "rename": "rename packages/**/*.js {{f}}.es6"
   },
   "repository": {
@@ -58,6 +59,7 @@
     "gulp-debug": "^4.0.0",
     "gulp-plumber": "^1.2.0",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-watch": "^5.0.0"
+    "gulp-watch": "^5.0.0",
+    "lerna": "^2.11.0"
   }
 }
