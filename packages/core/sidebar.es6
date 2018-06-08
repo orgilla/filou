@@ -2,7 +2,6 @@ import React, { Children, cloneElement, Fragment } from 'react';
 import { createComponent } from 'react-fela';
 import { withState } from 'recompose';
 
-console.warn('Deprecate this!');
 export const Aside = createComponent(
   ({
     theme,
