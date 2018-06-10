@@ -1,5 +1,5 @@
 {
-  "version": "0.10.1",
+  "version": "0.10.2",
   "name": "filou",
   "description": "",
   "author": "Orgilla <hi@orgil.la>",
@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@filou/core": "^0.10.1",
+    "@filou/core": "^0.10.2",
     "fela": "^6.1.8",
     "fela-monolithic": "^5.0.22",
     "fela-plugin-custom-property": "^7.0.3",
