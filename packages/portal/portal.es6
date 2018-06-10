@@ -7,23 +7,28 @@ const portal = isReact16 ? createPortal : unstable_renderSubtreeIntoContainer;
 
 class Portal extends Component {
   componentWillMount() {
-    const { noPortal, noScroll } = this.props;
+    const { noPortal, noScroll, rootElement = 'app' } = this.props;
+
     if (!noPortal && typeof document !== 'undefined') {
       this.popup = document.createElement('div');
       document.body.appendChild(this.popup);
     }
     if (noScroll) {
-      document.getElementById('app').classList.toggle('with-portal', true);
+      document
+        .getElementById(rootElement)
+        .classList.toggle('with-portal', true);
     }
   }
 
   componentWillUnmount() {
-    const { noScroll } = this.props;
+    const { noScroll, rootElement = 'app' } = this.props;
     if (this.popup) {
       document.body.removeChild(this.popup);
     }
     if (noScroll) {
-      document.getElementById('app').classList.toggle('with-portal', false);
+      document
+        .getElementById(rootElement)
+        .classList.toggle('with-portal', false);
     }
   }
 

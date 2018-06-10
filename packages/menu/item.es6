@@ -13,8 +13,8 @@ const LoaderContainer = createComponent(
     marginX: theme.space2,
     overflow: 'hidden',
     '> i.anticon': {
-      color: theme.color
-    }
+      color: theme.color,
+    },
   }),
   'div'
 );
@@ -30,10 +30,12 @@ const Content = createComponent(
       ellipsis: true,
       display: 'block',
       marginTop: `-${theme.space1}`,
-      color: (inverted !== undefined ? inverted : theme.inverted)
+      color: (inverted !== undefined
+      ? inverted
+      : theme.inverted)
         ? theme.light2
-        : theme.dark2
-    }
+        : theme.dark2,
+    },
   }),
   'div',
   ({ ellipsis, inverted, collapsed, ...props }) => Object.keys(props)
@@ -52,7 +54,7 @@ export default createComponent(
     disabled,
     ellipsis,
     collapsed,
-    inverted = color ? !!color || color === 0 : undefined
+    inverted = color ? !!color || color === 0 : undefined,
   }) => {
     const bgColor = getColor(theme, color, palette);
     const alpha = tinycolor(bgColor).getAlpha();
@@ -84,15 +86,15 @@ export default createComponent(
       color: !!inverted && theme.light,
       userSelect: 'none',
       onHover: {
-        backgroundColor: !!onClick && !disabled && hoverColor
-      }
+        backgroundColor: !!onClick && !disabled && hoverColor,
+      },
     };
   },
   ({
     large,
     children,
     subtitle,
-    icon,
+    icon: FaIcon,
     extra,
     _ref,
     innerRef,
@@ -113,9 +115,9 @@ export default createComponent(
       ref={_ref || innerRef || ref}
       className={className}
     >
-      {!!icon && (
+      {!!FaIcon && (
         <Image collapsed={collapsed} large={large}>
-          {icon}
+          {React.isValidElement(FaIcon) ? FaIcon : <FaIcon />}
         </Image>
       )}
       <Content collapsed={collapsed} ellipsis={ellipsis} inverted={inverted}>
