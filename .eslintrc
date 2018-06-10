@@ -1,15 +1,10 @@
 {
-  "parser": "babel-eslint",
-  "extends": [
-    "prettier",
-    "prettier/flowtype",
-    "prettier/react",
-    "prettier/standard"
-  ],
+  "extends": ["prettier", "prettier/react", "prettier/standard"],
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2017,
     "sourceType": "module",
     "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
       "jsx": true
     }
   }

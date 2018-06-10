@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createComponent } from 'react-fela';
-import { NavLink } from '@powr/router';
 import cn from 'classnames';
+// import { NavLink } from '@powr/router';
+const NavLink = () => null;
 
 const Brand = createComponent(
   ({ theme, inverse }) => ({
@@ -13,11 +14,11 @@ const Brand = createComponent(
     display: 'inline-block',
     '> img': {
       marginY: 0,
-      marginX: 0
+      marginX: 0,
     },
     onHover: {
-      color: inverse ? theme.light2 : theme.dark2
-    }
+      color: inverse ? theme.light2 : theme.dark2,
+    },
   }),
   ({ children, className, ...p }) => (
     <NavLink to="/" className={cn(className, 'o-nav-item-brand')} {...p}>
@@ -32,8 +33,8 @@ const Inner = createComponent(
     visibility: 'hidden',
     paddingX: theme.space3,
     '> *': {
-      marginX: `-${theme.space3}`
-    }
+      marginX: `-${theme.space3}`,
+    },
   }),
   'div',
   ['className']
@@ -44,7 +45,7 @@ const NavbarBrand = createComponent(
     position: 'relative',
     fontSize: `calc(${theme.fontSize} + 4px)`,
     whiteSpace: 'nowrap',
-    float: vertically ? 'none' : 'left'
+    float: vertically ? 'none' : 'left',
   }),
   ({ className, children, ...props }) => (
     <div className={className}>
@@ -59,9 +60,9 @@ const NavbarBrand = createComponent(
 NavbarBrand.displayName = 'Navbar.Brand';
 NavbarBrand.propTypes = {
   /** inverse theme with primary-color background */
-  inverse: PropTypes.bool
+  inverse: PropTypes.bool,
 };
 NavbarBrand.defaultProps = {
-  inverse: false
+  inverse: false,
 };
 export default NavbarBrand;

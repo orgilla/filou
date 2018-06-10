@@ -1,17 +1,13 @@
 {
-  presets: ['env', 'react', 'stage-0'],
+  presets: [
+    '@babel/env',
+    '@babel/preset-react',
+    ['@babel/stage-0', { decoratorsLegacy: true }],
+  ],
   plugins: [
+    '@babel/plugin-transform-runtime',
     [
-      'transform-runtime',
-      {
-        helpers: false,
-        polyfill: false,
-        regenerator: true,
-      },
-    ],
-    'transform-decorators-legacy',
-    [
-      'import',
+      'import-7',
       {
         libraryName: 'antd',
         style: true,
@@ -21,7 +17,7 @@
     [
       'transform-imports',
       {
-        antdj: {
+        antd: {
           transform: 'antd/lib/${member}',
           kebabCase: true,
           preventFullImport: true,
@@ -30,6 +26,11 @@
           transform: 'date-fns/${member}',
           preventFullImport: true,
           camelCase: true,
+        },
+        filou: {
+          transform: 'filou/es/${member}',
+          kebabCase: true,
+          preventFullImport: true,
         },
       },
     ],

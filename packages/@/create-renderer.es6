@@ -9,14 +9,14 @@ import friendlyPseudoClass from 'fela-plugin-friendly-pseudo-class';
 import namedKeys from 'fela-plugin-named-keys';
 import monolithic from 'fela-monolithic';
 import embedded from 'fela-plugin-embedded';
-import { rehydrate } from 'fela-dom';
+//import { rehydrate } from 'fela-dom';
 import normalize from './normalize';
 
 export default ua => {
-  if (typeof window !== 'undefined' && window.renderer) {
+  /*if (typeof window !== 'undefined' && window.renderer) {
     window.renderer.clear();
     return window.renderer;
-  }
+  }*/
   const browser = ua && ua.getBrowser && ua.getBrowser();
   const isBrowser = (type, maxVersion, minVersion) => {
     if (!browser) {
@@ -178,17 +178,17 @@ export default ua => {
     enhancers: [monolithic()],
     // enhancers: process.env.NODE_ENV === 'production' ? [] : [require('fela-monolithic').default()],
   });
-  if (typeof window !== 'undefined') {
+  /*if (typeof window !== 'undefined') {
     rehydrate(renderer);
-  }
+  }*/
   renderer.renderStatic(normalize);
   renderer.renderStatic(`
     .with-portal {
       overflow: hidden;
     }
   `);
-  if (typeof window !== 'undefined') {
+  /*if (typeof window !== 'undefined') {
     window.renderer = renderer;
-  }
+  }*/
   return renderer;
 };

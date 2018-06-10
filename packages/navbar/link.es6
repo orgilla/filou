@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from '@powr/router';
 import { createComponent } from 'react-fela';
+// import { NavLink } from '@powr/router';
+const NavLink = () => null;
 
 const Link = createComponent(
   ({ theme, inverse }) => ({
     cursor: 'pointer',
     onHover: {
       color: inverse ? theme.light : theme.dark,
-      textDecoration: `underline solid ${inverse ? theme.light : theme.color}`
+      textDecoration: `underline solid ${inverse ? theme.light : theme.color}`,
     },
     '&.active': {
-      textDecoration: `underline solid ${inverse ? theme.light : theme.color}`
-    }
+      textDecoration: `underline solid ${inverse ? theme.light : theme.color}`,
+    },
   }),
   ({ inverse, onClick, renderItemLink: LinkComponent, ...rest }) =>
     onClick ? (
@@ -25,7 +26,7 @@ const Link = createComponent(
 
 const Placeholder = createComponent(
   () => ({
-    cursor: 'default'
+    cursor: 'default',
   }),
   'a',
   ({ inverse, ...p }) => Object.keys(p)
@@ -38,7 +39,7 @@ const NavbarLink = createComponent(
     fontFamily: theme.fontFamily,
     textDecoration: 'none',
     ellipsis: true,
-    position: 'relative'
+    position: 'relative',
   }),
   ({ to, onClick, renderItemLink, ...rest }) =>
     to || onClick ? (
@@ -56,11 +57,11 @@ const NavbarLink = createComponent(
 NavbarLink.displayName = 'Navbar.Link';
 NavbarLink.propTypes = {
   to: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 NavbarLink.defaultProps = {
   to: undefined,
   onClick: undefined,
-  renderItemLink: props => <NavLink {...props} />
+  renderItemLink: props => <NavLink {...props} />,
 };
 export default NavbarLink;

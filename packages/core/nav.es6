@@ -1,27 +1,28 @@
 import React, { Children, cloneElement } from 'react';
 import { createComponent } from 'react-fela';
-import { Link } from '@powr/router';
 import cn from 'classnames';
+// import { Link } from '@powr/router';
+const Link = () => null;
 
 // Based on http://w3bits.com/labs/css-responsive-nav/
 // Nav styles
 const styles = ({ theme }) => ({
   '> ul': {
-    display: 'none'
+    display: 'none',
   },
   '& ul': {
     // margin: `0 -0.5em`,
     margin: 0,
-    padding: 0
+    padding: 0,
   },
   '> #tm:checked + .o-nav-menu': {
-    display: 'block'
+    display: 'block',
   },
   '& input[type="checkbox"]': {
-    display: 'none'
+    display: 'none',
   },
   '& ul span.drop-icon': {
-    display: 'none'
+    display: 'none',
   },
   '& ul.sub-menu': {
     backgroundColor: theme.light,
@@ -29,11 +30,11 @@ const styles = ({ theme }) => ({
     display: 'none',
     '& a:hover': {},
     '& li:last-child': {
-      borderWidth: 0
+      borderWidth: 0,
     },
     '& a': {
-      padding: theme.padding1
-    }
+      padding: theme.padding1,
+    },
   },
   '& li': {
     position: 'relative',
@@ -41,8 +42,8 @@ const styles = ({ theme }) => ({
     '& label.drop-icon': {
       position: 'absolute',
       right: '1.5em',
-      top: '1.25em'
-    }
+      top: '1.25em',
+    },
   },
   '& .toggle': {
     position: 'relative',
@@ -52,61 +53,61 @@ const styles = ({ theme }) => ({
       borderRadius: '50%',
       width: '1em',
       height: '1em',
-      textAlign: 'center'
+      textAlign: 'center',
     },
     '& .drop-icon': {
       position: 'absolute',
       right: '1.5em',
-      top: '1.25em'
-    }
+      top: '1.25em',
+    },
   },
   '& a': {
     position: 'relative',
     display: 'block',
     padding: '1em 0.5em',
     transition: 'all .125s ease-in-out',
-    onHover: {}
+    onHover: {},
   },
   '& li.brand > a': {
-    padding: 0
+    padding: 0,
   },
   '& input[type="checkbox"]:checked + ul.sub-menu': {
-    display: 'block'
+    display: 'block',
   },
   '& label.drop-icon': {
     borderRadius: '50%',
     width: '1em',
     height: '1em',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   '& .drop-icon': {
-    lineHeight: 1
+    lineHeight: 1,
   },
   ifSmallDown: {
     '& li': {
-      width: '33.333%'
+      width: '33.333%',
     },
     '& ul.sub-menu li': {
-      width: 'auto'
-    }
+      width: 'auto',
+    },
   },
   ifMediumUp: {
     '> ul': {
       display: 'block',
-      overflow: 'visible'
+      overflow: 'visible',
     },
     '& .toggle': {
-      display: 'none'
+      display: 'none',
     },
     '& label.drop-icon': {
-      display: 'none'
+      display: 'none',
     },
     '& ul span.drop-icon': {
-      display: 'inline-block'
+      display: 'inline-block',
     },
     '& li': {
       float: 'left',
-      borderWidth: '0 1px 0 0'
+      borderWidth: '0 1px 0 0',
     },
     '& li.right': {
       float: 'right',
@@ -116,12 +117,12 @@ const styles = ({ theme }) => ({
         '> li > ul.sub-menu': {
           top: 0,
           left: 'initial',
-          right: '100%'
-        }
-      }
+          right: '100%',
+        },
+      },
     },
     '& li:hover > ul': {
-      display: 'block'
+      display: 'block',
     },
     '& ul.sub-menu': {
       borderWidth: 0,
@@ -134,20 +135,20 @@ const styles = ({ theme }) => ({
       display: 'none',
       '> li > ul.sub-menu': {
         top: 0,
-        left: '100%'
+        left: '100%',
       },
       '& li': {
         float: 'none',
         borderWidth: '0 0 1px',
         '> a': {
-          padding: '0.3em 0.5em'
-        }
-      }
+          padding: '0.3em 0.5em',
+        },
+      },
     },
     '& input[type="checkbox"]:checked + .sub-menu': {
-      display: 'none'
-    }
-  }
+      display: 'none',
+    },
+  },
 });
 
 // Root navigation
@@ -248,8 +249,8 @@ Nav.Mega = createComponent(
           '> a': {
             fontWeight: 'bold',
             '> .drop-icon': {
-              display: 'none'
-            }
+              display: 'none',
+            },
           },
           '> ul': {
             display: 'block',
@@ -259,12 +260,12 @@ Nav.Mega = createComponent(
             border: 0,
             boxShadow: 'none',
             '& a': {
-              padding: '0em 0.5em'
-            }
-          }
-        }
-      }
-    }
+              padding: '0em 0.5em',
+            },
+          },
+        },
+      },
+    },
   }),
   p => <MenuItem {...p} />,
   p => Object.keys(p)

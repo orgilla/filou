@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getContext } from 'recompose';
 import PropTypes from 'prop-types';
-import { createUpdateQuery } from '@powr/router';
 import { asyncComponent } from 'react-async-component';
+// import { createUpdateQuery } from '@powr/router';
+const createUpdateQuery = () => null;
 
 const LightBox = asyncComponent({
   resolve: () =>
@@ -16,11 +17,11 @@ const LightBox = asyncComponent({
         },
         'lightbox'
       )
-    )
+    ),
 });
 
 @getContext({
-  gallery: PropTypes.string
+  gallery: PropTypes.string,
 })
 @connect(
   ({ location, lightbox }, { gallery }) => {
@@ -35,11 +36,11 @@ const LightBox = asyncComponent({
       prev,
       next,
       index,
-      image: index >= 0 ? images[index] : null
+      image: index >= 0 ? images[index] : null,
     };
   },
   dispatch => ({
-    updateQuery: createUpdateQuery(dispatch)
+    updateQuery: createUpdateQuery(dispatch),
   })
 )
 export default class Lightbox extends Component {

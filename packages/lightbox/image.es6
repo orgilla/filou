@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createUpdateQuery } from '@powr/router';
 import { createComponent } from 'react-fela';
 import { lightboxActions } from './lightbox-redux';
 import cloudinaryUrl from './cloudinary-url';
 import Image from './image';
+// import { createUpdateQuery } from '@powr/router';
+const createUpdateQuery = () => null;
 
 const Img = createComponent(
   ({ theme }) => ({
@@ -15,13 +16,16 @@ const Img = createComponent(
     },
   }),
   p => <Image {...p} />,
-  p => Object.keys(p),
+  p => Object.keys(p)
 );
 
-@connect(null, dispatch => ({
-  updateQuery: createUpdateQuery(dispatch),
-  ...lightboxActions(dispatch),
-}))
+@connect(
+  null,
+  dispatch => ({
+    updateQuery: createUpdateQuery(dispatch),
+    ...lightboxActions(dispatch),
+  })
+)
 export default class Lightbox extends Component {
   static contextTypes = {
     gallery: PropTypes.string,
@@ -78,7 +82,7 @@ export default class Lightbox extends Component {
         src: cloudinaryUrl(value, { w: width }),
         srcset: [
           getSrcSet(width),
-          getSrcSet(width / 4 * 3),
+          getSrcSet((width / 4) * 3),
           getSrcSet(width / 2),
           getSrcSet(width / 4),
         ],
@@ -93,7 +97,7 @@ export default class Lightbox extends Component {
             ? `${value.caption} - ${value.source}`
             : value.caption || value.source || '',
       },
-      gallery,
+      gallery
     );
   };
 
