@@ -77,7 +77,6 @@ const enhance = compose(
       overflow: !open ? 'hidden' : 'auto',
       boxShadow: open ? theme.boxShadow : undefined,
       transition: 'all 200ms cubic-bezier(0.165, 0.84, 0.44, 1)',
-      xy: console.log(inverted),
       backgroundColor: (inverted !== undefined
       ? !inverted
       : getColor(theme, color, palette) || theme.inverted)
