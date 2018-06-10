@@ -1,5 +1,5 @@
 {
-  "version": "0.10.2",
+  "version": "0.10.3",
   "name": "filou",
   "description": "",
   "author": "Orgilla <hi@orgil.la>",
@@ -11,6 +11,7 @@
   "dependencies": {
     "@filou/core": "^0.10.2",
     "fela": "^6.1.8",
+    "fela-dom": "^7.0.8",
     "fela-monolithic": "^5.0.22",
     "fela-plugin-custom-property": "^7.0.3",
     "fela-plugin-embedded": "^5.2.8",
