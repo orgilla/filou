@@ -9,6 +9,7 @@ import friendlyPseudoClass from 'fela-plugin-friendly-pseudo-class';
 import namedKeys from 'fela-plugin-named-keys';
 import monolithic from 'fela-monolithic';
 import embedded from 'fela-plugin-embedded';
+import { rehydrate } from 'fela-dom';
 import normalize from './normalize';
 
 export default ua => {
@@ -177,6 +178,9 @@ export default ua => {
     enhancers: [monolithic()],
     // enhancers: process.env.NODE_ENV === 'production' ? [] : [require('fela-monolithic').default()],
   });
+  if (typeof window !== 'undefined') {
+    rehydrate(renderer);
+  }
   renderer.renderStatic(normalize);
   renderer.renderStatic(`
     .with-portal {
