@@ -7,16 +7,16 @@ import unit from 'fela-plugin-unit';
 import removeUndefined from 'fela-plugin-remove-undefined';
 import friendlyPseudoClass from 'fela-plugin-friendly-pseudo-class';
 import namedKeys from 'fela-plugin-named-keys';
-import monolithic from 'fela-monolithic';
+import monolithicEnhancer from 'fela-monolithic';
 import embedded from 'fela-plugin-embedded';
 //import { rehydrate } from 'fela-dom';
 import normalize from './normalize';
 
-export default ua => {
-  /*if (typeof window !== 'undefined' && window.renderer) {
+export default ({ ua, monolithic = true } = {}) => {
+  if (typeof window !== 'undefined' && window.renderer) {
     window.renderer.clear();
     return window.renderer;
-  }*/
+  }
   const browser = ua && ua.getBrowser && ua.getBrowser();
   const isBrowser = (type, maxVersion, minVersion) => {
     if (!browser) {
@@ -175,7 +175,7 @@ export default ua => {
       }),
       removeUndefined(),
     ],
-    enhancers: [monolithic()],
+    enhancers: [monolithic ? monolithicEnhancer() : null].filter(x => x),
     // enhancers: process.env.NODE_ENV === 'production' ? [] : [require('fela-monolithic').default()],
   });
   /*if (typeof window !== 'undefined') {
@@ -187,8 +187,8 @@ export default ua => {
       overflow: hidden;
     }
   `);
-  /*if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined') {
     window.renderer = renderer;
-  }*/
+  }
   return renderer;
 };
