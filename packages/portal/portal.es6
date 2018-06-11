@@ -1,57 +1,46 @@
-import { Component, Children } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { createPortal, unstable_renderSubtreeIntoContainer } from 'react-dom';
-
-const isReact16 = createPortal !== undefined;
-const portal = isReact16 ? createPortal : unstable_renderSubtreeIntoContainer;
-
-class Portal extends Component {
-  componentWillMount() {
-    const { noPortal, noScroll, rootElement = 'app' } = this.props;
-
-    if (!noPortal && typeof document !== 'undefined') {
-      this.popup = document.createElement('div');
-      document.body.appendChild(this.popup);
+import { createPortal } from 'react-dom';
+const canUseDOM = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);
+class Portal extends React.Component {
+  state = {};
+  componentDidMount() {
+    if (this.defaultNode) {
+      document.body.removeChild(this.defaultNode);
     }
-    if (noScroll) {
-      document
-        .getElementById(rootElement)
-        .classList.toggle('with-portal', true);
-    }
+    this.defaultNode = null;
+    // TODO: this is a hack for FELA SSR issues
+    this.setState({ mounted: true });
   }
-
   componentWillUnmount() {
-    const { noScroll, rootElement = 'app' } = this.props;
-    if (this.popup) {
-      document.body.removeChild(this.popup);
+    if (this.defaultNode) {
+      document.body.removeChild(this.defaultNode);
     }
-    if (noScroll) {
-      document
-        .getElementById(rootElement)
-        .classList.toggle('with-portal', false);
-    }
+    this.defaultNode = null;
   }
 
   render() {
-    const { children, noPortal } = this.props;
-    if (noPortal) {
-      return Children.only(children);
+    if (!canUseDOM || !this.state.mounted) {
+      return null;
     }
-    if (this.popup) {
-      return portal(children, this.popup);
+    if (!this.props.node && !this.defaultNode) {
+      this.defaultNode = document.createElement('div');
+      document.body.appendChild(this.defaultNode);
     }
-    return null;
+    return createPortal(
+      this.props.children,
+      this.props.node || this.defaultNode
+    );
   }
 }
 
 Portal.propTypes = {
-  children: PropTypes.node, // eslint-disable-line
-  noPortal: PropTypes.bool,
-  noScroll: PropTypes.bool,
-};
-Portal.defaultProps = {
-  noPortal: false,
-  noScroll: false,
+  children: PropTypes.node.isRequired,
+  node: PropTypes.any,
 };
 
 export default Portal;
