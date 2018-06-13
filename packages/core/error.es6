@@ -1,6 +1,5 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
-import { connect } from 'react-redux';
 
 export default createComponent(
   () => ({
@@ -11,6 +10,11 @@ export default createComponent(
     fontSize: 16,
     width: '100%',
     '& h1': {
+      fontSize: 32,
+      marginTop: 32
+    },
+    '& p': {
+      textAlign: 'center',
       fontSize: 32,
       marginTop: 32
     },
@@ -124,9 +128,7 @@ export default createComponent(
       }
     }
   }),
-  connect(({ location }) => ({
-    query: location.query
-  }))(({ query, className }) => (
+  ({ className }) => (
     <div className={className}>
       <div className="boo-wrapper">
         <div className="boo">
@@ -142,6 +144,6 @@ export default createComponent(
         </p>
       </div>
     </div>
-  )),
+  ),
   p => Object.keys(p)
 );
