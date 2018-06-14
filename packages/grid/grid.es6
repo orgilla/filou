@@ -6,7 +6,7 @@ const Grid = createComponent(
   ({ theme, height, marginX }) => ({
     height,
     minWidth: '100%',
-    marginX: marginX || `-${theme.space2}`,
+    marginX: marginX || marginX !== false ? `-${theme.space2}` : null,
     onAfter: {
       content: '""',
       clear: 'both',

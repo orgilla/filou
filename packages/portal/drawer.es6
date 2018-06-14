@@ -3,6 +3,7 @@ import { createComponent } from 'react-fela';
 import withStyle from 'filou/with-style';
 import { withState, compose } from 'recompose';
 import Swipeable from 'react-swipeable';
+import ScrollLock from 'react-scrolllock';
 import { getColor } from '@filou/core/colors-provider';
 import Portal from './portal';
 
@@ -20,8 +21,8 @@ export const Navigation = createComponent(
       right: right ? 0 : undefined,
       left: right ? undefined : 0,
       height: '100%',
-      flexWidth: !collapsed ? width : 72,
-    },
+      flexWidth: !collapsed ? width : 72
+    }
   }),
   ({ children, className, setCollapsed, right }) => (
     <div className={className}>
@@ -50,7 +51,7 @@ const enhance = compose(
       left,
       open,
       fixed,
-      inverted,
+      inverted
     }) => ({
       zIndex: 15,
       pointerEvents: 'initial',
@@ -66,11 +67,11 @@ const enhance = compose(
           ? {
               right: (right !== true && right) || 0,
               justifyContent: 'flex-end',
-              transform: open ? null : 'translateX(101%)',
+              transform: open ? null : 'translateX(101%)'
             }
           : {
               left: (left !== true && left) || 0,
-              transform: open ? null : 'translateX(-101%)',
+              transform: open ? null : 'translateX(-101%)'
             },
       width,
       maxWidth: '100%',
@@ -81,7 +82,7 @@ const enhance = compose(
       ? !inverted
       : getColor(theme, color, palette) || theme.inverted)
         ? theme.light
-        : theme.dark,
+        : theme.dark
       // display: open ? 'flex' : 'none',
     })
   )
@@ -100,6 +101,7 @@ const Drawer = enhance(
     collapsed,
     width,
     fixed,
+    inverted,
     ...rest
   }) => (
     <aside
@@ -140,7 +142,7 @@ const Dimmer = createComponent(
     display: open ? undefined : 'none',
     opacity: !open ? 0 : 1,
     transition: 'opacity 200ms ease-out',
-    pointerEvents: !open ? 'none' : undefined,
+    pointerEvents: !open ? 'none' : undefined
   }),
   'div',
   ['onClick']
@@ -152,14 +154,23 @@ export default ({
   children,
   className,
   onClose,
+  open,
   ...props
 }) => (
-  <Portal open rootElement={rootElement}>
-    <Fragment>
-      <Dimmer {...props} transparent={dim === false} onClick={onClose} />
-      <Drawer className={className} {...props}>
-        {children}
-      </Drawer>
-    </Fragment>
-  </Portal>
+  <Fragment>
+    {dim && open ? <ScrollLock /> : null}
+    <Portal open>
+      <Fragment>
+        <Dimmer
+          {...props}
+          open={open}
+          transparent={dim === false}
+          onClick={onClose}
+        />
+        <Drawer className={className} open={open} {...props}>
+          {children}
+        </Drawer>
+      </Fragment>
+    </Portal>
+  </Fragment>
 );
