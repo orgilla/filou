@@ -42,8 +42,4 @@ const geocode = key => {
   return func;
 };
 
-/* geocode('AIzaSyChCjr4BlKcoiFbaPcBGMa0Fwu3fAinFRY')('Frankenallee 1 65779')
-  .then(address => console.log(address))
-  .catch(err => console.error(err)); */
-
 module.exports = geocode;
