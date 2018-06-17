@@ -1,0 +1,11 @@
+{
+  "version": "0.9.17",
+  "name": "@filou/static",
+  "description": "",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
+  "contributors": [
+    "Benjamin Kniffler <bkniffler@me.com>",
+    "Philipp Achenbach <olymp@philipp-achenbach.de>"
+  ],
+  "license": "MIT"
+}

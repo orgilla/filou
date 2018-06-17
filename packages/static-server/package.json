@@ -1,0 +1,28 @@
+{
+  "version": "0.9.17",
+  "name": "@filou/static-server",
+  "description": "",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
+  "contributors": [
+    "Benjamin Kniffler <bkniffler@me.com>",
+    "Philipp Achenbach <olymp@philipp-achenbach.de>"
+  ],
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.49",
+    "@google/maps": "^0.4.6",
+    "axios": "^0.18.0",
+    "evernote": "^2.0.5",
+    "front-matter": "^2.3.0",
+    "date-fns": "^1.29.0",
+    "fs-extra": "^6.0.1",
+    "hast-util-to-mdast": "^2.1.0",
+    "mdast-squeeze-paragraphs": "^3.0.2",
+    "mime": "^2.3.1",
+    "node-dir": "^0.1.17",
+    "rehype-parse": "^4.1.0",
+    "remark-parse": "^5.0.0",
+    "remark-stringify": "^5.0.0",
+    "unified": "^7.0.0"
+  },
+  "license": "MIT"
+}
