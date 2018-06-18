@@ -2,7 +2,7 @@ import React, { Component, createElement } from 'react';
 import astToReact2 from 'react-markdown/lib/ast-to-react';
 import { createComponent } from 'react-fela';
 import renderers2 from 'react-markdown/lib/renderers';
-import createHash from '../create-hash';
+import slugify from 'slugify';
 import getImg from '../get-img';
 
 renderers2.link = class MDLink extends Component {
@@ -54,7 +54,7 @@ renderers2.heading = class MDHeading extends Component {
       props.children.length === 1 &&
       typeof props.children[0] === 'string'
     ) {
-      this.id = createHash(props.children[0] || '');
+      this.id = slugify(props.children[0] || '');
     }
   }
   render() {

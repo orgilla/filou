@@ -1,8 +1,9 @@
 import { createComponent } from 'react-fela';
+import get from 'lodash/get';
 
 const Content = createComponent(({ theme }) => ({
   flex: 1,
-  minHeight: 'calc(81vh)',
+  minHeight: 'calc(85vh)',
   marginBottom: 100,
   '& p': {
     textAlign: 'justify',
@@ -22,7 +23,8 @@ const Content = createComponent(({ theme }) => ({
       color: theme.color,
       left: '-0.5em'
     }
-  }
+  },
+  ...get(theme, 'filou/static/Content', {})
 }));
 
 export default Content;

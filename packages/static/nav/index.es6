@@ -2,6 +2,7 @@ import React from 'react';
 import Drawer from '@filou/portal/drawer';
 import { createComponent } from 'filou';
 import { Link } from 'react-static';
+import get from 'lodash/get';
 
 const StyledDrawer = createComponent(
   () => ({
@@ -84,7 +85,8 @@ const Item = createComponent(
     transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
     transform: active ? 'scale(1.05)' : undefined,
     '> a': {
-      textDecoration: 'none'
+      textDecoration: 'none',
+      ...get(theme, 'filou/static/NavItemLink', {})
     },
     onBefore: active && {
       zIndex: 100,

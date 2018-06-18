@@ -6,7 +6,6 @@ import get from 'lodash/get';
 
 const Footer = createComponent(
   ({ theme }) => ({
-    ...get(theme, 'filou/static.footer', {}),
     position: 'relative',
     bottom: 0,
     paddingBottom: 10,
@@ -57,7 +56,8 @@ const Footer = createComponent(
       '& a': {
         onHover: {}
       }
-    }
+    },
+    ...get(theme, 'filou/static/FooterContainer', {})
   }),
   ({ className, children }) => (
     <div className={className}>

@@ -11,16 +11,20 @@ import Nav from '../nav';
 export { default as Info } from './info';
 
 const Logo = createComponent(
-  ({ sticky }) => ({
+  ({ theme, sticky }) => ({
+    display: 'flex',
+    alignItems: 'center',
     marginLeft: -10,
     height: 56,
     transition: 'all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)',
     textDecoration: 'none',
-    transform: sticky.isSticky ? 'scale(0.8) translateX(-26px)' : undefined
+    ...get(theme, 'filou/static/HeaderLogo', {})
+    // transform: sticky.isSticky ? 'scale(0.8) translateX(-26px)' : undefined
   }),
-  ({ onClick, to, className, logo: RawLogo }) => (
+  ({ onClick, to, className, logo: RawLogo, logoText }) => (
     <Link to={to} onClick={onClick} className={className}>
-      <RawLogo />
+      {typeof RawLogo === 'object' ? RawLogo : <RawLogo />}
+      {logoText}
     </Link>
   ),
   p => Object.keys(p)
@@ -73,17 +77,22 @@ const Group = createComponent(
     ':last-child': {
       marginRight: 0
     },
+    ':first-child': {
+      marginLeft: 0
+    },
     textDecoration: 'none',
     position: 'relative',
     '> a': {
-      textDecoration: 'none'
+      textDecoration: 'none',
+      ...get(theme, 'filou/static/HeaderLink', {})
     },
     onHover: {
       color: theme.color,
       '> div': {
         pointerEvents: 'initial',
         opacity: 1
-      }
+      },
+      ...get(theme, 'filou/static/HeaderLink', {})
     },
     '> div': {
       position: 'absolute',
@@ -115,11 +124,11 @@ const Group = createComponent(
         color: 'white',
         boxShadow:
           'rgba(0, 0, 0, 0.0470588) 0px 1px 4px, rgba(0, 0, 0, 0.0470588) 0px 1px 3px',
-        ...get(theme, 'filou/static.header.group', {})
+        ...get(theme, 'filou/static/HeaderGroup', {})
       }
     }
   }),
-  ({ children, className, title, isLast }) => (
+  ({ children, className, title }) => (
     <span className={className}>
       {title}
       <div>
@@ -136,18 +145,18 @@ export const Item = createComponent(
     ':last-child': {
       marginRight: 0
     },
+    ':first-child': {
+      marginLeft: 0
+    },
     textDecoration: 'none',
     transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
     onHover: {
-      color: theme.color
-    }
-    /* extend: isLast && {
-      border: `3px solid ${theme.color}`,
-      padding: 8,
-      borderRadius: 34
-    } */
+      color: theme.color,
+      ...get(theme, 'filou/static/HeaderLink', {})
+    },
+    ...get(theme, 'filou/static/HeaderLink', {})
   }),
-  ({ children, onClick, to, className, isLast }) => (
+  ({ children, onClick, to, className }) => (
     <Link to={to} onClick={onClick} className={className}>
       {children}
     </Link>
@@ -163,7 +172,7 @@ export const Spacer = createComponent(
 );
 
 const Container = createComponent(
-  ({ sticky }) => ({
+  ({ sticky, theme }) => ({
     /* position: 'absolute',
     top: 25,
     left: 0, */
@@ -182,7 +191,8 @@ const Container = createComponent(
     zIndex: 12,
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    ...get(theme, 'filou/static/HeaderContainer', {})
   }),
   'div'
 );
@@ -203,7 +213,9 @@ const createMenu = (Group, Item, menu) => {
       return null;
     }
     return children ? (
-      <Group title={slug ? <Link to={slug}>{title}</Link> : title}>
+      <Group
+        title={slug ? <Link to={slug}>{title}</Link> : <Link>{title}</Link>}
+      >
         {children.map(item => (
           <MenuItem {...item} key={item.slug || item.title} />
         ))}
@@ -215,12 +227,15 @@ const createMenu = (Group, Item, menu) => {
   return menu.map(item => <MenuItem {...item} key={item.slug || item.title} />);
 };
 
-const Header = ({ logo, sitemap, topOffset, hasInfo }) => (
+const Header = ({ logo, sitemap, topOffset, hasInfo, logoText, children }) => (
   <ZIndex>
     <Sticky topOffset={topOffset || (hasInfo === true ? 25 : 0)}>
       {sticky => (
         <Container sticky={sticky}>
-          {logo && <Logo to="/" sticky={sticky} logo={logo} />}
+          {logo && (
+            <Logo to="/" sticky={sticky} logo={logo} logoText={logoText} />
+          )}
+          {children}
           <Spacer />
           <Menu>{createMenu(Group, Item, sitemap)}</Menu>
           <Bars>{createMenu(Nav.Group, Nav.Item, sitemap)}</Bars>

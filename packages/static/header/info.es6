@@ -1,20 +1,20 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
+import get from 'lodash/get';
 
 const Info = createComponent(
-  ({ theme }) => ({
+  ({ theme, height }) => ({
     // backgroundImage,
     display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: theme.color,
     opacity: 0.7,
     // position: 'absolute',
-    top: 0,
     width: '100%',
-    left: 0,
-    height: 25,
+    height,
     // paddingX: 15,
-    paddingTop: 4,
-    paddingRight: 10,
+    paddingX: 10,
     // borderBottom: '1px solid lightgray',
     ifSmallDown: {
       textAlign: 'center',
@@ -31,18 +31,26 @@ const Info = createComponent(
     '> a': {
       onHover: {
         color: 'white',
-        opacity: 0.6
+        opacity: 0.6,
+        ...get(theme, 'filou/static/HeaderInfoLink', {})
       },
       color: 'white',
-      fontSize: 14,
+      // fontSize: 14,
       marginX: 15,
       whiteSpace: 'nowrap',
       overflow: 'hidden',
-      textOverflow: 'ellipsis'
+      textOverflow: 'ellipsis',
+      ...get(theme, 'filou/static/HeaderInfoLink', {})
     },
     '> span': {
+      ':last-child': {
+        marginRight: 0
+      },
+      ':first-child': {
+        marginLeft: 0
+      },
       color: 'white',
-      fontSize: 14,
+      // fontSize: 14,
       marginX: 15,
       whiteSpace: 'nowrap',
       overflow: 'hidden',
@@ -50,11 +58,15 @@ const Info = createComponent(
       '> a': {
         onHover: {
           color: 'white',
-          opacity: 0.6
+          opacity: 0.6,
+          ...get(theme, 'filou/static/HeaderInfoLink', {})
         },
-        marginX: 0
+        marginX: 0,
+        ...get(theme, 'filou/static/HeaderInfoLink', {})
       }
-    }
+    },
+    ...get(theme, 'filou/static.header.info', {}),
+    ...get(theme, 'filou/static/HeaderInfo', {})
   }),
   ({ children, className }) => <div className={className}>{children}</div>,
   p => Object.keys(p)

@@ -4,8 +4,9 @@ import { FaHashtag } from '@filou/icons';
 import { createComponent } from 'react-fela';
 import { withState, withPropsOnChange } from 'recompose';
 import { StickyContainer, Sticky } from 'react-sticky';
+import slugify from 'slugify';
+import get from 'lodash/get';
 import Nav from '../nav';
-import createHash from '../create-hash';
 
 class HeadingsContainer extends Component {
   render() {
@@ -94,7 +95,8 @@ const HeadingsMobile = deco(
           textOverflow: 'ellipsis',
           color: 'white',
           flex: 1,
-          margin: 0
+          margin: 0,
+          ...get(theme, 'filou/static/ChaptersLink', {})
         },
         ifMediumDown: {
           paddingY: 10,
@@ -110,7 +112,7 @@ const HeadingsMobile = deco(
               <Nav.Item
                 key={value + i}
                 active={element && value === element.innerText}
-                to={`#${createHash(value)}`}
+                to={`#${slugify(value)}`}
               >
                 {value}
               </Nav.Item>
@@ -124,7 +126,7 @@ const HeadingsMobile = deco(
 );
 const HeadingsNonMobile = deco(
   createComponent(
-    ({ styles = {}, paddingTop }) => ({
+    ({ styles = {}, paddingTop, theme }) => ({
       position: 'absolute',
       ...styles,
       animationName: {
@@ -155,6 +157,10 @@ const HeadingsNonMobile = deco(
       ifMediumDown: {
         display: 'none',
         transform: 'translateX(200%)'
+      },
+      '> a': {
+        textDecoration: 'none',
+        ...get(theme, 'filou/static/ChaptersLink', {})
       }
     }),
     ({ headings, className, element }) => (
@@ -164,7 +170,7 @@ const HeadingsNonMobile = deco(
             key={value + i}
             depth={depth}
             active={element && value === element.innerText}
-            to={`#${createHash(value)}`}
+            to={`#${slugify(value)}`}
           >
             {value}
           </Nav.Item>
