@@ -15,10 +15,15 @@ export const getImage = node => {
   if (node.type === 'image') {
     return node.url;
   } else if (node.children) {
-    return node.children
-      .map(getImage)
-      .filter(x => x)
-      .join('');
+    return node.children.map(getImage).filter(x => x)[0];
+  }
+};
+
+export const getLink = node => {
+  if (node.type === 'link') {
+    return node.url;
+  } else if (node.children) {
+    return node.children.map(getLink).filter(x => x)[0];
   }
 };
 
