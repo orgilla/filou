@@ -14,7 +14,7 @@ const Container = createComponent(
         marginLeft: 0
       }
     },
-    height,
+    height: height || (nested ? '100%' : undefined),
     position: 'relative',
     width: nested ? undefined : '100%',
     ...sticky.style,
