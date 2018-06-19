@@ -39,6 +39,7 @@ const getTheme = (theme = {}) => ({
 
   // Shadows
   // boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.08)',
+  transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
   boxShadow: 'rgba(0, 0, 0, 0.15) 0px 1px 4px, rgba(0, 0, 0, 0.15) 0px 1px 3px',
   innerShadow: 'inset 0px 0px 10px 0px rgba(0, 0, 0, 0.15)',
 
@@ -53,7 +54,7 @@ const getTheme = (theme = {}) => ({
   fontSizeH4: '1.25rem',
   fontSizeH5: '1.125rem',
   fontSizeH6: '1.05rem',
-  ...theme,
+  ...theme
 });
 
 export default ({ theme, children }) => (

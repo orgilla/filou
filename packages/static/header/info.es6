@@ -1,21 +1,17 @@
 import React from 'react';
-import { createComponent } from 'react-fela';
-import get from 'lodash/get';
+import { createComponent, ThemeProvider, withTheme } from 'react-fela';
+import Menu from './menu';
 
 const Info = createComponent(
   ({ theme, height }) => ({
-    // backgroundImage,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: theme.color,
-    opacity: 0.7,
-    // position: 'absolute',
+    backgroundColor: theme.inverted ? theme.color : theme.light,
+    // opacity: 0.7,
     width: '100%',
     height,
-    // paddingX: 15,
     paddingX: 10,
-    // borderBottom: '1px solid lightgray',
     ifSmallDown: {
       textAlign: 'center',
       '> div': {
@@ -29,47 +25,37 @@ const Info = createComponent(
       }
     },
     '> a': {
-      onHover: {
-        color: 'white',
-        opacity: 0.6,
-        ...get(theme, 'filou/static/HeaderInfoLink', {})
-      },
-      color: 'white',
-      // fontSize: 14,
-      marginX: 15,
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      ...get(theme, 'filou/static/HeaderInfoLink', {})
+      marginX: 15
     },
     '> span': {
-      ':last-child': {
-        marginRight: 0
-      },
-      ':first-child': {
-        marginLeft: 0
-      },
-      color: 'white',
-      // fontSize: 14,
       marginX: 15,
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
       '> a': {
-        onHover: {
-          color: 'white',
-          opacity: 0.6,
-          ...get(theme, 'filou/static/HeaderInfoLink', {})
-        },
-        marginX: 0,
-        ...get(theme, 'filou/static/HeaderInfoLink', {})
+        marginX: 0
       }
-    },
-    ...get(theme, 'filou/static.header.info', {}),
-    ...get(theme, 'filou/static/HeaderInfo', {})
+    }
   }),
-  ({ children, className }) => <div className={className}>{children}</div>,
+  ({ children, className }) => <Menu className={className}>{children}</Menu>,
   p => Object.keys(p)
 );
 
-export default Info;
+export default withTheme(
+  ({
+    theme,
+    inverted = theme.inverted,
+    fontSize = theme.fontSize,
+    fontWeight = theme.fontWeight,
+    linkColor = theme.color,
+    ...props
+  }) => (
+    <ThemeProvider
+      theme={{
+        inverted,
+        fontSize: theme[fontSize] || fontSize || theme.fontSize,
+        fontWeight: theme[fontWeight] || fontWeight || theme.fontWeight,
+        linkColor: theme[linkColor] || linkColor || theme.color
+      }}
+    >
+      <Info {...props} />
+    </ThemeProvider>
+  )
+);

@@ -80,15 +80,12 @@ const HeadingsMobile = deco(
         paddingLeft: 40,
         paddingRight: 10,
         display: 'flex',
-        transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
+        transition: theme.transition,
         backgroundColor: 'rgb(85, 85, 85)',
         color: 'white',
         textAlign: 'center',
         cursor: 'pointer',
-        boxShadow:
-          styles.position === 'fixed'
-            ? 'rgba(0, 0, 0, 0.0470588) 0px 1px 4px, rgba(0, 0, 0, 0.0470588) 0px 1px 3px'
-            : undefined,
+        boxShadow: styles.position === 'fixed' ? theme.boxShadow : undefined,
         '> h2': {
           whiteSpace: 'nowrap',
           overflow: 'hidden',
