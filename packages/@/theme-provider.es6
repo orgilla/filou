@@ -58,7 +58,5 @@ const getTheme = (theme = {}) => ({
 });
 
 export default ({ theme, children }) => (
-  <FelaThemeProvider theme={getTheme(theme)}>
-    <FelaThemeProvider theme={{}}>{children}</FelaThemeProvider>
-  </FelaThemeProvider>
+  <FelaThemeProvider theme={getTheme(theme)}>{children}</FelaThemeProvider>
 );

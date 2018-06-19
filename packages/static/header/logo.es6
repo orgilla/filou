@@ -3,11 +3,17 @@ import { createComponent } from 'react-fela';
 import { Link } from 'react-static';
 
 const Logo = createComponent(
-  ({ theme, sticky }) => ({
+  () => ({
     display: 'flex',
     alignItems: 'center',
-    marginLeft: -10,
-    height: 56,
+    width: 'auto',
+    height: '100%',
+    '> svg': {
+      // height: '100%',
+      width: 'auto'
+    },
+    // marginLeft: -10,
+    // height: 56,
     transition: 'all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1)',
     textDecoration: 'none'
     // transform: sticky.isSticky ? 'scale(0.8) translateX(-26px)' : undefined

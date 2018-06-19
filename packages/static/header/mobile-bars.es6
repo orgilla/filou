@@ -9,11 +9,12 @@ const Bars = withState('nav', 'setNav', false)(
   createComponent(
     ({ theme }) => ({
       display: 'none',
+      marginX: 0,
       ifSmallDown: {
         display: 'flex'
       },
       '& svg': {
-        fill: theme.inverted ? theme.light : theme.dark
+        fill: theme.inverted ? theme.light : theme.linkColor
       }
     }),
     ({ children, className, nav, setNav }) => (

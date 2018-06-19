@@ -1,6 +1,6 @@
 import React from 'react';
 
-const createMenuItems = (Group, Item, menu, props = {}) => {
+const createMenuItems = (Group, Item, menu = [], props = {}) => {
   const MenuItem = ({ slug, title, children, hide }) => {
     if (hide) {
       return null;

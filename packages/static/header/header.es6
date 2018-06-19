@@ -2,7 +2,6 @@ import React from 'react';
 import { Sticky } from 'react-sticky';
 import { ThemeProvider, createComponent, withTheme } from 'react-fela';
 import Nav from '../nav';
-import Menu from './menu';
 import MobileBars from './mobile-bars';
 import Container from './container';
 import createMenuItems from './create-menu-items';
@@ -11,29 +10,55 @@ import Logo from './logo';
 import Group from './group';
 import Item from './item';
 
-const ZIndex = createComponent(
-  () => ({
-    zIndex: 10,
+const StickyBox = createComponent(
+  ({ height }) => ({
+    height,
+    zIndex: 12,
     '> div': {
-      zIndex: 10
+      height,
+      zIndex: 12
     }
   }),
   'div'
 );
 
-const Header = ({
-  logo,
-  sitemap,
-  offsetTop,
-  logoText,
-  children,
+const Inner = ({
   height,
+  sticky,
+  logo,
+  children,
+  logoText,
+  subMenuInverted,
+  sitemap,
+  className
+}) => (
+  <Container className={className} height={height} sticky={sticky}>
+    {logo && <Logo to="/" sticky={sticky} logo={logo} logoText={logoText} />}
+    {children}
+    {sitemap && <Spacer />}
+    {sitemap && (
+      <MobileBars>{createMenuItems(Nav.Group, Nav.Item, sitemap)}</MobileBars>
+    )}
+    {sitemap && (
+      <Container nested>
+        {createMenuItems(Group, Item, sitemap, {
+          inverted: subMenuInverted
+        })}
+      </Container>
+    )}
+  </Container>
+);
+const Header = ({
   theme,
+  sticky,
+  offsetTop,
+  height,
   inverted = theme.inverted,
   subMenuInverted = inverted,
   fontSize = theme.fontSize,
   fontWeight = theme.fontWeight,
-  linkColor = theme.color
+  linkColor = theme.color,
+  ...rest
 }) => (
   <ThemeProvider
     theme={{
@@ -43,27 +68,24 @@ const Header = ({
       linkColor: theme[linkColor] || linkColor || theme.color
     }}
   >
-    <ZIndex>
-      <Sticky topOffset={offsetTop}>
-        {sticky => (
-          <Container height={height} sticky={sticky}>
-            {logo && (
-              <Logo to="/" sticky={sticky} logo={logo} logoText={logoText} />
-            )}
-            {children}
-            <Spacer />
-            <Menu>
-              {createMenuItems(Group, Item, sitemap, {
-                inverted: subMenuInverted
-              })}
-            </Menu>
-            <MobileBars>
-              {createMenuItems(Nav.Group, Nav.Item, sitemap)}
-            </MobileBars>
-          </Container>
-        )}
-      </Sticky>
-    </ZIndex>
+    {sticky ? (
+      <StickyBox height={height}>
+        <Sticky topOffset={offsetTop}>
+          {stickyProps => (
+            <div>
+              <Inner
+                {...rest}
+                height={height}
+                sticky={stickyProps}
+                subMenuInverted={subMenuInverted}
+              />
+            </div>
+          )}
+        </Sticky>
+      </StickyBox>
+    ) : (
+      <Inner {...rest} height={height} subMenuInverted={subMenuInverted} />
+    )}
   </ThemeProvider>
 );
 

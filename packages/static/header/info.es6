@@ -1,61 +1,23 @@
 import React from 'react';
-import { createComponent, ThemeProvider, withTheme } from 'react-fela';
-import Menu from './menu';
+import { createComponent } from 'react-fela';
+import Header from './header';
 
 const Info = createComponent(
-  ({ theme, height }) => ({
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.inverted ? theme.color : theme.light,
-    // opacity: 0.7,
-    width: '100%',
-    height,
-    paddingX: 10,
+  () => ({
+    zIndex: 11,
     ifSmallDown: {
       textAlign: 'center',
-      '> div': {
+      '> *:not(:first-child)': {
         display: 'none'
       },
-      '> a': {
-        display: 'none'
-      },
-      '> span': {
-        flex: 1
-      }
-    },
-    '> a': {
-      marginX: 15
-    },
-    '> span': {
-      marginX: 15,
-      '> a': {
+      '> *:first-child': {
+        flex: 1,
         marginX: 0
       }
     }
   }),
-  ({ children, className }) => <Menu className={className}>{children}</Menu>,
+  props => <Header {...props} />,
   p => Object.keys(p)
 );
 
-export default withTheme(
-  ({
-    theme,
-    inverted = theme.inverted,
-    fontSize = theme.fontSize,
-    fontWeight = theme.fontWeight,
-    linkColor = theme.color,
-    ...props
-  }) => (
-    <ThemeProvider
-      theme={{
-        inverted,
-        fontSize: theme[fontSize] || fontSize || theme.fontSize,
-        fontWeight: theme[fontWeight] || fontWeight || theme.fontWeight,
-        linkColor: theme[linkColor] || linkColor || theme.color
-      }}
-    >
-      <Info {...props} />
-    </ThemeProvider>
-  )
-);
+export default Info;

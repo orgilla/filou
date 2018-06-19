@@ -1,13 +1,22 @@
 import { createComponent } from 'react-fela';
 
 const Container = createComponent(
-  ({ sticky, theme, height }) => ({
-    /* position: 'absolute',
-    top: 25,
-    left: 0, */
+  ({ sticky = {}, theme, height, nested }) => ({
+    ifSmallDown: nested && {
+      display: 'none'
+    },
+    '> *': {
+      marginRight: theme.space3,
+      ':last-child': {
+        marginRight: 0
+      },
+      ':first-child': {
+        marginLeft: 0
+      }
+    },
     height,
     position: 'relative',
-    width: '100%',
+    width: nested ? undefined : '100%',
     ...sticky.style,
     boxShadow:
       sticky.isSticky && sticky.distanceFromTop !== 0
@@ -16,7 +25,7 @@ const Container = createComponent(
     // paddingY: sticky.isSticky ? 0 : 10,
     // marginBottom: sticky.isSticky ? 20 : 0,
     transition: theme.transition,
-    paddingX: 10,
+    paddingX: nested ? undefined : theme.space2,
     // marginTop: sticky.isSticky ? 0 : 25,
     left: 0,
     backgroundColor: !theme.inverted ? theme.light : theme.color,
