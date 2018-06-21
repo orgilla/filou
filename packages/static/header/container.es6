@@ -28,7 +28,11 @@ const Container = createComponent(
     paddingX: nested ? undefined : theme.space2,
     // marginTop: sticky.isSticky ? 0 : 25,
     left: 0,
-    backgroundColor: !theme.inverted ? theme.light : theme.color,
+    backgroundColor: nested
+      ? undefined
+      : !theme.inverted
+        ? theme.light
+        : theme.color,
     zIndex: 12,
     display: 'flex',
     flexDirection: 'row',

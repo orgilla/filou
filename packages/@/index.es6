@@ -1,5 +1,6 @@
 export { createComponent, Provider } from 'react-fela';
 export { default as color } from 'tinycolor2';
+export { default as tinyColor } from 'tinycolor2';
 export * as Core from '@filou/core';
 
 export { default as createRenderer } from './create-renderer';

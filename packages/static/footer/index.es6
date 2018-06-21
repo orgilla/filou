@@ -15,37 +15,6 @@ const Footer = createComponent(
     // height: 61,
     // paddingY: 60,
     overflow: 'hidden',
-    '& ul': {
-      // fontSize: 16,
-      position: 'relative',
-      marginBottom: 0,
-      marginLeft: '0.4rem',
-      listStyleType: 'none',
-      '> li.iubenda': {
-        display: 'flex',
-        '> iframe': {
-          width: '84px!important'
-        }
-      },
-      '> li': {
-        '> ul': {
-          marginTop: 3
-        },
-        paddingLeft: '0.5em',
-        marginBottom: 3,
-        position: 'relative',
-        '> a': {
-          textDecoration: 'none'
-        }
-      },
-      '> li:before': {
-        content: '"■"',
-        position: 'absolute',
-        marginRight: 10,
-        fontWeight: 'bold',
-        left: '-0.5em'
-      }
-    },
     '& .o-nav-item-lvl-0': {
       padding: 5,
       paddingX: 12

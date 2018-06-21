@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider as FelaThemeProvider } from 'react-fela';
 
 const getTheme = (theme = {}) => ({
+  // linkAnimations: animations,
   // Colors
   color: '#8e44ad',
   colorSecondary: '#e67e22',

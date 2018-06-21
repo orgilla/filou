@@ -29,6 +29,7 @@ const Inner = ({
   children,
   logoText,
   subMenuInverted,
+  mobileNavInverted,
   sitemap,
   className
 }) => (
@@ -37,7 +38,9 @@ const Inner = ({
     {children}
     {sitemap && <Spacer />}
     {sitemap && (
-      <MobileBars>{createMenuItems(Nav.Group, Nav.Item, sitemap)}</MobileBars>
+      <MobileBars inverted={mobileNavInverted}>
+        {createMenuItems(Nav.Group, Nav.Item, sitemap)}
+      </MobileBars>
     )}
     {sitemap && (
       <Container nested>
@@ -55,9 +58,10 @@ const Header = ({
   height,
   inverted = theme.inverted,
   subMenuInverted = inverted,
+  mobileNavInverted = inverted,
   fontSize = theme.fontSize,
   fontWeight = theme.fontWeight,
-  linkColor = theme.color,
+  color = theme.color,
   ...rest
 }) => (
   <ThemeProvider
@@ -65,7 +69,7 @@ const Header = ({
       inverted,
       fontSize: theme[fontSize] || fontSize || theme.fontSize,
       fontWeight: theme[fontWeight] || fontWeight || theme.fontWeight,
-      linkColor: theme[linkColor] || linkColor || theme.color
+      linkColor: theme[color] || color || theme.color
     }}
   >
     {sticky ? (
@@ -78,6 +82,7 @@ const Header = ({
                 height={height}
                 sticky={stickyProps}
                 subMenuInverted={subMenuInverted}
+                mobileNavInverted={mobileNavInverted}
               />
             </div>
           )}

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { FaBars } from '@filou/icons';
 import Tappable from 'react-tappable';
-import { createComponent } from 'react-fela';
+import { createComponent, ThemeProvider, withTheme } from 'react-fela';
 import { withState } from 'recompose';
 import Nav from '../nav';
 
@@ -17,11 +17,24 @@ const Bars = withState('nav', 'setNav', false)(
         fill: theme.inverted ? theme.light : theme.linkColor
       }
     }),
-    ({ children, className, nav, setNav }) => (
+    ({
+      children,
+      className,
+      nav,
+      setNav,
+      theme,
+      inverted = theme.inverted
+    }) => (
       <Fragment>
-        <Nav open={nav} onClose={() => setNav(!nav)}>
-          {children}
-        </Nav>
+        <ThemeProvider
+          theme={{
+            inverted
+          }}
+        >
+          <Nav open={nav} onClose={() => setNav(!nav)}>
+            {children}
+          </Nav>
+        </ThemeProvider>
         <Tappable className={className} onTap={() => setNav(true)}>
           <FaBars size={30} />
         </Tappable>
@@ -31,4 +44,4 @@ const Bars = withState('nav', 'setNav', false)(
   )
 );
 
-export default Bars;
+export default withTheme(Bars);

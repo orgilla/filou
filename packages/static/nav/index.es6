@@ -10,7 +10,7 @@ const StyledDrawer = createComponent(
     padding: 20,
     paddingBottom: 0,
     zIndex: 15,
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     maxWidth: '80%!important'
   }),
   p => <Drawer {...p} />,
@@ -102,15 +102,8 @@ const Item = createComponent(
   p => Object.keys(p)
 );
 
-const Nav = ({ open, onClose, children, inverted = false }) => (
-  <StyledDrawer
-    open={open}
-    onClose={onClose}
-    right
-    fixed
-    // dim={false}
-    inverted={inverted}
-  >
+const Nav = ({ open, onClose, children }) => (
+  <StyledDrawer open={open} onClose={onClose} right fixed>
     <Container>{children}</Container>
   </StyledDrawer>
 );

@@ -1,9 +1,11 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
 import { Link, Route } from 'react-static';
+import get from 'lodash/get';
 
+const func = () => ({});
 const Item = createComponent(
-  ({ theme, nolink, active }) => ({
+  ({ theme, nolink, active, hideIfSmall, hideIfMini, hideIfMedium }) => ({
     fontSize: theme.fontSize,
     cursor: 'pointer',
     fontWeight: theme.fontWeight,
@@ -19,18 +21,33 @@ const Item = createComponent(
         }
       },
       {
+        condition: hideIfMini,
+        style: {
+          ifMini: {
+            display: 'none'
+          }
+        }
+      },
+      {
+        condition: hideIfMedium,
+        style: {
+          ifMediumDown: {
+            display: 'none'
+          }
+        }
+      },
+      {
+        condition: hideIfSmall,
+        style: {
+          ifSmallDown: {
+            display: 'none'
+          }
+        }
+      },
+      {
         condition: active,
         style: theme.activeStyle || {
-          onAfter: {
-            content: "''",
-            width: '100%',
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            borderBottom: `3px solid ${
-              theme.inverted ? theme.light : theme.color
-            }`
-          }
+          ...get(theme, 'linkAnimation.active', func)(theme)
         }
       }
     ],
@@ -43,8 +60,10 @@ const Item = createComponent(
     onHover: !nolink && {
       textDecoration: 'none',
       color: theme.inverted ? theme.light : theme.linkColor,
-      opacity: 0.6
-    }
+      opacity: 0.6,
+      ...get(theme, 'linkAnimation.hover', func)(theme)
+    },
+    ...get(theme, 'linkAnimation.default', func)(theme)
   }),
   ({ children, onClick, to, className, nolink }) =>
     !nolink ? (
@@ -57,11 +76,20 @@ const Item = createComponent(
   p => Object.keys(p)
 );
 
-export default ({ to, ...rest }) =>
+const ActiveItem = ({ to, exact, ...rest }) =>
   to ? (
-    <Route path={to} exact={to === '/'}>
-      {({ match }) => <Item to={to} active={match} {...rest} />}
+    <Route path={to}>
+      {({ location }) => {
+        const active =
+          to === '/' || exact
+            ? location.pathname === to
+            : location.pathname === to ||
+              location.pathname.indexOf(`${to}/`) === 0;
+        return <Item to={to} active={active} {...rest} />;
+      }}
     </Route>
   ) : (
     <Item to={to} {...rest} />
   );
+
+export default ActiveItem;

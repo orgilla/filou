@@ -1,5 +1,6 @@
 import React from 'react';
 import { createComponent, ThemeProvider, withTheme } from 'react-fela';
+import get from 'lodash/get';
 import Item from './item';
 
 const Backdrop = createComponent(({ theme }) => ({
@@ -14,7 +15,12 @@ const Backdrop = createComponent(({ theme }) => ({
   width: 220,
   '> a': {
     marginBottom: 4,
-    marginTop: 4
+    marginTop: 4,
+    onAfter: {
+      left: 0,
+      maxWidth: '33%',
+      transform: 'translateX(0)'
+    }
   },
   paddingX: 20,
   paddingY: 10,
@@ -22,7 +28,8 @@ const Backdrop = createComponent(({ theme }) => ({
   flexDirection: 'column',
   backgroundColor: theme.inverted ? theme.color : theme.light,
   borderRadius: theme.borderRadius,
-  boxShadow: theme.boxShadow
+  boxShadow: theme.boxShadow,
+  ...get(theme, 'filou/static/HeaderMenu', {})
   // 'rgba(0, 0, 0, 0.0470588) 0px 1px 4px, rgba(0, 0, 0, 0.0470588) 0px 1px 3px'
 }));
 

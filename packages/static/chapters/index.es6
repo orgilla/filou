@@ -20,7 +20,7 @@ class HeadingsContainer extends Component {
           this.ref = ref && ref.node;
         }}
       >
-        <Sticky disableCompensation>
+        <Sticky disableCompensation style={{ zIndex: 1 }}>
           {props => (
             <HeadingsNonMobile
               paddingTop={headerHeight}
