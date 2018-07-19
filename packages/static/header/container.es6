@@ -1,18 +1,11 @@
+import React from 'react';
 import { createComponent } from 'react-fela';
+import { Container } from '@filou/core';
 
-const Container = createComponent(
+const OuterContainer = createComponent(
   ({ sticky = {}, theme, height, nested }) => ({
     ifSmallDown: nested && {
       display: 'none'
-    },
-    '> *': {
-      marginRight: theme.space3,
-      ':last-child': {
-        marginRight: 0
-      },
-      ':first-child': {
-        marginLeft: 0
-      }
     },
     height: height || (nested ? '100%' : undefined),
     position: 'relative',
@@ -28,17 +21,46 @@ const Container = createComponent(
     paddingX: nested ? undefined : theme.space2,
     // marginTop: sticky.isSticky ? 0 : 25,
     left: 0,
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'center',
     backgroundColor: nested
       ? undefined
       : !theme.inverted
         ? theme.light
         : theme.color,
-    zIndex: 12,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
+    zIndex: 12
   }),
-  'div'
+  ({ container, className, ...rest }) => (
+    <div className={className}>
+      {container ? <Container {...rest} /> : <div {...rest} />}
+    </div>
+  ),
+  ['container']
 );
 
-export default Container;
+const InnerContainer = createComponent(
+  ({ theme }) => ({
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    '> *': {
+      marginRight: theme.space3,
+      ':last-child': {
+        marginRight: 0
+      },
+      ':first-child': {
+        marginLeft: 0
+      }
+    }
+  }),
+  ({ container, sticky, height, nested, ...rest }) => (
+    <OuterContainer sticky={sticky} height={height} nested={nested}>
+      {container ? <Container {...rest} /> : <div {...rest} />}
+    </OuterContainer>
+  ),
+  ['container', 'height', 'nested', 'sticky']
+);
+
+export default InnerContainer;

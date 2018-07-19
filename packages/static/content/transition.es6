@@ -69,7 +69,6 @@ export default () => (
           classNames="fade"
           enter
           exit
-          xy={console.log(children)}
         >
           <Content>{children}</Content>
         </Transition>

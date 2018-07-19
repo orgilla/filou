@@ -105,8 +105,8 @@ export default class GeocodeEditor extends Component {
       });
   };
 
-  renderOption = ({ id, formattedAddress }) => (
-    <AutoComplete.Option key={id} text={formattedAddress}>
+  renderOption = ({ id, formattedAddress }, i) => (
+    <AutoComplete.Option key={id || i} text={formattedAddress}>
       <div style={{ whiteSpace: 'initial', display: 'flex' }}>
         {formattedAddress}
       </div>

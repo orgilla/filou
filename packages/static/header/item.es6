@@ -1,6 +1,7 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
-import { Link, Route } from 'react-static';
+import HistoryConsumer from '../history';
+import LinkConsumer from '../link';
 import get from 'lodash/get';
 
 const func = () => ({});
@@ -67,9 +68,13 @@ const Item = createComponent(
   }),
   ({ children, onClick, to, className, nolink }) =>
     !nolink ? (
-      <Link to={to} onClick={onClick} className={className}>
-        {children}
-      </Link>
+      <LinkConsumer>
+        {Link => (
+          <Link to={to} onClick={onClick} className={className}>
+            {children}
+          </Link>
+        )}
+      </LinkConsumer>
     ) : (
       <span className={className}>{children}</span>
     ),
@@ -78,18 +83,15 @@ const Item = createComponent(
 
 const ActiveItem = ({ to, exact, ...rest }) =>
   to ? (
-    <Route path={to}>
-      {({ location }) => {
-        const active =
-          to === '/' || exact
-            ? location.pathname === to
-            : location.pathname === to ||
-              location.pathname.indexOf(`${to}/`) === 0;
-        return <Item to={to} active={active} {...rest} />;
-      }}
-    </Route>
+    <HistoryConsumer>
+      {History => (
+        <History to={to} exact={exact} {...rest}>
+          {({ pathname }) => <Item to={to} active={pathname === to} {...rest} />}
+        </History>
+      )}
+    </HistoryConsumer>
   ) : (
-    <Item to={to} {...rest} />
+    <Item {...rest} />
   );
 
 export default ActiveItem;

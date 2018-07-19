@@ -1,4 +1,5 @@
 export * from './markdown';
+export { default as createRetriever } from './retrieve';
 
 export const getText = node => {
   if (node.type === 'text' && node.value) {

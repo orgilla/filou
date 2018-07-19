@@ -1,5 +1,5 @@
 {
-  "version": "0.9.18",
+  "version": "0.9.27",
   "name": "@filou/static-server",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -8,12 +8,12 @@
     "Philipp Achenbach <olymp@philipp-achenbach.de>"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.49",
-    "@google/maps": "^0.4.6",
+    "@babel/runtime": "^7.0.0-beta.52",
+    "@google/maps": "^0.5.4",
     "axios": "^0.18.0",
+    "date-fns": "^1.29.0",
     "evernote": "^2.0.5",
     "front-matter": "^2.3.0",
-    "date-fns": "^1.29.0",
     "fs-extra": "^6.0.1",
     "hast-util-to-mdast": "^2.1.0",
     "mdast-squeeze-paragraphs": "^3.0.2",

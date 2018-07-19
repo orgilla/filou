@@ -31,9 +31,15 @@ const Inner = ({
   subMenuInverted,
   mobileNavInverted,
   sitemap,
+  container,
   className
 }) => (
-  <Container className={className} height={height} sticky={sticky}>
+  <Container
+    container={container}
+    className={className}
+    height={height}
+    sticky={sticky}
+  >
     {logo && <Logo to="/" sticky={sticky} logo={logo} logoText={logoText} />}
     {children}
     {sitemap && <Spacer />}
@@ -62,6 +68,7 @@ const Header = ({
   fontSize = theme.fontSize,
   fontWeight = theme.fontWeight,
   color = theme.color,
+  container = false,
   ...rest
 }) => (
   <ThemeProvider
@@ -79,6 +86,7 @@ const Header = ({
             <div>
               <Inner
                 {...rest}
+                container={container}
                 height={height}
                 sticky={stickyProps}
                 subMenuInverted={subMenuInverted}
@@ -89,7 +97,12 @@ const Header = ({
         </Sticky>
       </StickyBox>
     ) : (
-      <Inner {...rest} height={height} subMenuInverted={subMenuInverted} />
+      <Inner
+        {...rest}
+        container={container}
+        height={height}
+        subMenuInverted={subMenuInverted}
+      />
     )}
   </ThemeProvider>
 );

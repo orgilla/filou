@@ -1,7 +1,17 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
-import { Link } from 'react-static';
+import LinkConsumer from '../link';
 
+const LogoInner = ({ onClick, to, className, logo: RawLogo, logoText }) => (
+  <LinkConsumer>
+    {Link => (
+      <Link to={to} onClick={onClick} className={className}>
+        {typeof RawLogo === 'object' ? RawLogo : <RawLogo key="logo" />}
+        {/*logoText && <span>{logoText}</span>*/}
+      </Link>
+    )}
+  </LinkConsumer>
+);
 const Logo = createComponent(
   () => ({
     display: 'flex',
@@ -18,12 +28,7 @@ const Logo = createComponent(
     textDecoration: 'none'
     // transform: sticky.isSticky ? 'scale(0.8) translateX(-26px)' : undefined
   }),
-  ({ onClick, to, className, logo: RawLogo, logoText }) => (
-    <Link to={to} onClick={onClick} className={className}>
-      {typeof RawLogo === 'object' ? RawLogo : <RawLogo />}
-      {logoText}
-    </Link>
-  ),
+  LogoInner,
   p => Object.keys(p)
 );
 export default Logo;

@@ -1,8 +1,8 @@
 import React from 'react';
 import Drawer from '@filou/portal/drawer';
 import { createComponent } from 'filou';
-import { Link } from 'react-static';
 import get from 'lodash/get';
+import LinkConsumer from '../link';
 
 const StyledDrawer = createComponent(
   () => ({
@@ -98,7 +98,7 @@ const Item = createComponent(
       left: '-0.5em'
     }
   }),
-  p => <Link {...p} />,
+  p => <LinkConsumer>{Link => <Link {...p} />}</LinkConsumer>,
   p => Object.keys(p)
 );
 

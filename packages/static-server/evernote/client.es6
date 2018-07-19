@@ -11,6 +11,22 @@ function toHexString(byteArray) {
 export default ({ token, sandbox = false, cache: doCache = false }) => {
   const client = new Evernote.Client({ token, sandbox });
   const api = {
+    client,
+    getNotebooks: async () => {
+      const noteStore = client.getNoteStore();
+      const notebooks = await noteStore
+        .listNotebooks()
+        .catch(err => console.error(err));
+
+      return notebooks;
+    },
+    getSharedNotebooks: async () => {
+      const noteStore = client.getNoteStore();
+      const notebooks = await noteStore
+        .listLinkedNotebooks()
+        .catch(err => console.error(err));
+      return notebooks;
+    },
     getNoteByGuid: async guid => {
       const noteStore = client.getNoteStore();
       const noteSpec = new Evernote.NoteStore.NoteResultSpec({
@@ -21,13 +37,14 @@ export default ({ token, sandbox = false, cache: doCache = false }) => {
       note.resourceMap = {};
       note.tags = [];
       await Promise.all(
-        note.resources.map(async ({ guid, mime, data }) => {
+        (note.resources || []).map(async ({ guid, mime, data }) => {
           const filename = `${guid}.${mime.split('/')[1]}`;
           note.resourceMap[toHexString(data.bodyHash)] = {
             filename,
             data: data.body,
             mime
           };
+          console.log(filename);
         })
       );
 

@@ -10,8 +10,8 @@ const createMenuItems = (Group, Item, menu = [], props = {}) => {
         {...props}
         title={slug ? <Item to={slug}>{title}</Item> : <Item>{title}</Item>}
       >
-        {children.map(item => (
-          <MenuItem {...props} {...item} key={item.slug || item.title} />
+        {children.map((item, i) => (
+          <MenuItem {...props} {...item} key={item.slug || item.title || i} />
         ))}
       </Group>
     ) : (
@@ -20,8 +20,8 @@ const createMenuItems = (Group, Item, menu = [], props = {}) => {
       </Item>
     );
   };
-  return menu.map(item => (
-    <MenuItem {...props} {...item} key={item.slug || item.title} />
+  return menu.map((item, i) => (
+    <MenuItem {...props} {...item} key={item.slug || item.title || i} />
   ));
 };
 

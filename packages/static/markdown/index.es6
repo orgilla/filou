@@ -8,7 +8,6 @@ import getImg from '../get-img';
 renderers2.link = class MDLink extends Component {
   render() {
     const { children, ...rest } = this.props;
-    console.log(children);
     if (
       children &&
       children.length &&
@@ -32,7 +31,6 @@ renderers2.link = class MDLink extends Component {
 renderers2.code = class MDCode extends Component {
   render() {
     const { value } = this.props;
-    console.log(this.props);
     return <span>Nicht gefunden: {value}</span>;
   }
 };

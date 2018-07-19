@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { createComponent } from 'react-fela';
-import { Link } from 'react-static';
 
 const Form = createComponent(
   () => ({

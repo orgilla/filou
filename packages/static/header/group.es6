@@ -5,7 +5,7 @@ import Item from './item';
 
 const Backdrop = createComponent(({ theme }) => ({
   position: 'absolute',
-  left: 0,
+  left: `-${theme.space3}`,
   bottom: 0,
   transform: 'translateY(90%)',
   zIndex: 13,
@@ -17,13 +17,13 @@ const Backdrop = createComponent(({ theme }) => ({
     marginBottom: 4,
     marginTop: 4,
     onAfter: {
-      left: 0,
+      left: -theme.space3,
       maxWidth: '33%',
       transform: 'translateX(0)'
     }
   },
-  paddingX: 20,
-  paddingY: 10,
+  paddingX: theme.space3,
+  paddingY: theme.space2,
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: theme.inverted ? theme.color : theme.light,

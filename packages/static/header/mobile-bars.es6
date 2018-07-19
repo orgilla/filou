@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { FaBars } from '@filou/icons';
-import Tappable from 'react-tappable';
 import { createComponent, ThemeProvider, withTheme } from 'react-fela';
 import { withState } from 'recompose';
 import Nav from '../nav';
@@ -35,9 +34,9 @@ const Bars = withState('nav', 'setNav', false)(
             {children}
           </Nav>
         </ThemeProvider>
-        <Tappable className={className} onTap={() => setNav(true)}>
+        <div className={className} onClick={() => setNav(true)}>
           <FaBars size={30} />
-        </Tappable>
+        </div>
       </Fragment>
     ),
     p => Object.keys(p)

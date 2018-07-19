@@ -7,8 +7,8 @@ const MenuItem = ({ slug, title, children, singlePage }) => {
   const childs =
     children && !singlePage ? (
       <ul>
-        {children.map(item => (
-          <MenuItem {...item} key={item.slug || item.title} />
+        {children.map((item, i) => (
+          <MenuItem {...item} key={item.slug || item.title || i} />
         ))}
       </ul>
     ) : null;
@@ -53,7 +53,7 @@ const Sitemap = createComponent(
     }
   }),
   ({
-    sitemap,
+    sitemap = [],
     className,
     theme,
     inverted = theme.inverted,
@@ -69,13 +69,13 @@ const Sitemap = createComponent(
         linkColor: theme[color] || color || theme.color
       }}
     >
-      <panel className={className}>
+      <div className={className}>
         <ul>
-          {sitemap.map(item => (
-            <MenuItem {...item} key={item.slug || item.title} />
+          {(sitemap || []).map((item, i) => (
+            <MenuItem {...item} key={item.slug || item.title || i} />
           ))}
         </ul>
-      </panel>
+      </div>
     </ThemeProvider>
   ),
   p => Object.keys(p)

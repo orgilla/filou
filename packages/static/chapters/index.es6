@@ -20,7 +20,7 @@ class HeadingsContainer extends Component {
           this.ref = ref && ref.node;
         }}
       >
-        <Sticky disableCompensation style={{ zIndex: 1 }}>
+        <Sticky disableCompensation>
           {props => (
             <HeadingsNonMobile
               paddingTop={headerHeight}
@@ -126,6 +126,7 @@ const HeadingsNonMobile = deco(
     ({ styles = {}, paddingTop, theme }) => ({
       position: 'absolute',
       ...styles,
+      zIndex: 9,
       animationName: {
         '0%': {
           opacity: 0
@@ -139,7 +140,6 @@ const HeadingsNonMobile = deco(
       // maxHeight: 500,
       // overflow: 'auto',
       width: 300,
-      // backgroundColor: 'white',
       paddingTop: paddingTop + 30,
       paddingRight: 50,
       left: 'initial',

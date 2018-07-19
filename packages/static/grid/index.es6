@@ -2,13 +2,13 @@ import React from 'react';
 import { createComponent } from 'react-fela';
 import { Container } from '@filou/core';
 import { format } from 'date-fns';
-import { Link } from 'react-static';
 import Grid from '@filou/grid';
 import Button from '../button';
 import getSrc from '../get-img';
+import LinkConsumer from '../link';
 
 const Panel = createComponent(
-  ({ image }) => ({
+  ({ image, theme }) => ({
     padding: '0 16px 24px 16px',
     '> a': {
       '> div': {
@@ -20,26 +20,26 @@ const Panel = createComponent(
       },
       display: 'block',
       backgroundColor: '#FFFFFF',
-      borderRadius: 4,
+      borderRadius: theme.borderRadius,
       overflow: 'hidden',
       height: '100%',
-      boxShadow: '0 1px 5px rgba(45, 45, 45, 0.09)',
+      boxShadow: theme.boxShadow,
       textDecoration: 'none',
       '> h3': {
-        paddingX: 10,
+        paddingX: !theme.boxShadow ? undefined : theme.space2,
         minHeight: 60,
         marginBottom: 0,
         marginTop: 0,
         paddingBottom: 0
       },
       '> p': {
-        paddingX: 10,
-        marginBottom: 10,
+        paddingX: !theme.boxShadow ? undefined : theme.space2,
+        marginBottom: theme.space2,
         textDecoration: 'none'
       },
       '> span': {
-        paddingX: 10,
-        paddingY: 10,
+        paddingX: !theme.boxShadow ? undefined : theme.space2,
+        paddingY: theme.space2,
         textDecoration: 'none',
         display: 'flex',
         flexDirection: 'row',
@@ -51,16 +51,20 @@ const Panel = createComponent(
   }),
   ({ title, image, text, date, className, type, ...rest }) => (
     <div className={className}>
-      <Link {...rest}>
-        <div />
-        <span>
-          {date && <span>{format(date, 'DD.MM.YYYY HH:mm')}</span>}
-          <b />
-          {type && <Button>{type}</Button>}
-        </span>
-        <h3>{title}</h3>
-        <p>{text}</p>
-      </Link>
+      <LinkConsumer>
+        {Link => (
+          <Link {...rest}>
+            <div />
+            <span>
+              {date && <span>{format(date, 'DD.MM.YYYY HH:mm')}</span>}
+              <b />
+              {type && <Button>{type}</Button>}
+            </span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </Link>
+        )}
+      </LinkConsumer>
     </div>
   ),
   p => Object.keys(p)
@@ -68,9 +72,9 @@ const Panel = createComponent(
 
 const GridPanels = ({ items }) => (
   <Container>
-    <Grid size={4} padding={16} marginX={false}>
-      {items.map(item => (
-        <Grid.Item small={1} key={item.to || item.id}>
+    <Grid size={4} marginX={-27}>
+      {items.map((item, i) => (
+        <Grid.Item  small={1} key={item.to || item.id || i}>
           <Panel {...item} />
         </Grid.Item>
       ))}

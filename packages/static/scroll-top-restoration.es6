@@ -1,9 +1,9 @@
-import { Component } from 'react';
-import { withRouter } from 'react-static';
+import React, { Component } from 'react';
+import HistoryConsumer from './history';
 
 class ScrollToTop extends Component {
   componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
+    if (this.props.pathname !== prevProps.pathname) {
       window.scrollTo(0, 0);
     }
   }
@@ -13,4 +13,10 @@ class ScrollToTop extends Component {
   }
 }
 
-export default withRouter(ScrollToTop);
+export default () => (
+  <HistoryConsumer>
+    {History => (
+      <History>{({ pathname }) => <ScrollToTop pathname={pathname} />}</History>
+    )}
+  </HistoryConsumer>
+);

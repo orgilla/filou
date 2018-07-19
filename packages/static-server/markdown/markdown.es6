@@ -6,14 +6,24 @@ const parse2 = require('remark-parse');
 const stringify = require('remark-stringify');
 const squeeze = require('mdast-squeeze-paragraphs');
 const toMDAST = require('hast-util-to-mdast');
+const all = require('hast-util-to-mdast/lib/all');
+
+function iframe(h, node) {
+  const props = {
+    url: node.properties.src || '',
+    title: node.properties.src
+  };
+  node.children = [{ type: 'text', value: node.properties.src }];
+  return h(node, 'link', props, all(h, node));
+}
 
 export const mdastToMarkdown = mdast =>
   unified()
     .use(stringify)
     .stringify(mdast);
 
-export const htmlToMdast = (cooked, handlers) =>
-  squeeze(
+export const htmlToMdast = (cooked, handlers = {}) => {
+  const x = squeeze(
     toMDAST(
       unified()
         .use(parse)
@@ -21,10 +31,12 @@ export const htmlToMdast = (cooked, handlers) =>
           verbose: true
         }),
       {
-        handlers
+        handlers: { ...handlers, iframe }
       }
     )
   );
+  return x;
+};
 
 export const htmlToMarkdown = (cooked, handlers) => {
   const mdast = htmlToMdast(cooked, handlers);
