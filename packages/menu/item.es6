@@ -2,7 +2,6 @@ import React from 'react';
 import { createComponent } from 'react-fela';
 import { Icon } from 'antd';
 import tinycolor from 'tinycolor2';
-import Tappable from 'react-tappable';
 import { getColor } from '@filou/core/colors-provider';
 import Image from './image';
 
@@ -13,8 +12,8 @@ const LoaderContainer = createComponent(
     marginX: theme.space2,
     overflow: 'hidden',
     '> i.anticon': {
-      color: theme.color,
-    },
+      color: theme.color
+    }
   }),
   'div'
 );
@@ -34,8 +33,8 @@ const Content = createComponent(
       ? inverted
       : theme.inverted)
         ? theme.light2
-        : theme.dark2,
-    },
+        : theme.dark2
+    }
   }),
   'div',
   ({ ellipsis, inverted, collapsed, ...props }) => Object.keys(props)
@@ -54,7 +53,7 @@ export default createComponent(
     disabled,
     ellipsis,
     collapsed,
-    inverted = color ? !!color || color === 0 : undefined,
+    inverted = color ? !!color || color === 0 : undefined
   }) => {
     const bgColor = getColor(theme, color, palette);
     const alpha = tinycolor(bgColor).getAlpha();
@@ -86,8 +85,8 @@ export default createComponent(
       color: !!inverted && theme.light,
       userSelect: 'none',
       onHover: {
-        backgroundColor: !!onClick && !disabled && hoverColor,
-      },
+        backgroundColor: !!onClick && !disabled && hoverColor
+      }
     };
   },
   ({
@@ -109,9 +108,9 @@ export default createComponent(
     collapsed,
     ...rest
   }) => (
-    <Tappable
+    <div
       {...rest}
-      onTap={disabled ? () => {} : onClick}
+      onClick={disabled ? () => {} : onClick}
       ref={_ref || innerRef || ref}
       className={className}
     >
@@ -137,7 +136,7 @@ export default createComponent(
           </LoaderContainer>
         </Image>
       )}
-    </Tappable>
+    </div>
   ),
   ({ active, small, ...p }) => Object.keys(p)
 );

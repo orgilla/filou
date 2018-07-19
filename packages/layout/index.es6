@@ -4,7 +4,6 @@ import { compose, withState, withPropsOnChange } from 'recompose';
 import { withStyle, withTheme, createComponent } from '@powr/fela';
 import { connect } from 'react-redux';
 import { FaClose, FaEllipsisV } from '@filou/icons';
-import Tappable from 'react-tappable';
 import Swipeable from 'react-swipeable';
 import './bouncefix';
 
@@ -30,9 +29,9 @@ export const Icon = createComponent(
     }
   }),
   ({ className, color, size, icon: Icon, onClick }) => (
-    <Tappable className={className} onTap={onClick}>
+    <div className={className} onClick={onClick}>
       <Icon size={size || 18} color={color || 'light'} />
-    </Tappable>
+    </div>
   ),
   p => Object.keys(p)
 );
