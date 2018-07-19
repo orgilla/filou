@@ -6,17 +6,20 @@
       {
         helpers: false,
         polyfill: false,
-        regenerator: true,
-      },
+        regenerator: true
+      }
     ],
     'transform-decorators-legacy',
     [
       'import',
       {
         libraryName: 'antd',
-        style: true,
-      },
+        style: true
+      }
     ],
+    // 'transform-react-constant-elements',
+    'transform-react-inline-elements',
+    'transform-react-remove-prop-types',
     'lodash',
     [
       'transform-imports',
@@ -24,14 +27,14 @@
         antdj: {
           transform: 'antd/lib/${member}',
           kebabCase: true,
-          preventFullImport: true,
+          preventFullImport: true
         },
         'date-fns': {
           transform: 'date-fns/${member}',
           preventFullImport: true,
-          camelCase: true,
-        },
-      },
-    ],
-  ],
+          camelCase: true
+        }
+      }
+    ]
+  ]
 }
