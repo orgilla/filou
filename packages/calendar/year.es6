@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { createComponent } from 'react-fela';
 import locale from 'date-fns/locale/de';
 import {

@@ -6,28 +6,31 @@ const Grid = createComponent(
   ({ theme, height, marginX }) => ({
     height,
     minWidth: '100%',
-    marginX: marginX || marginX !== false ? `-${theme.space2}` : null,
+    marginX: marginX || (marginX !== false ? `-${theme.space2}` : null),
     onAfter: {
       content: '""',
       clear: 'both',
       display: 'block',
       visibility: 'hidden',
-      height: 0,
-    },
+      height: 0
+    }
   }),
   ({ children, size, height, marginX, padding, ...rest }) => (
     <div {...rest}>
-      {Children.map(children, child => (child ? cloneElement(child, { gridSize: size }) : child))}
+      {Children.map(
+        children,
+        child => (child ? cloneElement(child, { gridSize: size }) : child)
+      )}
     </div>
   ),
-  p => Object.keys(p),
+  p => Object.keys(p)
 );
 Grid.propTypes = {
   /** Defines the number of columns of the grid system */
-  size: PropTypes.number,
+  size: PropTypes.number
 };
 Grid.defaultProps = {
-  size: 12,
+  size: 12
 };
 Grid.displayName = 'Grid';
 
