@@ -1,15 +1,15 @@
 import { createRenderer } from 'fela';
-import extend from 'fela-plugin-extend';
+import extend from './fela-plugin-extend';
 import customProperty from 'fela-plugin-custom-property';
 import prefixer from 'fela-plugin-prefixer';
 import fallbackValue from 'fela-plugin-fallback-value';
 import unit from 'fela-plugin-unit';
-import removeUndefined from 'fela-plugin-remove-undefined';
+// import removeUndefined from 'fela-plugin-remove-undefined';
 import friendlyPseudoClass from 'fela-plugin-friendly-pseudo-class';
 import namedKeys from 'fela-plugin-named-keys';
 import monolithicEnhancer from 'fela-monolithic';
 import embedded from 'fela-plugin-embedded';
-//import { rehydrate } from 'fela-dom';
+// import { rehydrate } from 'fela-dom';
 import normalize from './normalize';
 
 export default ({ ua, monolithic = true } = {}) => {
@@ -56,37 +56,37 @@ export default ({ ua, monolithic = true } = {}) => {
         ifLarge: '@media (max-width: 1199px, min-width: 992)',
         ifMedium: '@media (max-width: 991px, min-width: 768)',
         ifSmall: '@media (max-width: 767px, min-width: 480)',
-        ifMini: '@media (max-width: 479px)',
+        ifMini: '@media (max-width: 479px)'
       }),
       friendlyPseudoClass(),
       customProperty({
         size: size => ({
           width: size,
-          height: size,
+          height: size
         }),
         paddingX: padding => ({
           paddingLeft: padding,
-          paddingRight: padding,
+          paddingRight: padding
         }),
         paddingY: padding => ({
           paddingTop: padding,
-          paddingBottom: padding,
+          paddingBottom: padding
         }),
         marginX: margin => ({
           marginLeft: margin,
-          marginRight: margin,
+          marginRight: margin
         }),
         marginY: margin => ({
           marginTop: margin,
-          marginBottom: margin,
+          marginBottom: margin
         }),
         borderX: border => ({
           borderLeft: border,
-          borderRight: border,
+          borderRight: border
         }),
         borderY: border => ({
           borderTop: border,
-          borderBottom: border,
+          borderBottom: border
         }),
         ellipsis: ellipsis =>
           ellipsis === true
@@ -94,7 +94,7 @@ export default ({ ua, monolithic = true } = {}) => {
                 whiteSpace: 'nowrap',
                 overflowX: 'hidden',
                 textOverflow: 'ellipsis',
-                maxWidth: '100%',
+                maxWidth: '100%'
               }
             : {},
         clearfix: clearfix =>
@@ -105,8 +105,8 @@ export default ({ ua, monolithic = true } = {}) => {
                   clear: 'both',
                   display: 'block',
                   visibility: 'hidden',
-                  height: 0,
-                },
+                  height: 0
+                }
               }
             : {},
         center: center =>
@@ -119,13 +119,13 @@ export default ({ ua, monolithic = true } = {}) => {
                       top: 0,
                       right: 0,
                       bottom: 0,
-                      left: 0,
+                      left: 0
                     }
                   : {
                       top: '50%',
                       left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                    }),
+                      transform: 'translate(-50%, -50%)'
+                    })
               }
             : {},
         centerX: center =>
@@ -137,12 +137,12 @@ export default ({ ua, monolithic = true } = {}) => {
                       marginLeft: 'auto',
                       left: 0,
                       marginRight: 'auto',
-                      right: 0,
+                      right: 0
                     }
                   : {
                       left: '50%',
-                      transform: 'translateX(-50%)',
-                    }),
+                      transform: 'translateX(-50%)'
+                    })
               }
             : {},
         centerY: center =>
@@ -154,33 +154,31 @@ export default ({ ua, monolithic = true } = {}) => {
                       marginTop: 'auto',
                       top: 0,
                       marginBottom: 'auto',
-                      bottom: 0,
+                      bottom: 0
                     }
                   : {
                       top: '50%',
-                      transform: 'translateY(-50%)',
-                    }),
+                      transform: 'translateY(-50%)'
+                    })
               }
             : {},
-        flexWidth: width => {
-          return { maxWidth: width, minWidth: width, width };
-        },
+        flexWidth: width => ({ maxWidth: width, minWidth: width, width }),
         hasFlex: styles => {
           if (!isBrowser('IE', 10)) {
             return styles;
           }
 
           return { display: 'block' };
-        },
-      }),
-      removeUndefined(),
+        }
+      })
+      // removeUndefined(),
     ],
-    enhancers: [monolithic ? monolithicEnhancer() : null].filter(x => x),
+    enhancers: [monolithic ? monolithicEnhancer() : null].filter(x => x)
     // enhancers: process.env.NODE_ENV === 'production' ? [] : [require('fela-monolithic').default()],
   });
-  /*if (typeof window !== 'undefined') {
+  /* if (typeof window !== 'undefined') {
     rehydrate(renderer);
-  }*/
+  } */
   renderer.renderStatic(normalize);
   renderer.renderStatic(`
     .with-portal {
