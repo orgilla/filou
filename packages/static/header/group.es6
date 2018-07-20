@@ -14,12 +14,12 @@ const Backdrop = createComponent(({ theme, mega }) => ({
   pointerEvents: 'none',
   width: 220,
   '> a': {
-    marginY: 4,
-    onAfter: {
+    marginY: 4
+    /* onAfter: {
       left: -theme.space3,
-      maxWidth: '33%',
-      transform: 'translateX(0)'
-    }
+      maxWidth: '33%'
+      // transform: 'translateX(0)'
+    } */
   },
   paddingX: theme.space3,
   paddingY: theme.space2,
@@ -31,9 +31,13 @@ const Backdrop = createComponent(({ theme, mega }) => ({
   extend: mega
     ? {
         flexDirection: 'row',
-        width: 800,
-        left: '-200%',
+        // paddingX: 0,
+        width: 'initial',
+        transform: 'translateX(-50%) translateY(90%)',
         '> span': {
+          marginX: theme.space1
+        },
+        '> a': {
           marginX: theme.space1
         }
       }
@@ -43,18 +47,20 @@ const Backdrop = createComponent(({ theme, mega }) => ({
 }));
 
 const Group = createComponent(
-  () => ({
+  ({ mega }) => ({
     position: 'relative',
     onHover: {
       '> div': {
-        transform: 'translateY(100%)',
+        transform: mega
+          ? 'translateX(-50%) translateY(100%)'
+          : 'translateY(100%)',
         pointerEvents: 'initial',
         opacity: 1
       }
     }
   }),
   ({ children, className, title, theme, inverted = theme.inverted, mega }) => (
-    <Item nolink className={className} xy={console.log(mega)}>
+    <Item nolink className={className}>
       {title}
       <ThemeProvider theme={{ ...theme, inverted }}>
         <Backdrop mega={mega}>{children}</Backdrop>

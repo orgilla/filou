@@ -15,6 +15,6 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "react-static": "^5.9.7"
+    "react-static": "6.0.0-beta.14"
   }
 }

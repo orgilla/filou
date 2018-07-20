@@ -4,7 +4,7 @@ import { Container } from '@filou/core';
 
 const OuterContainer = createComponent(
   ({ sticky = {}, theme, height, nested }) => ({
-    ifSmallDown: nested && {
+    ifMediumDown: nested && {
       display: 'none'
     },
     height: height || (nested ? '100%' : undefined),

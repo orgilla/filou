@@ -12,7 +12,7 @@ const Item = createComponent(
     fontWeight: theme.fontWeight,
     color: theme.inverted ? theme.light : theme.linkColor,
     textDecoration: 'none',
-    transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
+    transition: theme.transition,
     position: 'relative',
     extend: [
       {
@@ -86,7 +86,9 @@ const ActiveItem = ({ to, exact, ...rest }) =>
     <HistoryConsumer>
       {History => (
         <History to={to} exact={exact} {...rest}>
-          {({ pathname }) => <Item to={to} active={pathname === to} {...rest} />}
+          {({ pathname }) => (
+            <Item to={to} active={pathname === to} {...rest} />
+          )}
         </History>
       )}
     </HistoryConsumer>

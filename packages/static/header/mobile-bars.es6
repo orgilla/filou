@@ -9,7 +9,7 @@ const Bars = withState('nav', 'setNav', false)(
     ({ theme }) => ({
       display: 'none',
       marginX: 0,
-      ifSmallDown: {
+      ifMediumDown: {
         display: 'flex'
       },
       '& svg': {
