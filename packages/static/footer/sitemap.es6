@@ -44,11 +44,14 @@ const Sitemap = createComponent(
       },
       '> li:before': {
         content: '"■"',
-        color: theme.color,
+        fontSize: 8,
+        transform: 'translateX(-50%) translateY(-50%)',
         position: 'absolute',
         marginRight: 10,
         fontWeight: 'bold',
-        left: '-0.5em'
+        color: theme.color,
+        top: 13,
+        left: 0
       }
     }
   }),

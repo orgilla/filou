@@ -17,11 +17,14 @@ const Content = createComponent(({ theme }) => ({
     },
     '> li:before': {
       content: '"■"',
+      fontSize: 8,
+      transform: 'translateX(-50%) translateY(-50%)',
       position: 'absolute',
       marginRight: 10,
       fontWeight: 'bold',
       color: theme.color,
-      left: '-0.5em'
+      top: '50%',
+      left: 0
     }
   },
   ...get(theme, 'filou/static/Content', {})
