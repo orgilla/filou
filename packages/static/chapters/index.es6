@@ -20,10 +20,10 @@ class HeadingsContainer extends Component {
           this.ref = ref && ref.node;
         }}
       >
-        <Sticky disableCompensation>
+        <Sticky topOffset={0}>
           {props => (
             <HeadingsNonMobile
-              paddingTop={headerHeight}
+              top={headerHeight}
               double
               container={this.ref}
               styles={props.style}
@@ -35,7 +35,7 @@ class HeadingsContainer extends Component {
         <Sticky topOffset={-headerHeight}>
           {props => (
             <HeadingsMobile
-              paddingTop={headerHeight}
+              top={headerHeight}
               container={this.ref}
               styles={props.style}
               distanceFromTop={props.distanceFromTop}
@@ -50,8 +50,8 @@ class HeadingsContainer extends Component {
 }
 
 const deco = withPropsOnChange(
-  ['container', 'distanceFromTop', 'paddingTop', 'double'],
-  ({ container, distanceFromTop, paddingTop, double }) => ({
+  ['container', 'distanceFromTop', 'top', 'double'],
+  ({ container, distanceFromTop, top, double }) => ({
     element:
       container &&
       Array.from(container.querySelectorAll('h1, h2, h3, h4, h5, h6'))
@@ -60,7 +60,7 @@ const deco = withPropsOnChange(
             e.offsetTop +
               distanceFromTop -
               e.offsetHeight -
-              (double ? paddingTop : 0) <
+              (double ? top : 0) <
             0
         )
         .reverse()[0]
@@ -70,10 +70,10 @@ const deco = withPropsOnChange(
 const HeadingsMobile = deco(
   withState('open', 'setOpen', false)(
     createComponent(
-      ({ theme, styles, paddingTop }) => ({
+      ({ theme, styles, top }) => ({
         ...styles,
         zIndex: 13,
-        top: paddingTop,
+        top,
         overflow: 'hidden',
         height: 0,
         paddingY: 0,
@@ -123,55 +123,55 @@ const HeadingsMobile = deco(
 );
 const HeadingsNonMobile = deco(
   createComponent(
-    ({ styles = {}, paddingTop, theme }) => ({
-      position: 'absolute',
+    ({ styles = {}, top, theme }) => ({
       ...styles,
       zIndex: 9,
-      animationName: {
-        '0%': {
-          opacity: 0
+      height: 0,
+      '> div': {
+        top,
+        position: 'absolute',
+        animationName: {
+          '0%': {
+            opacity: 0
+          },
+          '100%': {
+            opacity: 1
+          }
         },
-        '100%': {
-          opacity: 1
+        animationDuration: '1.2s',
+        animationTimingFunction: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
+        width: 300,
+        paddingRight: 50,
+        left: 'initial',
+        right: '0px',
+        display: 'flex',
+        flexDirection: 'column',
+        transform: 'translateX(0)',
+        transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
+        ifMediumDown: {
+          display: 'none',
+          transform: 'translateX(200%)'
+        },
+        '> a': {
+          textDecoration: 'none',
+          ...get(theme, 'filou/static/ChaptersLink', {})
         }
-      },
-      animationDuration: '1.2s',
-      animationTimingFunction: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
-      // maxHeight: 500,
-      // overflow: 'auto',
-      width: 300,
-      paddingTop: paddingTop + 30,
-      paddingRight: 50,
-      left: 'initial',
-      right: '0px',
-      // top: 50,
-      // left: 30,
-      // paddingLeft: 20,
-      display: 'flex',
-      flexDirection: 'column',
-      transform: 'translateX(0)',
-      transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
-      ifMediumDown: {
-        display: 'none',
-        transform: 'translateX(200%)'
-      },
-      '> a': {
-        textDecoration: 'none',
-        ...get(theme, 'filou/static/ChaptersLink', {})
       }
     }),
     ({ headings, className, element }) => (
       <div className={className}>
-        {headings.filter(x => x.value).map(({ value, depth }, i) => (
-          <Nav.Item
-            key={value + i}
-            depth={depth}
-            active={element && value === element.innerText}
-            to={`#${slugify(value)}`}
-          >
-            {value}
-          </Nav.Item>
-        ))}
+        <div>
+          {headings.filter(x => x.value).map(({ value, depth }, i) => (
+            <Nav.Item
+              key={value + i}
+              depth={depth}
+              active={element && value === element.innerText}
+              to={`#${slugify(value)}`}
+            >
+              {value}
+            </Nav.Item>
+          ))}
+        </div>
       </div>
     ),
     p => Object.keys(p)

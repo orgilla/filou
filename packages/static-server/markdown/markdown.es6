@@ -56,7 +56,7 @@ export const markdownToMdastAndHeadings = (src = '') => {
     .filter(x => x.type === 'heading')
     .map(x => ({ depth: x.depth, value: x.children[0].value }));
 
-  return { ...attributes, ast, headings };
+  return { ...attributes, ast, headings, src, body };
 };
 
 export const htmlToMdastAndHeadings = (src, handlers) =>
