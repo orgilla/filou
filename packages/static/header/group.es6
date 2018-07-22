@@ -25,6 +25,8 @@ const Backdrop = createComponent(({ theme, mega }) => ({
   paddingY: theme.space2,
   display: 'flex',
   flexDirection: 'column',
+  // overflowX: 'hidden',
+  // overflowY: 'auto',
   backgroundColor: theme.inverted ? theme.color : theme.light,
   borderRadius: theme.borderRadius,
   boxShadow: theme.boxShadow,
@@ -39,6 +41,15 @@ const Backdrop = createComponent(({ theme, mega }) => ({
         },
         '> a': {
           marginX: theme.space1
+        },
+        onAfter: {
+          zIndex: -1,
+          content: '""',
+          position: 'absolute',
+          left: -100000,
+          right: -100000,
+          height: '100%',
+          backgroundColor: 'white'
         }
       }
     : {},

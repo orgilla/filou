@@ -5,7 +5,7 @@ import { Container } from '@filou/core';
 import get from 'lodash/get';
 
 const Footer = createComponent(
-  ({ theme }) => ({
+  ({ theme, backgroundColor }) => ({
     position: 'relative',
     bottom: 0,
     paddingBottom: 10,
@@ -15,6 +15,26 @@ const Footer = createComponent(
     // height: 61,
     // paddingY: 60,
     overflow: 'hidden',
+    backgroundColor:
+      backgroundColor && theme[backgroundColor]
+        ? theme[backgroundColor]
+        : backgroundColor || (!theme.inverted ? theme.light : theme.color),
+    color: theme.light,
+    '& h2': {
+      color: theme.light
+    },
+    '& h3': {
+      color: theme.light
+    },
+    '& h4': {
+      color: theme.light
+    },
+    '& h5': {
+      color: theme.light
+    },
+    '& a': {
+      color: theme.light
+    },
     '& .o-nav-item-lvl-0': {
       padding: 5,
       paddingX: 12

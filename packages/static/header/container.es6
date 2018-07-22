@@ -3,18 +3,20 @@ import { createComponent } from 'react-fela';
 import { Container } from '@filou/core';
 
 const OuterContainer = createComponent(
-  ({ sticky = {}, theme, height, nested }) => ({
+  ({ theme, sticky, height, nested, top, backgroundColor }) => ({
     ifMediumDown: nested && {
       display: 'none'
     },
+    top,
+    // overflowX: 'hidden',
+    zIndex: sticky ? 12 : undefined,
     height: height || (nested ? '100%' : undefined),
-    position: 'relative',
+    position: sticky ? 'sticky' : 'relative',
     width: nested ? undefined : '100%',
-    ...sticky.style,
-    boxShadow:
+    /* boxShadow:
       sticky.isSticky && sticky.distanceFromTop !== 0
         ? theme.boxShadow
-        : undefined,
+        : undefined, */
     // paddingY: sticky.isSticky ? 0 : 10,
     // marginBottom: sticky.isSticky ? 20 : 0,
     transition: theme.transition,
@@ -24,12 +26,11 @@ const OuterContainer = createComponent(
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: nested
-      ? undefined
-      : !theme.inverted
-        ? theme.light
-        : theme.color,
-    zIndex: 12
+    backgroundColor:
+      backgroundColor && theme[backgroundColor]
+        ? theme[backgroundColor]
+        : backgroundColor ||
+          (nested ? undefined : !theme.inverted ? theme.light : theme.color)
   }),
   ({ container, className, ...rest }) => (
     <div className={className}>
@@ -55,12 +56,18 @@ const InnerContainer = createComponent(
       }
     }
   }),
-  ({ container, sticky, height, nested, ...rest }) => (
-    <OuterContainer sticky={sticky} height={height} nested={nested}>
+  ({ container, sticky, height, nested, top, backgroundColor, ...rest }) => (
+    <OuterContainer
+      sticky={sticky}
+      height={height}
+      top={top}
+      nested={nested}
+      backgroundColor={backgroundColor}
+    >
       {container ? <Container {...rest} /> : <div {...rest} />}
     </OuterContainer>
   ),
-  ['container', 'height', 'nested', 'sticky']
+  ['container', 'height', 'nested', 'sticky', 'top', 'backgroundColor']
 );
 
 export default InnerContainer;

@@ -1,19 +1,20 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
-import { StickyContainer } from 'react-sticky';
 import ScrollTop from '../scroll-top-restoration';
 
 const Layout = createComponent(
   () => ({
     display: 'flex',
     flexDirection: 'column',
+    width: '100vw',
+    overflowX: 'hidden',
     minHeight: '100vh'
   }),
   ({ children, className }) => (
-    <StickyContainer className={className}>
+    <div className={className}>
       {children}
       <ScrollTop />
-    </StickyContainer>
+    </div>
   )
 );
 

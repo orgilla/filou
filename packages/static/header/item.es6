@@ -1,16 +1,32 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
+import get from 'lodash/get';
 import HistoryConsumer from '../history';
 import LinkConsumer from '../link';
-import get from 'lodash/get';
 
 const func = () => ({});
 const Item = createComponent(
-  ({ theme, nolink, active, hideIfSmall, hideIfMini, hideIfMedium }) => ({
+  ({
+    theme,
+    nolink,
+    active,
+    hideIfSmall,
+    hideIfMini,
+    hideIfMedium,
+    color
+  }) => ({
     fontSize: theme.fontSize,
     cursor: 'pointer',
+    fontStyle: theme.fontStyle,
     fontWeight: theme.fontWeight,
-    color: theme.inverted ? theme.light : theme.linkColor,
+    color:
+      color === true
+        ? theme.color
+        : color
+          ? theme[color]
+          : theme.inverted
+            ? theme.light
+            : theme.linkColor,
     textDecoration: 'none',
     transition: theme.transition,
     position: 'relative',
