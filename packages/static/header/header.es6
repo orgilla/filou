@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider, createComponent, withTheme } from 'react-fela';
+import { ThemeProvider, withTheme } from 'react-fela';
 import Nav from '../nav';
 import MobileBars from './mobile-bars';
 import Container from './container';
@@ -7,7 +7,11 @@ import createMenuItems from './create-menu-items';
 import Spacer from './spacer';
 import Logo from './logo';
 import Group from './group';
+import Mega from './mega';
 import Item from './item';
+
+const HeaderGroup = ({ mega, ...props }) =>
+  mega ? <Mega {...props} /> : <Group {...props} />;
 
 const Header = ({
   theme,
@@ -54,8 +58,9 @@ const Header = ({
       )}
       {sitemap && (
         <Container nested>
-          {createMenuItems(Group, Item, sitemap, {
-            inverted: subMenuInverted
+          {createMenuItems(HeaderGroup, Item, sitemap, {
+            inverted: subMenuInverted,
+            height
           })}
         </Container>
       )}

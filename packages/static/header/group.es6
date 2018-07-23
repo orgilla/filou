@@ -3,7 +3,7 @@ import { createComponent, ThemeProvider, withTheme } from 'react-fela';
 import get from 'lodash/get';
 import Item from './item';
 
-const Backdrop = createComponent(({ theme, mega }) => ({
+const Backdrop = createComponent(({ theme }) => ({
   position: 'absolute',
   left: `-${theme.space3}`,
   bottom: 0,
@@ -30,51 +30,26 @@ const Backdrop = createComponent(({ theme, mega }) => ({
   backgroundColor: theme.inverted ? theme.color : theme.light,
   borderRadius: theme.borderRadius,
   boxShadow: theme.boxShadow,
-  extend: mega
-    ? {
-        flexDirection: 'row',
-        // paddingX: 0,
-        width: 'initial',
-        transform: 'translateX(-50%) translateY(90%)',
-        '> span': {
-          marginX: theme.space1
-        },
-        '> a': {
-          marginX: theme.space1
-        },
-        onAfter: {
-          zIndex: -1,
-          content: '""',
-          position: 'absolute',
-          left: -100000,
-          right: -100000,
-          height: '100%',
-          backgroundColor: 'white'
-        }
-      }
-    : {},
   ...get(theme, 'filou/static/HeaderMenu', {})
   // 'rgba(0, 0, 0, 0.0470588) 0px 1px 4px, rgba(0, 0, 0, 0.0470588) 0px 1px 3px'
 }));
 
 const Group = createComponent(
-  ({ mega }) => ({
+  () => ({
     position: 'relative',
     onHover: {
       '> div': {
-        transform: mega
-          ? 'translateX(-50%) translateY(100%)'
-          : 'translateY(100%)',
+        transform: 'translateY(100%)',
         pointerEvents: 'initial',
         opacity: 1
       }
     }
   }),
-  ({ children, className, title, theme, inverted = theme.inverted, mega }) => (
+  ({ children, className, title, theme, inverted = theme.inverted }) => (
     <Item nolink className={className}>
       {title}
       <ThemeProvider theme={{ ...theme, inverted }}>
-        <Backdrop mega={mega}>{children}</Backdrop>
+        <Backdrop>{children}</Backdrop>
       </ThemeProvider>
     </Item>
   ),
