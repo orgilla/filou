@@ -12,7 +12,7 @@ const Backdrop = createComponent(({ theme }) => ({
   opacity: 0,
   transition: theme.transition,
   pointerEvents: 'none',
-  width: 220,
+  width: 'auto',
   '> a': {
     marginY: 4
     /* onAfter: {
