@@ -1,6 +1,6 @@
 {
   "version": "0.11.0",
-  "name": "@filou/static-server",
+  "name": "@filou/evernote",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
   "contributors": [
@@ -9,22 +9,14 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.52",
-    "@google/maps": "^0.5.4",
     "axios": "^0.18.0",
     "date-fns": "^1.29.0",
     "evernote": "^2.0.5",
-    "front-matter": "^2.3.0",
     "fs-extra": "^6.0.1",
     "glob": "^7.1.2",
-    "hast-util-to-mdast": "^2.1.0",
     "himalaya": "^1.1.0",
-    "mdast-squeeze-paragraphs": "^3.0.2",
     "mime": "^2.3.1",
-    "node-dir": "^0.1.17",
-    "rehype-parse": "^4.1.0",
-    "remark-parse": "^5.0.0",
-    "remark-stringify": "^5.0.0",
-    "unified": "^7.0.0"
+    "node-dir": "^0.1.17"
   },
   "license": "MIT"
 }

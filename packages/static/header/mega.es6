@@ -9,22 +9,25 @@ const Backdrop = createComponent(({ theme, height }) => ({
   top: height,
   left: 0,
   // height: 25,
+  transition: `${theme.transition}`,
+  // transitionDelay: '0.2s',
+  pointerEvents: 'none',
+  // transitionDuration: '0.1s',
   width: '100%',
   // marginY: `-${theme.space2}`,
   backgroundColor: theme.inverted ? theme.color : theme.light,
-  zIndex: 14,
+  zIndex: -1,
   opacity: 0,
-  transition: theme.transition,
   transform: `translateY(-${theme.space3})`,
-  pointerEvents: 'none',
+  // pointerEvents: 'none',
   onBefore: {
     zIndex: 0,
     content: '""',
     position: 'absolute',
-    top: -15,
+    top: -20,
+    bottom: -30,
     left: 0,
-    width: '100%',
-    height: '100%'
+    width: '100%'
   },
   '> div > a': {
     marginLeft: theme.space3
@@ -45,6 +48,8 @@ const Group = createComponent(
     position: 'relative',
     onHover: {
       '> div': {
+        zIndex: 14,
+        transitionDelay: '0s',
         transform: 'translateY(0)',
         pointerEvents: 'initial',
         opacity: 1

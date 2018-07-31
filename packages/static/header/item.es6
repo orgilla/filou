@@ -69,8 +69,8 @@ const Item = createComponent(
       }
     ],
     minWidth: 0,
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
+    // whiteSpace: 'nowrap',
+    // textOverflow: 'ellipsis',
     height: '100%',
     display: 'flex',
     alignItems: 'center',

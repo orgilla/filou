@@ -1,35 +1,31 @@
 import { createComponent } from 'react-fela';
 
-const List = createComponent(
-  ({ theme }) => ({
+export const getStyle = ({ theme }) => ({
+  marginBottom: 0,
+  marginLeft: 0,
+  listStyleType: 'none',
+  '> li': {
     position: 'relative',
-    marginBottom: 0,
-    marginLeft: '0.4rem',
-    listStyleType: 'none',
-    '> li': {
-      '> a ': {
-        whiteSpace: 'initial'
-      },
-      '> ul': {
-        marginTop: 3
-      },
-      paddingLeft: '0.5em',
-      marginBottom: 3,
-      position: 'relative'
+    // display: 'inline-block',
+    paddingLeft: theme.space3,
+    '> ul': {
+      marginTop: 3
     },
-    '> li:before': {
-      content: '"■"',
-      fontSize: 8,
-      transform: 'translateX(-50%) translateY(-50%)',
-      position: 'absolute',
-      marginRight: 10,
-      fontWeight: 'bold',
-      color: theme.color,
-      top: 13,
-      left: 0
+    '> a': {
+      // display: 'inline-block'
     }
-  }),
-  'ul'
-);
+  },
+  '> li:before': {
+    content: '"■"',
+    float: 'left',
+    fontSize: '50%',
+    // display: 'inline-block',
+    transform: `translateY(50%) translateX(-${theme.space3})`,
+    // transform: `translateY(-75%) translateX(-${theme.space3})`,
+    width: 0,
+    color: theme.color
+  }
+});
+const List = createComponent(getStyle, 'ul');
 
 export default List;

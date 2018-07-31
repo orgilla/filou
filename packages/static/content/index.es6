@@ -1,5 +1,6 @@
 import { createComponent } from 'react-fela';
 import get from 'lodash/get';
+import { getStyle } from '../ul';
 
 const Content = createComponent(({ theme }) => ({
   flex: 1,
@@ -9,24 +10,7 @@ const Content = createComponent(({ theme }) => ({
     textAlign: 'justify',
     hyphens: 'auto'
   },
-  '& ul': {
-    listStyleType: 'none',
-    '> li': {
-      paddingLeft: '1em',
-      position: 'relative'
-    },
-    '> li:before': {
-      content: '"■"',
-      fontSize: 8,
-      transform: 'translateX(-50%) translateY(-50%)',
-      position: 'absolute',
-      marginRight: 10,
-      fontWeight: 'bold',
-      color: theme.color,
-      top: '50%',
-      left: 0
-    }
-  },
+  '& ul': getStyle({ theme }),
   ...get(theme, 'filou/static/Content', {})
 }));
 

@@ -3,16 +3,17 @@ import { ThemeProvider, withTheme } from 'react-fela';
 import Item from '../header/item';
 import Ul from '../ul';
 
-const MenuItem = ({ slug, title, children, singlePage }) => {
+const MenuItem = ({ slug, title, children }) => {
   const inner = <Item to={slug}>{title}</Item>;
-  const childs =
-    children && !singlePage ? (
-      <Ul>
-        {children.map((item, i) => (
+  const childs = children ? (
+    <Ul>
+      {children
+        .filter(x => x.slug.indexOf('#') === -1)
+        .map((item, i) => (
           <MenuItem {...item} key={item.slug || item.title || i} />
         ))}
-      </Ul>
-    ) : null;
+    </Ul>
+  ) : null;
   return (
     <li>
       {inner}

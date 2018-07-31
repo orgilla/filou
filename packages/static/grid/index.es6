@@ -11,13 +11,13 @@ const Panel = createComponent(
   ({ image, theme }) => ({
     padding: '0 16px 24px 16px',
     '> a': {
-      '> div': {
+      '> div': image ? {
         height: 150,
         backgroundColor: 'lightgray',
         width: '100%',
         backgroundImage: `url(${getSrc(image)})`,
         backgroundSize: 'cover'
-      },
+      } : null,
       display: 'block',
       backgroundColor: '#FFFFFF',
       borderRadius: theme.borderRadius,

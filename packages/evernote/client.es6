@@ -1,5 +1,5 @@
 import Evernote from 'evernote';
-import cache from '../cache';
+import cache from './cache';
 
 function toHexString(byteArray) {
   let s = '';
@@ -8,7 +8,8 @@ function toHexString(byteArray) {
   });
   return s;
 }
-export default ({ token, sandbox = false, cache: doCache = false }) => {
+
+const createClient = ({ token, sandbox = false, cache: doCache = false }) => {
   const client = new Evernote.Client({ token, sandbox });
   const api = {
     client,
@@ -27,6 +28,26 @@ export default ({ token, sandbox = false, cache: doCache = false }) => {
         .catch(err => console.error(err));
       return notebooks;
     },
+    getSharedNotebook: async guid => {
+      const authenticationToken = await api.getSharedNotebookToken(guid);
+      const sharedClient = createClient({
+        token: authenticationToken,
+        sandbox,
+        cache: doCache
+      });
+      const notebooks = await sharedClient.getNotebooks();
+      notebooks[0].token = authenticationToken;
+      return notebooks[0];
+    },
+    getSharedNotebookToken: async guid => {
+      const noteStore = client.getNoteStore();
+      const notebooks = await noteStore.listLinkedNotebooks();
+      const notebook = notebooks.filter(x => x.guid === guid)[0];
+      const { authenticationToken } = await client
+        .getNoteStore(notebook.noteStoreUrl)
+        .authenticateToSharedNotebook(notebook.sharedNotebookGlobalId);
+      return authenticationToken;
+    },
     getNoteByGuid: async guid => {
       const noteStore = client.getNoteStore();
       const noteSpec = new Evernote.NoteStore.NoteResultSpec({
@@ -44,7 +65,6 @@ export default ({ token, sandbox = false, cache: doCache = false }) => {
             data: data.body,
             mime
           };
-          console.log(filename);
         })
       );
 
@@ -56,9 +76,9 @@ export default ({ token, sandbox = false, cache: doCache = false }) => {
       );
       return note;
     },
-    getNotesByNotebookGuid: async (notebookGuid, limit = 100) => {
+    getNotesGuidsByNotebookGuid: async (guid, limit = 100) => {
       const noteStore = client.getNoteStore();
-      const filter = new Evernote.NoteStore.NoteFilter({ notebookGuid });
+      const filter = new Evernote.NoteStore.NoteFilter({ notebookGuid: guid });
       const resultSpec = new Evernote.NoteStore.NotesMetadataResultSpec({
         includeTitle: true
       });
@@ -68,19 +88,26 @@ export default ({ token, sandbox = false, cache: doCache = false }) => {
         limit,
         resultSpec
       );
-      return Promise.all(
-        notesMeta.notes.map(({ guid }) => api.getNoteByGuid(guid))
-      );
+      return notesMeta.notes.map(({ guid }) => guid);
     }
   };
   if (doCache) {
-    Object.keys(api).forEach(key => {
-      api[key] = cache(
-        api[key],
-        key,
-        typeof doCache === 'string' ? doCache : undefined
-      );
-    });
+    Object.keys(api)
+      .filter(
+        x =>
+          ['getNotesByNotebookGuid', 'getNotesBySharedNotebookGuid'].indexOf(
+            x
+          ) === -1
+      )
+      .forEach(key => {
+        api[key] = cache(
+          api[key],
+          key,
+          typeof doCache === 'string' ? doCache : undefined
+        );
+      });
   }
   return api;
 };
+
+export default createClient;
