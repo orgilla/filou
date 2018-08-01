@@ -31,8 +31,7 @@ export default async ({
   await ensureDir(dir);
   await ensureDir(assets);
 
-  const concurrency = 10;
-  const threads = Math.max(cpus().length, 1);
+  const threads = Math.min(Math.max(cpus().length, 1), 4);
 
   console.log('Starting with', threads, 'threads');
   const progress = createProgress(notes.length);
@@ -55,7 +54,6 @@ export default async ({
           });
           const opt = {
             notes: chunk,
-            concurrency,
             dir,
             assets,
             token,
