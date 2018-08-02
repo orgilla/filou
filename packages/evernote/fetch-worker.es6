@@ -22,12 +22,15 @@ import {
   run
 } from './plugins/content';
 
-const prepare = traverse(node => {
-  node.props = node.attributes
-    ? node.attributes.reduce((store, x) => ({ ...store, [x.key]: x.value }), {})
-    : {};
+const prepare = traverse(n => {
+  let { attributes, ...node } = n;
+  attributes = (attributes || []).reduce(
+    (store, x) => ({ ...store, [x.key]: x.value }),
+    {}
+  );
+  const { style, ...props } = attributes || {};
   delete node.attributes;
-  return node;
+  return { ...node, style, props };
 });
 const noteTitle = note => {
   note.name =
@@ -39,12 +42,16 @@ const noteSlug = note => {
   return note;
 };
 
+const pluginTraverse = (plugins, ...args) => first =>
+  plugins.reduce((store, plugin) => traverse(plugin, ...args)(store), first);
+
 templateSettings.interpolate = /{([\s\S]+?)}/g;
 
 process.on('message', async options => {
   const { notes, dir, assets, config, token, cache } = options;
   const { asset, visit: vst, name } = require(config);
   let current;
+
   try {
     const client = createClient({
       token,
@@ -91,8 +98,8 @@ process.on('message', async options => {
       }
       result.content = parse(note.content)[1].children;
       result.content = prepare({ children: result.content }).children;
-      result.content = traverse(
-        createVisitor([
+      result.content = pluginTraverse(
+        [
           unwrapTable,
           center,
           internalLinks,
@@ -101,22 +108,15 @@ process.on('message', async options => {
           unwrapMedia,
           mediaToImage,
           unwrapText,
-          removeFont
-        ]),
-        result,
-        note
-      )({ children: result.content }).children;
-      result.content = traverse(
-        createVisitor([
+          removeFont,
           removeBreaks,
           extractTableAtStart,
-          removeStyle,
+          // removeStyle,
           run(vst)
-        ]),
+        ],
         result,
         note
       )({ children: result.content }).children;
-
       await writeFile(`${file}.json`, JSON.stringify(result, null, 4));
       process.send({ type: 'progress' });
     }

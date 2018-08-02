@@ -1,8 +1,34 @@
+const { get } = require('lodash');
+
+const getContent = node => {
+  if (node.content) {
+    return node.content;
+  }
+  if (node.children) {
+    return node.children
+      .map(getContent)
+      .filter(x => x)
+      .join('\n');
+  }
+};
+
+const hasStyle = (node, style) => {
+  if (node.style && node.style.indexOf(style) !== -1) {
+    return true;
+  }
+
+  return false;
+};
+
+const isType = (node, type) => node.tagName === type;
+
 export const unwrapText = node => {
   if (node.tagName === 'span' && node.children.length === 1) {
     node = node.children[0];
   }
-
+  if (node.tagName === 'div' && node.children.length === 1) {
+    node = node.children[0];
+  }
   return node;
 };
 export const removeFont = node => {
@@ -21,14 +47,14 @@ export const mediaToImage = (node, index, parent, children, context, note) => {
   if (
     node.tagName === 'en-media' &&
     node.props.type &&
-    node.props.type.indexOf('image/') === 0 &&
-    note.resourceMap &&
-    note.resourceMap[node.props.hash]
+    node.props.type.indexOf('image/') === 0
   ) {
     const { hash } = node.props;
     node.tagName = 'img';
     node.props = {
-      value: note.resourceMap[hash].url || `/${note.resourceMap[hash].filename}`
+      value:
+        get(note, `resourceMap.${hash}.url`) ||
+        `/${get(note, `resourceMap.${hash}.filename`)}`
     };
   }
 
@@ -47,15 +73,11 @@ export const unwrapMedia = node => {
 
   return node;
 };
-export const fields = node => {
-  const { style } = node.props;
-  if (
-    node.tagName === 'span' &&
-    style &&
-    style.indexOf('evernote-highlight') !== -1
-  ) {
+export const fields = (node, index, parent) => {
+  if (isType(node, 'span') && hasStyle(node, 'evernote-highlight')) {
     node.tagName = 'field';
-    node.props.value = node.children[0].content;
+    node.props.value = getContent(node);
+
     if (node.props.value && node.props.value.indexOf(' ') !== -1) {
       const [type, ...value] = node.props.value.split(' ');
       node.tagName = type;
@@ -67,20 +89,18 @@ export const fields = node => {
   return node;
 };
 export const removeBreaks = (node, index, parent, children) => {
-  if (node.tagName === 'br' && children.length === 0) {
+  if (node.tagName === 'br' && children.length === 0 && !parent.tagName) {
     return null;
   }
   return node;
 };
 export const headings = (node, index, parent, children, context, note) => {
-  const { style } = node.props;
-
   if (!context.headings) {
     context.headings = [];
   }
-  if (node.tagName === 'span' && style && style.indexOf('24px') !== -1) {
+  if (isType(node, 'span') && hasStyle(node, 'font-size') !== -1) {
     const size = parseInt(
-      ((style.split('font-size:')[1] || '').split('px')[0] || '').trim(),
+      ((node.style.split('font-size:')[1] || '').split('px')[0] || '').trim(),
       10
     );
 
@@ -123,15 +143,11 @@ export const unwrapTable = node => {
   return node;
 };
 export const center = (node, index, parent) => {
-  if (node.tagName === 'div' && node.children.length === 1) {
-    if (
-      node.props.style &&
-      node.props.style.indexOf('center') !== -1 &&
-      parent
-    ) {
-      parent.props.center = true;
-    }
-    node = node.children[0];
+  if (node.style && node.style.indexOf('center') !== -1 && parent) {
+    parent.props.center = true;
+  }
+  if (isType(node, 'span') && hasStyle(node, 'bold')) {
+    node.props.bold = true;
   }
   return node;
 };
@@ -151,8 +167,8 @@ export const extractTableAtStart = (node, index, parent, children, context) => {
   return node;
 };
 export const removeStyle = node => {
-  if (node && node.props && node.props.style) {
-    delete node.props.style;
+  if (node && node.style) {
+    delete node.style;
   }
   return node;
 };

@@ -1,4 +1,5 @@
 import Evernote from 'evernote';
+import { get } from 'lodash';
 import cache from './cache';
 
 function toHexString(byteArray) {
@@ -98,20 +99,26 @@ const createClient = ({ token, sandbox = false, cache: doCache = false }) => {
             try {
               image = await cld.v2.api.resource(`evernote/${guid}`);
             } catch (err) {
-              const noteStore = client.getNoteStore();
-              const res = await noteStore.getResource(
-                guid,
-                true,
-                false,
-                false,
-                false
-              );
-              image = await new Promise(yay =>
-                cld.uploader
-                  .upload_stream(yay, { public_id: `evernote/${guid}` })
-                  .end(res.data.body.data || res.data.body)
-              );
-              console.log('UPLOADED TO CLOUDINARY', image);
+              if (get(err, 'error.http_code') === 420) {
+                // throw err;
+                console.log('RATE LIMITED!');
+                image = {};
+              } else {
+                const noteStore = client.getNoteStore();
+                const res = await noteStore.getResource(
+                  guid,
+                  true,
+                  false,
+                  false,
+                  false
+                );
+                image = await new Promise(yay =>
+                  cld.uploader
+                    .upload_stream(yay, { public_id: `evernote/${guid}` })
+                    .end(res.data.body.data || res.data.body)
+                );
+                console.log('UPLOADED!');
+              }
             }
             note.resourceMap[
               toHexString(data.bodyHash.data || data.bodyHash)
