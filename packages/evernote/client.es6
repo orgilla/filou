@@ -101,7 +101,7 @@ const createClient = ({ token, sandbox = false, cache: doCache = false }) => {
             } catch (err) {
               if (get(err, 'error.http_code') === 420) {
                 // throw err;
-                console.log('RATE LIMITED!');
+                console.log('RATE LIMITED!', err.error);
                 image = {};
               } else {
                 const noteStore = client.getNoteStore();

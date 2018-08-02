@@ -20,7 +20,7 @@ const hasStyle = (node, style) => {
   return false;
 };
 
-const isType = (node, type) => node.tagName === type;
+const isType = (node, ...args) => args.indexOf(node.tagName) !== -1;
 
 export const unwrapText = node => {
   if (node.tagName === 'span' && node.children.length === 1) {
@@ -74,7 +74,7 @@ export const unwrapMedia = node => {
   return node;
 };
 export const fields = (node, index, parent) => {
-  if (isType(node, 'span') && hasStyle(node, 'evernote-highlight')) {
+  if (isType(node, 'span', 'font') && hasStyle(node, 'evernote-highlight')) {
     node.tagName = 'field';
     node.props.value = getContent(node);
 
@@ -98,7 +98,7 @@ export const headings = (node, index, parent, children, context, note) => {
   if (!context.headings) {
     context.headings = [];
   }
-  if (isType(node, 'span') && hasStyle(node, 'font-size') !== -1) {
+  if (isType(node, 'span', 'font') && hasStyle(node, 'font-size') !== -1) {
     const size = parseInt(
       ((node.style.split('font-size:')[1] || '').split('px')[0] || '').trim(),
       10
