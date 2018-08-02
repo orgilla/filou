@@ -1,5 +1,14 @@
 const { get } = require('lodash');
 
+const getNodeByTag = (node, tagName) => {
+  if (node.tagName === tagName) {
+    return node;
+  }
+  if (node.children) {
+    return node.children.find(x => getNodeByTag(x, tagName));
+  }
+};
+
 const getContent = node => {
   if (node.content) {
     return node.content;
@@ -158,8 +167,8 @@ export const extractTableAtStart = (node, index, parent, children, context) => {
     node.children[0].children.length === 2
   ) {
     node.children[1].children.forEach(row => {
-      const value1 = row.children[0].children[0].content;
-      const value2 = row.children[1].children[0].content;
+      const value1 = getContent(row.children[0]);
+      const value2 = getContent(row.children[1]);
       context[value1] = value2;
     });
     return null;
