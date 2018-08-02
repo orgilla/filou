@@ -8,7 +8,16 @@ function toHexString(byteArray) {
   });
   return s;
 }
-
+/* async function crawl(url) {
+  try {
+    const req = await axios.get(url);
+    console.log('ERR', req);
+    return req.status === 200;
+  } catch (err) {
+    console.log('ERR', err);
+    return false;
+  }
+} */
 const createClient = ({ token, sandbox = false, cache: doCache = false }) => {
   const client = new Evernote.Client({ token, sandbox });
   const api = {
@@ -97,12 +106,12 @@ const createClient = ({ token, sandbox = false, cache: doCache = false }) => {
                 false,
                 false
               );
-              console.log('UPLOADING TO EVERNOTE');
               image = await new Promise(yay =>
                 cld.uploader
                   .upload_stream(yay, { public_id: `evernote/${guid}` })
                   .end(res.data.body.data || res.data.body)
               );
+              console.log('UPLOADED TO CLOUDINARY', image);
             }
             note.resourceMap[
               toHexString(data.bodyHash.data || data.bodyHash)
