@@ -28,7 +28,7 @@ export const mediaToImage = (node, index, parent, children, context, note) => {
     const { hash } = node.props;
     node.tagName = 'img';
     node.props = {
-      value: `/${note.resourceMap[hash].filename}`
+      value: note.resourceMap[hash].url || `/${note.resourceMap[hash].filename}`
     };
   }
 

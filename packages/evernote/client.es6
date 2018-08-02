@@ -77,16 +77,44 @@ const createClient = ({ token, sandbox = false, cache: doCache = false }) => {
         })
       );
       await Promise.all(
-        (note.resources || []).map(async ({ guid, mime }) => {
+        (note.resources || []).map(async ({ guid, mime, data }) => {
           const filename = `${guid}.${mime.split('/')[1]}`;
-          const res = await api.getResourceByGuid(guid);
-          note.resourceMap[
-            toHexString(res.data.bodyHash.data || res.data.bodyHash)
-          ] = {
+          note.resourceMap[toHexString(data.bodyHash.data || data.bodyHash)] = {
             filename,
-            data: res.data.body.data || res.data.body,
             mime
           };
+          if (process.env.CLOUDINARY_URL) {
+            const cld = require('cloudinary');
+            let image;
+            try {
+              image = await cld.v2.api.resource(`evernote/${guid}`);
+            } catch (err) {
+              const noteStore = client.getNoteStore();
+              const res = await noteStore.getResource(
+                guid,
+                true,
+                false,
+                false,
+                false
+              );
+              console.log('UPLOADING TO EVERNOTE');
+              image = await new Promise(yay =>
+                cld.uploader
+                  .upload_stream(yay, { public_id: `evernote/${guid}` })
+                  .end(res.data.body.data || res.data.body)
+              );
+            }
+            note.resourceMap[
+              toHexString(data.bodyHash.data || data.bodyHash)
+            ].url =
+              image.secure_url;
+          } else {
+            const res = await api.getResourceByGuid(guid);
+            note.resourceMap[
+              toHexString(data.bodyHash.data || data.bodyHash)
+            ].data =
+              res.data.body.data || res.data.body;
+          }
         })
       );
       return note;

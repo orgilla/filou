@@ -69,25 +69,26 @@ process.on('message', async options => {
 
       await ensureDir(dirname(file));
 
-      await Promise.all(
-        Object.keys(note.resourceMap).map(async key => {
-          const { data } = note.resourceMap[key];
-          const assetName =
-            typeof asset === 'function'
-              ? asset(note.resourceMap[key], note)
-              : template(asset)(note.resourceMap[key]);
-          note.resourceMap[key].filename = assetName;
-          await ensureDir(dirname(resolve(assets, assetName)));
-          return writeFile(
-            resolve(assets, assetName),
-            typeof data === 'object' ? new Buffer(data) : data,
-            {
-              encoding: 'utf-8'
-            }
-          );
-        })
-      );
-
+      if (!process.env.CLOUDINARY_URL) {
+        await Promise.all(
+          Object.keys(note.resourceMap).map(async key => {
+            const { data } = note.resourceMap[key];
+            const assetName =
+              typeof asset === 'function'
+                ? asset(note.resourceMap[key], note)
+                : template(asset)(note.resourceMap[key]);
+            note.resourceMap[key].filename = assetName;
+            await ensureDir(dirname(resolve(assets, assetName)));
+            return writeFile(
+              resolve(assets, assetName),
+              typeof data === 'object' ? new Buffer(data) : data,
+              {
+                encoding: 'utf-8'
+              }
+            );
+          })
+        );
+      }
       result.content = parse(note.content)[1].children;
       result.content = prepare({ children: result.content }).children;
       result.content = traverse(
