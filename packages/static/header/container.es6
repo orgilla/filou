@@ -53,7 +53,10 @@ const InnerContainer = createComponent(
       },
       ':first-child': {
         marginLeft: 0
-      }
+      },
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
   }),
   ({ container, sticky, height, nested, top, backgroundColor, ...rest }) => (

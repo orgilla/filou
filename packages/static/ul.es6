@@ -21,6 +21,9 @@ export const getStyle = ({ theme }) => ({
     fontSize: '50%',
     // display: 'inline-block',
     transform: `translateY(50%) translateX(-${theme.space3})`,
+    ifMediumDown: {
+      transform: `translateX(-${theme.space3})`
+    },
     // transform: `translateY(-75%) translateX(-${theme.space3})`,
     width: 0,
     color: theme.color
