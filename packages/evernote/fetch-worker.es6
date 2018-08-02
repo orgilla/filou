@@ -38,7 +38,13 @@ const noteTitle = note => {
   return note;
 };
 const noteSlug = note => {
-  note.slug = `/${slugify(note.name || note.title)}`.toLowerCase();
+  note.slug = `/${slugify(
+    (note.name || note.title)
+      .split(':')
+      .join('-')
+      .split('.')
+      .join('-')
+  )}`.toLowerCase();
   return note;
 };
 
