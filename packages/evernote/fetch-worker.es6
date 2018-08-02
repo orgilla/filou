@@ -23,12 +23,12 @@ import {
 } from './plugins/content';
 
 const prepare = traverse(n => {
-  let { attributes, ...node } = n;
-  attributes = (attributes || []).reduce(
+  let { attributes = [], ...node } = n;
+  attributes = attributes.reduce(
     (store, x) => ({ ...store, [x.key]: x.value }),
     {}
   );
-  const { style, ...props } = attributes || {};
+  const { style = '', ...props } = attributes || {};
   delete node.attributes;
   return { ...node, style, props };
 });
