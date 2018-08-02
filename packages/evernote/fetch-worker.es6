@@ -44,6 +44,7 @@ templateSettings.interpolate = /{([\s\S]+?)}/g;
 process.on('message', async options => {
   const { notes, dir, assets, config, token, cache } = options;
   const { asset, visit: vst, name } = require(config);
+  let current;
   try {
     const client = createClient({
       token,
@@ -51,7 +52,7 @@ process.on('message', async options => {
     });
     for (const guid of notes) {
       const note = await client.getNoteByGuid(guid);
-
+      current = note;
       let result = {
         id: note.guid,
         created: note.created,

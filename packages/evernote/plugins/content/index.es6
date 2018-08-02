@@ -21,7 +21,9 @@ export const mediaToImage = (node, index, parent, children, context, note) => {
   if (
     node.tagName === 'en-media' &&
     node.props.type &&
-    node.props.type.indexOf('image/') === 0
+    node.props.type.indexOf('image/') === 0 &&
+    note.resourceMap &&
+    note.resourceMap[node.props.hash]
   ) {
     const { hash } = node.props;
     node.tagName = 'img';

@@ -48,30 +48,45 @@ const createClient = ({ token, sandbox = false, cache: doCache = false }) => {
         .authenticateToSharedNotebook(notebook.sharedNotebookGlobalId);
       return authenticationToken;
     },
-    getNoteByGuid: async guid => {
+    getResourceByGuid: async guid => {
+      const noteStore = client.getNoteStore();
+      const x = await noteStore.getResource(guid, true, false, false, false);
+      return x;
+    },
+    getTagByGuid: guid => {
+      const noteStore = client.getNoteStore();
+      return noteStore.getTag(guid);
+    },
+    getNoteByGuidInternal: async guid => {
       const noteStore = client.getNoteStore();
       const noteSpec = new Evernote.NoteStore.NoteResultSpec({
         includeContent: true,
-        includeResourcesData: true
+        includeResourcesData: false
       });
-      const note = await noteStore.getNoteWithResultSpec(guid, noteSpec);
+      return noteStore.getNoteWithResultSpec(guid, noteSpec);
+    },
+    getNoteByGuid: async guid => {
+      const note = await api.getNoteByGuidInternal(guid);
       note.resourceMap = {};
       note.tags = [];
-      await Promise.all(
-        (note.resources || []).map(async ({ guid, mime, data }) => {
-          const filename = `${guid}.${mime.split('/')[1]}`;
-          note.resourceMap[toHexString(data.bodyHash)] = {
-            filename,
-            data: data.body,
-            mime
-          };
-        })
-      );
 
       await Promise.all(
         (note.tagGuids || []).map(async x => {
-          const tag = await noteStore.getTag(x);
+          const tag = await api.getTagByGuid(x);
           note.tags.push(tag.name);
+        })
+      );
+      await Promise.all(
+        (note.resources || []).map(async ({ guid, mime }) => {
+          const filename = `${guid}.${mime.split('/')[1]}`;
+          const res = await api.getResourceByGuid(guid);
+          note.resourceMap[
+            toHexString(res.data.bodyHash.data || res.data.bodyHash)
+          ] = {
+            filename,
+            data: res.data.body.data || res.data.body,
+            mime
+          };
         })
       );
       return note;
@@ -95,9 +110,11 @@ const createClient = ({ token, sandbox = false, cache: doCache = false }) => {
     Object.keys(api)
       .filter(
         x =>
-          ['getNotesByNotebookGuid', 'getNotesBySharedNotebookGuid'].indexOf(
-            x
-          ) === -1
+          [
+            'getNotesByNotebookGuid',
+            'getNotesBySharedNotebookGuid',
+            'getNoteByGuid'
+          ].indexOf(x) === -1
       )
       .forEach(key => {
         api[key] = cache(
