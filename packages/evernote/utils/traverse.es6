@@ -7,7 +7,9 @@ const traverse = (visitor, ...args) => {
     for (let i = 0; i < node.children.length; i++) {
       const currentNode = node.children[i];
       const edited = visitor(currentNode, i, node, children, ...args);
-      if (edited) {
+      if (edited && Array.isArray(edited)) {
+        edited.forEach(x => children.push(internal(x)));
+      } else if (edited) {
         children.push(internal(edited));
       }
     }

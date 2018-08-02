@@ -101,6 +101,9 @@ export const removeBreaks = (node, index, parent, children) => {
   if (node.tagName === 'br' && children.length === 0 && !parent.tagName) {
     return null;
   }
+  if (node.tagName === 'br' && parent.children.length - 1 === index) {
+    return null;
+  }
   return node;
 };
 export const headings = (node, index, parent, children, context, note) => {
@@ -143,11 +146,8 @@ export const internalLinks = node => {
   return node;
 };
 export const unwrapTable = node => {
-  if (
-    node.tagName === 'div' &&
-    node.children.find(x => x.tagName === 'table')
-  ) {
-    node = node.children.find(x => x.tagName === 'table');
+  if (node.tagName === 'div' && !node.style) {
+    return node.children;
   }
   return node;
 };

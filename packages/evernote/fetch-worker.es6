@@ -107,6 +107,7 @@ process.on('message', async options => {
       result.content = pluginTraverse(
         [
           unwrapTable,
+          unwrapTable,
           center,
           internalLinks,
           headings,
