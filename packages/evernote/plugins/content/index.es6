@@ -33,7 +33,7 @@ const isType = (node, ...args) => args.indexOf(node.tagName) !== -1;
 
 export const unwrapText = node => {
   if (node.tagName === 'span' && node.children.length === 1) {
-    node = node.children[0];
+    // node = node.children[0];
   }
   if (node.tagName === 'div' && node.children.length === 1) {
     node = node.children[0];
@@ -177,7 +177,7 @@ export const extractTableAtStart = (node, index, parent, children, context) => {
 };
 export const removeStyle = node => {
   if (node && node.style) {
-    delete node.style;
+    // delete node.style;
   }
   return node;
 };
