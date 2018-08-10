@@ -102,7 +102,7 @@ process.on('message', async options => {
           })
         );
       }
-      result.content = parse(note.content)[1].children;
+      result.content = parse(note.content).find(x => x.tagName === 'en-note').children;
       result.content = prepare({ children: result.content }).children;
       result.content = pluginTraverse(
         [
