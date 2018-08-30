@@ -4,7 +4,8 @@ import Header from './header';
 
 const Info = createComponent(
   () => ({
-    zIndex: 11
+    zIndex: 11,
+    height: '100%'
   }),
   props => <Header {...props} />,
   p => Object.keys(p)

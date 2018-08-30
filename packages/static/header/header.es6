@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider, withTheme } from 'react-fela';
+import { createComponent, ThemeProvider, withTheme } from 'react-fela';
 import Nav from '../nav';
 import MobileBars from './mobile-bars';
 import Container from './container';
@@ -12,6 +12,14 @@ import Item from './item';
 
 const HeaderGroup = ({ mega, ...props }) =>
   mega ? <Mega {...props} /> : <Group {...props} />;
+
+  const H3 = createComponent(
+    () => ({
+      marginY: 0
+    }),
+    'h3',
+    p => Object.keys(p)
+  );
 
 const Header = ({
   theme,
@@ -50,6 +58,7 @@ const Header = ({
       height={height}
     >
       {logo && <Logo to="/" sticky={sticky} logo={logo} logoText={logoText} />}
+      {logoText && <Item to="/"><H3>{logoText}</H3></Item>}
       {sitemap && <Spacer />}
       {sitemap && (
         <MobileBars inverted={mobileNavInverted}>

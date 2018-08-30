@@ -8,6 +8,7 @@ const func = () => ({});
 const Item = createComponent(
   ({
     theme,
+    flex,
     nolink,
     active,
     hideIfSmall,
@@ -72,7 +73,7 @@ const Item = createComponent(
     // whiteSpace: 'nowrap',
     // textOverflow: 'ellipsis',
     height: '100%',
-    display: 'flex',
+    display: flex !== false ? 'flex' : undefined,
     alignItems: 'center',
     onHover: !nolink && {
       textDecoration: 'none',
@@ -83,7 +84,7 @@ const Item = createComponent(
     ...get(theme, 'linkAnimation.default', func)(theme)
   }),
   ({ children, onClick, to, className, nolink }) =>
-    !nolink ? (
+    to ? (
       <LinkConsumer>
         {Link => (
           <Link to={to} onClick={onClick} className={className}>
@@ -92,7 +93,7 @@ const Item = createComponent(
         )}
       </LinkConsumer>
     ) : (
-      <span className={className}>{children}</span>
+      <span className={className} onClick={onClick}>{children}</span>
     ),
   p => Object.keys(p)
 );

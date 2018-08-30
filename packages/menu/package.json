@@ -1,5 +1,5 @@
 {
-  "version": "0.11.0",
+  "version": "0.11.1",
   "name": "@filou/menu",
   "description": "",
   "author": "Philipp Achenbach <olymp@philipp-achenbach.de>",
@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "react-fela": "^7.3.0",
+    "react-fela": "^8.0.0",
     "react-swipeable": "^4.3.0",
     "tinycolor2": "^1.4.1"
   }

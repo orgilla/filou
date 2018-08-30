@@ -4,7 +4,8 @@ export default ({
   consumerKey,
   consumerSecret,
   sandbox = false,
-  china = false
+  china = false,
+  callback
 }) => {
   const client = new Evernote.Client({
     consumerKey,
@@ -45,7 +46,7 @@ export default ({
       const { queryStringParameters } = event;
       return client.getAccessToken(
         queryStringParameters.oauth_token,
-        global.secret,
+        global.secret || queryStringParameters.secret,
         queryStringParameters.oauth_verifier,
         (error, oauthAccessToken) => {
           if (error) {
@@ -70,21 +71,21 @@ export default ({
         }
       );
     },
-    lambdaFinal: async (event, context, callback) => {
+    lambdaFinal: async (event, context, cb) => {
       const { headers, path } = event;
-      const callbackUrl = `http://${headers.host}${path}`;
+      const callbackUrl = `http://${headers.host}${callback || path}`;
       client.getRequestToken(callbackUrl, (err, oauthToken, oauthSecret) => {
         if (err) {
           console.log(err);
         } else {
           global.secret = oauthSecret;
           const authorizeUrl = client.getAuthorizeUrl(oauthToken);
-          return callback(null, {
+          return cb(null, {
             statusCode: 200,
             headers: {
               'Content-Type': 'text/html'
             },
-            body: `Please <a href="${authorizeUrl}">click here</a> to authorize the application`
+            body: `Please <a href="${authorizeUrl}" target="_blank">click here</a> to authorize the application (${oauthSecret})`
           });
         }
       });

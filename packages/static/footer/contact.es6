@@ -31,12 +31,18 @@ class ContactForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <p>{children}</p>
-        <h5>E-Mail</h5>
-        <input type="email" name="email" />
-        <h5>Name</h5>
-        <input type="text" name="name" />
-        <h5>Text</h5>
-        <textarea name="message" rows="4" />
+        <fieldset>
+          <label htmlFor="email">E-Mail</label>
+          <input type="email" name="email" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="name">Name</label>
+          <input type="text" name="name" />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="text">Text</label>
+          <textarea name="message" rows="4" />
+        </fieldset>
         <button type="submit">Absenden</button>
       </Form>
     );

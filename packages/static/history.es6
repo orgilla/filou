@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ThemeContext = React.createContext('historycomponent');
+const Context = React.createContext('historycomponent');
 
 /* export class ThemeProvider extends React.Component {
   state = { theme: 'light' };
@@ -14,9 +14,9 @@ const ThemeContext = React.createContext('historycomponent');
   }
 } */
 
-export const { Provider } = ThemeContext;
+export const { Provider } = Context;
 
-export default ThemeContext.Consumer;
+export default Context.Consumer;
 
 /* class ThemedButton extends React.Component {
   render() {

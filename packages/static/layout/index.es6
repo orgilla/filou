@@ -6,7 +6,7 @@ const Layout = createComponent(
   () => ({
     display: 'flex',
     flexDirection: 'column',
-    width: '100vw',
+    maxWidth: '100vw',
     // overflowX: 'hidden',
     minHeight: '100vh'
   }),

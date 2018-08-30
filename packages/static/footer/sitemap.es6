@@ -4,7 +4,7 @@ import Item from '../header/item';
 import Ul from '../ul';
 
 const MenuItem = ({ slug, title, children }) => {
-  const inner = <Item to={slug}>{title}</Item>;
+  const inner = <Item flex={false} to={slug}>{title}</Item>;
   const childs = children ? (
     <Ul>
       {children

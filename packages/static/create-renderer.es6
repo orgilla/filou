@@ -1,7 +1,7 @@
 import { createRenderer } from 'filou';
 
-export default typography => {
-  const renderer = createRenderer();
+export default (typography, options) => {
+  const renderer = createRenderer(options);
   if (typography) {
     renderer.renderStatic(typography.toString());
     if (

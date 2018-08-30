@@ -1,5 +1,5 @@
 import { createRenderer } from 'fela';
-import extend from './fela-plugin-extend';
+import extend from 'fela-plugin-extend';
 import customProperty from 'fela-plugin-custom-property';
 import prefixer from 'fela-plugin-prefixer';
 import fallbackValue from 'fela-plugin-fallback-value';
@@ -7,12 +7,12 @@ import unit from 'fela-plugin-unit';
 // import removeUndefined from 'fela-plugin-remove-undefined';
 import friendlyPseudoClass from 'fela-plugin-friendly-pseudo-class';
 import namedKeys from 'fela-plugin-named-keys';
-import monolithicEnhancer from 'fela-monolithic';
+// import monolithicEnhancer from 'fela-monolithic';
 import embedded from 'fela-plugin-embedded';
 // import { rehydrate } from 'fela-dom';
 import normalize from './normalize';
 
-export default ({ ua, monolithic = true } = {}) => {
+export default ({ ua, monolithic = false } = {}) => {
   if (typeof window !== 'undefined' && window.renderer) {
     window.renderer.clear();
     return window.renderer;
@@ -34,7 +34,7 @@ export default ({ ua, monolithic = true } = {}) => {
   };
 
   const renderer = createRenderer({
-    // / selectorPrefix: 'o-',
+    selectorPrefix: 'o-',
     plugins: [
       extend(),
       embedded(),
@@ -172,8 +172,8 @@ export default ({ ua, monolithic = true } = {}) => {
         }
       })
       // removeUndefined(),
-    ],
-    enhancers: [monolithic ? monolithicEnhancer() : null].filter(x => x)
+    ]
+    // enhancers: [monolithic ? monolithicEnhancer() : null].filter(x => x)
     // enhancers: process.env.NODE_ENV === 'production' ? [] : [require('fela-monolithic').default()],
   });
   /* if (typeof window !== 'undefined') {

@@ -11,7 +11,6 @@ const Form = createComponent(
       color: 'rgb(85,85,85)'
     },
     '& fieldset': {
-      borderColor: '1px solid #d0d0d0',
       boxShadow: '0 1px 0 #ebebec',
       border: '1px solid lightgray',
       borderRadius: theme.borderRadius,
@@ -24,19 +23,18 @@ const Form = createComponent(
         marginRight: theme.space1
       }
     },
-    '> div > input': {
+    '> fieldset > input': {
       boxShadow: '0 1px 0 #ebebec',
-      borderColor: '1px solid #d0d0d0',
       borderRadius: theme.borderRadius,
       width: '100%',
       border: '1px solid lightgray',
       fontSize: '0.87055rem',
       color: 'rgb(85,85,85)',
+      paddingX: 5,
       marginBottom: 5
     },
-    '> div > textarea': {
+    '> fieldset > textarea': {
       boxShadow: '0 1px 0 #ebebec',
-      borderColor: '1px solid #d0d0d0',
       borderRadius: theme.borderRadius,
       width: '100%',
       border: '1px solid lightgray',
@@ -50,7 +48,7 @@ const Form = createComponent(
       lineHeight: '18px',
       fontWeight: 'bold',
       boxShadow: '0 1px 0 #ebebec',
-      borderColor: '1px solid #d0d0d0',
+      border: '1px solid #d0d0d0',
       borderRadius: theme.borderRadius
     },
     '> button:disabled': {

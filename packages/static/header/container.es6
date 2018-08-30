@@ -32,9 +32,9 @@ const OuterContainer = createComponent(
         : backgroundColor ||
           (nested ? undefined : !theme.inverted ? theme.light : theme.color)
   }),
-  ({ container, className, ...rest }) => (
+  ({ container, className, children, ...rest }) => (
     <div className={className}>
-      {container ? <Container {...rest} /> : <div {...rest} />}
+      {container ? <Container {...rest} /> : children}
     </div>
   ),
   ['container']
@@ -44,6 +44,7 @@ const InnerContainer = createComponent(
   ({ theme }) => ({
     flex: 1,
     display: 'flex',
+    height: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     '> *': {
@@ -54,6 +55,8 @@ const InnerContainer = createComponent(
       ':first-child': {
         marginLeft: 0
       },
+    },
+    '> a': {
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis'

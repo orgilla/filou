@@ -1,0 +1,601 @@
+dependencies:
+  immutable: 3.8.2
+  is-hotkey: 0.1.3
+  slate: 0.33.8
+  slate-auto-replace: 0.9.1
+  slate-base64-serializer: 0.2.63
+  slate-collapse-on-escape: 0.6.1
+  slate-edit-blockquote: 0.6.1
+  slate-edit-code: 0.15.5
+  slate-edit-list: 0.11.3
+  slate-edit-table: 0.15.2
+  slate-hyperscript: 0.5.22
+  slate-paste-linkify: 0.5.1
+  slate-plain-serializer: 0.5.41
+  slate-react: 0.12.11
+  slate-soft-break: 0.6.1
+  slate-trailing-block: 0.5.0
+devDependencies:
+  prismjs: 1.15.0
+  pug-lexer: 4.0.0
+  pug-parser: 5.0.0
+  pug-source-gen: 0.0.2
+  slate-prism: 0.5.0
+packages:
+  /@types/babel-types/7.0.4:
+    dev: true
+    resolution:
+      integrity: sha512-WiZhq3SVJHFRgRYLXvpf65XnV6ipVHhnNaNvE8yCimejrGglkg38kEj0JcizqwSHxmPSjcTlig/6JouxLGEhGw==
+  /@types/babylon/6.16.3:
+    dependencies:
+      '@types/babel-types': 7.0.4
+    dev: true
+    resolution:
+      integrity: sha512-lyJ8sW1PbY3uwuvpOBZ9zMYKshMnQpXmeDHh8dj9j2nJm/xrW0FgB5gLSYOArj5X0IfaXnmhFoJnhS4KbqIMug==
+  /acorn/4.0.13:
+    dev: true
+    engines:
+      node: '>=0.4.0'
+    hasBin: true
+    resolution:
+      integrity: sha1-EFSVrlNh1pe9GVyCUZLhrX8lN4c=
+  /babel-runtime/6.26.0:
+    dependencies:
+      core-js: 2.5.7
+      regenerator-runtime: 0.11.1
+    dev: true
+    resolution:
+      integrity: sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
+  /babel-types/6.26.0:
+    dependencies:
+      babel-runtime: 6.26.0
+      esutils: 2.0.2
+      lodash: 4.17.10
+      to-fast-properties: 1.0.3
+    dev: true
+    resolution:
+      integrity: sha1-o7Bz+Uq0nrb6Vc1lInozQ4BjJJc=
+  /babylon/6.18.0:
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha512-q/UEjfGJ2Cm3oKV71DJz9d25TPnq5rhBVL2Q4fA5wcC3jcrdn7+SssEybFIxwAvvP+YCsCYNKughoF33GxgycQ==
+  /character-parser/2.2.0:
+    dependencies:
+      is-regex: 1.0.4
+    dev: true
+    resolution:
+      integrity: sha1-x84o821LzZdE5f/CxfzeHHMmH8A=
+  /clipboard/2.0.1:
+    dependencies:
+      good-listener: 1.2.2
+      select: 1.1.2
+      tiny-emitter: 2.0.2
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha512-7yhQBmtN+uYZmfRjjVjKa0dZdWuabzpSKGtyQZN+9C8xlC788SSJjOHWh7tzurfwTqTD5UDYAhIv5fRJg3sHjQ==
+  /constantinople/3.1.2:
+    dependencies:
+      '@types/babel-types': 7.0.4
+      '@types/babylon': 6.16.3
+      babel-types: 6.26.0
+      babylon: 6.18.0
+    dev: true
+    resolution:
+      integrity: sha512-yePcBqEFhLOqSBtwYOGGS1exHo/s1xjekXiinh4itpNQGCu4KA1euPh1fg07N2wMITZXQkBz75Ntdt1ctGZouw==
+  /core-js/2.5.7:
+    dev: true
+    resolution:
+      integrity: sha512-RszJCAxg/PP6uzXVXL6BsxSXx/B05oJAQ2vkJRjyjrEcNVycaqOmNb5OTxZPE3xa5gwZduqza6L9JOCenh/Ecw==
+  /debug/3.1.0:
+    dependencies:
+      ms: 2.0.0
+    dev: false
+    resolution:
+      integrity: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
+  /delegate/3.2.0:
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha512-IofjkYBZaZivn0V8nnsMJGBr4jVLxHDheKSW88PyxS5QC4Vo9ZbZVvhzlSxY87fVq3STR6r+4cGepyHkcWOQSw==
+  /detect-indent/4.0.0:
+    dependencies:
+      repeating: 2.0.1
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-920GQ1LN9Docts5hnE7jqUdd4gg=
+  /detect-newline/2.1.0:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-9B8cEL5LAOh7XxPaaAdZ8sW/0+I=
+  /direction/0.1.5:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha1-zl15f5fib4vnvv9T99xA4cGp7Ew=
+  /ends-with/0.2.0:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-L52pjVelDP2kVxzkM5AAUA9Oa4o=
+  /esrever/0.2.0:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha1-lunSj08bGnZ4TNXUkOquAQ50B7g=
+  /esutils/2.0.2:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-Cr9PHKpbyx96nYrMbepPqqBLrJs=
+  /function-bind/1.1.1:
+    dev: true
+    resolution:
+      integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
+  /get-document/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-SCG85m8cJMsDMWAr5strEsTwHEs=
+  /get-window/1.1.2:
+    dependencies:
+      get-document: 1.0.0
+    dev: false
+    resolution:
+      integrity: sha512-yjWpFcy9fjhLQHW1dPtg9ga4pmizLY8y4ZSHdGrAQ1NU277MRhnGnnLPxe19X8W5lWVsCZz++5xEuNozWMVmTw==
+  /good-listener/1.2.2:
+    dependencies:
+      delegate: 3.2.0
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha1-1TswzfkxPf+33JoNR3CWqm0UXFA=
+  /has/1.0.3:
+    dependencies:
+      function-bind: 1.1.1
+    dev: true
+    engines:
+      node: '>= 0.4.0'
+    resolution:
+      integrity: sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
+  /immutable/3.8.2:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-wkOZUUVbs5kT2vKBN28VMOEErfM=
+  /is-empty/1.2.0:
+    dev: false
+    resolution:
+      integrity: sha1-3pu1snhzigWgsJpX4ftNSjQan2s=
+  /is-expression/3.0.0:
+    dependencies:
+      acorn: 4.0.13
+      object-assign: 4.1.1
+    dev: true
+    resolution:
+      integrity: sha1-Oayqa+f9HzRx3ELHQW5hwkMXrJ8=
+  /is-finite/1.0.2:
+    dependencies:
+      number-is-nan: 1.0.1
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-zGZ3aVYCvlUO8R6LSqYwU0K20Ko=
+  /is-hotkey/0.0.3:
+    dev: false
+    resolution:
+      integrity: sha512-qpMe/7DxFXs65E3f8u5Zu+3qOXmqlKlAF/cpYlRiPzg1UKC9clzQcwcuf/2RC4WMFhh56DQC+FfK63Qp3lM35w==
+  /is-hotkey/0.1.3:
+    dev: false
+    resolution:
+      integrity: sha512-wB5PP/lwpaN5zNT1vjHxYFBxiq5zvUZiv8696eB5OmeCRCgNIzb3cMJjRhogSQXe8LLDKOzzlFfGlMaWnc4emQ==
+  /is-in-browser/1.1.3:
+    dev: false
+    resolution:
+      integrity: sha1-Vv9NtoOgeMYILrldrX3GLh0E+DU=
+  /is-plain-object/2.0.4:
+    dependencies:
+      isobject: 3.0.1
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==
+  /is-regex/1.0.4:
+    dependencies:
+      has: 1.0.3
+    dev: true
+    engines:
+      node: '>= 0.4'
+    resolution:
+      integrity: sha1-VRdIm1RwkbCTDglWVM7SXul+lJE=
+  /is-url/1.2.4:
+    dev: false
+    resolution:
+      integrity: sha512-ITvGim8FhRiYe4IQ5uHSkj7pVaPDrCTkNd3yq3cV7iZAcJdHTUMPMEHcqSOy9xZ9qFenQCvi+2wjH9a1nXqHww==
+  /is-window/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-LIlspT25feRdPDMTOmXYyfVjSA0=
+  /isobject/3.0.1:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+  /isomorphic-base64/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-9Caq6CVpuopOxcpzrSGkSrHueAM=
+  /js-tokens/4.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+  /keycode/2.2.0:
+    dev: false
+    resolution:
+      integrity: sha1-PQr1bce4uOXLqNCpfxByBO7CKwQ=
+  /lodash/4.17.10:
+    resolution:
+      integrity: sha512-UejweD1pDoXu+AD825lWwp4ZGtSwgnpZxb3JDViD7StjQz+Nb/6l093lx4OQ0foGWNRoc19mWy7BzL+UAK2iVg==
+  /loose-envify/1.4.0:
+    dependencies:
+      js-tokens: 4.0.0
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
+  /ms/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
+  /number-is-nan/1.0.1:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
+  /object-assign/4.1.1:
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
+  /prismjs/1.15.0:
+    dev: true
+    optionalDependencies:
+      clipboard: 2.0.1
+    resolution:
+      integrity: sha512-Lf2JrFYx8FanHrjoV5oL8YHCclLQgbJcVZR+gikGGMqz6ub5QVWDTM6YIwm3BuPxM/LOV+rKns3LssXNLIf+DA==
+  /prop-types/15.6.2:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+    dev: false
+    resolution:
+      integrity: sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
+  /pug-error/1.3.2:
+    dev: true
+    resolution:
+      integrity: sha1-U659nSm7A89WRJOgJhCfVMR/XyY=
+  /pug-lexer/4.0.0:
+    dependencies:
+      character-parser: 2.2.0
+      is-expression: 3.0.0
+      pug-error: 1.3.2
+    dev: true
+    resolution:
+      integrity: sha1-IQwYRX7y4XYCQnQMXmR715TOwng=
+  /pug-parser/5.0.0:
+    dependencies:
+      pug-error: 1.3.2
+      token-stream: 0.0.1
+    dev: true
+    resolution:
+      integrity: sha1-45Stmz/KkxI5QK/4hcBuRKt+aOQ=
+  /pug-source-gen/0.0.2:
+    dependencies:
+      constantinople: 3.1.2
+      object-assign: 4.1.1
+      pug-walk: 0.0.3
+      repeat-string: 1.6.1
+    dev: true
+    resolution:
+      integrity: sha1-dtd1PYlpPGhGV4yA2hYouMb8b9s=
+  /pug-walk/0.0.3:
+    dev: true
+    resolution:
+      integrity: sha1-wovnvMVA8kuD0nRHJBCCfITjGsY=
+  /react-immutable-proptypes/2.1.0:
+    dev: false
+    peerDependencies:
+      immutable: '>=3.6.2'
+    resolution:
+      integrity: sha1-Aj1vObsVyXwHHp5g0A0TbqxfoLQ=
+  /react-portal/3.2.0:
+    dependencies:
+      prop-types: 15.6.2
+    dev: false
+    resolution:
+      integrity: sha512-avb1FreAZAVCvNNyS2dCpxZiPYPJnAasHYPxdVBTROgNFeI+KSb+OoMHNsC1GbDawESCriPwCX+qKua6WSPIFw==
+  /regenerator-runtime/0.11.1:
+    dev: true
+    resolution:
+      integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
+  /repeat-string/1.6.1:
+    dev: true
+    engines:
+      node: '>=0.10'
+    resolution:
+      integrity: sha1-jcrkcOHIirwtYA//Sndihtp15jc=
+  /repeating/2.0.1:
+    dependencies:
+      is-finite: 1.0.2
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-UhTFOpJtNVJwdSf7q0FdvAjQbdo=
+  /select/1.1.2:
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha1-DnNQrN7ICxEIUoeG7B1EGNEbOW0=
+  /selection-is-backward/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-l6VGMxiKURq6ZBn8XB+pG0Z+a+E=
+  /slate-auto-replace/0.9.1:
+    dependencies:
+      is-hotkey: 0.0.3
+      type-of: 2.0.1
+    dev: false
+    peerDependencies:
+      slate: '>=0.29.0'
+      slate-react: '>=0.9.0'
+    resolution:
+      integrity: sha512-MnCH9dTse4anItl400RKN+W6Pix5v4UhWziBXOlC61SCoEuCeg46cejNi1ldJxGoaH607YbmbD1X0I/1+XJM5Q==
+  /slate-base64-serializer/0.2.63:
+    dependencies:
+      isomorphic-base64: 1.0.2
+    dev: false
+    peerDependencies:
+      slate: '>=0.32.0'
+    resolution:
+      integrity: sha512-BINB8jeixr37BDHa7YQEgyz1j7M7Ff0MiXGoHqPlbXaFg0cQgorkJSlW9eHrvUcEN2SwKvBhP0IwB41oEm2nxA==
+  /slate-collapse-on-escape/0.6.1:
+    dependencies:
+      to-pascal-case: 1.0.0
+    dev: false
+    peerDependencies:
+      slate: '>=0.29.0'
+      slate-react: '>=0.9.0'
+    resolution:
+      integrity: sha512-AF5TKRxSHonrYUJjzTsY/O+fsmv/dwTG1GjncIrWsS2iXzjMtCg/LFJSLaqU5QGq35PHdY22p6+OeQnfZHXTDA==
+  /slate-dev-environment/0.1.6:
+    dependencies:
+      is-in-browser: 1.1.3
+    dev: false
+    resolution:
+      integrity: sha512-DDeNzcpBvdEtPmuLrpPtrth7vnK693fgxzwS6FACu3oMBoXjh0qcJWVBktecPJXJDxcTVkWUpt0dPhfXLMIkWQ==
+  /slate-dev-logger/0.1.43:
+    dev: false
+    resolution:
+      integrity: sha512-GkcPMGzmPVm85AL+jaKnzhIA0UH9ktQDEIDM+FuQtz+TAPcpPCQiRAaZ6I2p2uD0Hq9bImhKSCtHIa0qRxiVGw==
+  /slate-edit-blockquote/0.6.1:
+    dev: false
+    peerDependencies:
+      immutable: ^3.8.1
+      slate: ^0.33.0
+      slate-schema-violations: ^0.1.4
+    resolution:
+      integrity: sha512-gPeJvnXEu/eEDhJARWns/vGok+1b0OmpwrnlHXHDyEmnBDLEYY+W5HTH2i1ZXUZQ/8QHLE0NPhYjS1A4AAm2+w==
+  /slate-edit-code/0.15.5:
+    dependencies:
+      detect-indent: 4.0.0
+      detect-newline: 2.1.0
+      ends-with: 0.2.0
+      is-hotkey: 0.1.3
+    dev: false
+    peerDependencies:
+      immutable: ^3.8.1
+      slate: ^0.33.0
+      slate-react: ^0.12.0
+      slate-schema-violations: ^0.1.4
+    resolution:
+      integrity: sha512-+Nd6AGPYtYSe87l16cHSnhXF4CPW7n6f4KoxL+dDhf1KQkP1dXGSgAFJlZmOJJp9dQexPbB0mxTu2TPKB9W2MA==
+  /slate-edit-list/0.11.3:
+    dev: false
+    peerDependencies:
+      immutable: ^3.8.2
+      slate: ^0.32.0
+    resolution:
+      integrity: sha512-nqaiYYppezMmbsh+JN6vqZl2EexiUTJWwCzJVas8cv+WeRtRmuysn94LKF2VdLIxLmNAe/ZfliIkW9uC/NdO6w==
+  /slate-edit-table/0.15.2:
+    dev: false
+    peerDependencies:
+      immutable: ^3.8.1
+      slate: ^0.33.3
+      slate-schema-violations: ^0.1.7
+    resolution:
+      integrity: sha1-8mtnRRtQf5NhBhUfVaC/+9vKAhM=
+  /slate-hotkeys/0.1.4:
+    dependencies:
+      is-hotkey: 0.1.3
+      slate-dev-environment: 0.1.6
+    dev: false
+    resolution:
+      integrity: sha1-WxCyoXiv/GCCf5KE1MCl1+UEH/4=
+  /slate-hyperscript/0.5.22:
+    dependencies:
+      is-empty: 1.2.0
+      is-plain-object: 2.0.4
+      slate-dev-logger: 0.1.43
+    dev: false
+    peerDependencies:
+      slate: '>=0.32.0'
+    resolution:
+      integrity: sha1-UEhe5RGNulzWnQMstPEAxkN+Ss8=
+  /slate-paste-linkify/0.5.1:
+    dependencies:
+      is-url: 1.2.4
+      to-pascal-case: 1.0.0
+    dev: false
+    peerDependencies:
+      slate: '>=0.29.0'
+      slate-react: '>=0.9.0'
+    resolution:
+      integrity: sha512-Vh4RUjIYogGGBZsKIpZ09UQw+5WmPAn9F50fTxZMQoZtyex7aRO3rmq5DsMc60qmCBre2B7MwDTQr9IY7/yaYQ==
+  /slate-plain-serializer/0.5.41:
+    dependencies:
+      slate-dev-logger: 0.1.43
+    dev: false
+    peerDependencies:
+      immutable: '>=3.8.1'
+      slate: '>=0.32.0'
+    resolution:
+      integrity: sha512-KPC2T5PT29JN7uxpmpg/xIGO1YjNmpTfghkGsUKBx7HHYjGe5c9jEApolTvzNy3F3w+wGQNsiT+aN6dn9m6sFA==
+  /slate-prism/0.5.0:
+    dependencies:
+      prismjs: 1.15.0
+    dev: true
+    peerDependencies:
+      immutable: '*'
+      react: '*'
+      react-dom: '*'
+      slate: ^0.32.0
+    resolution:
+      integrity: sha512-WnyR1l3dOMNd4zbMmwExz4Uy6z27qGDPRWDXlW7ylbWhlwfJ94Cjy0crjhaVxd9Kk0YkriMU6RjNN9j4WM/ndA==
+  /slate-prop-types/0.4.61:
+    dev: false
+    peerDependencies:
+      immutable: '>=3.8.1'
+      slate: '>=0.32.0'
+    resolution:
+      integrity: sha512-qhm4jbhQnVsxnizzXp6Hzb5d6zxFnAoYBnxKmE/tmv9QVkZs9ldur1YIROutTm418/9FpLe6bATrLhqeGHYalw==
+  /slate-react/0.12.11:
+    dependencies:
+      debug: 3.1.0
+      get-window: 1.1.2
+      is-window: 1.0.2
+      keycode: 2.2.0
+      lodash: 4.17.10
+      prop-types: 15.6.2
+      react-immutable-proptypes: 2.1.0
+      react-portal: 3.2.0
+      selection-is-backward: 1.0.0
+      slate-base64-serializer: 0.2.63
+      slate-dev-environment: 0.1.6
+      slate-dev-logger: 0.1.43
+      slate-hotkeys: 0.1.4
+      slate-plain-serializer: 0.5.41
+      slate-prop-types: 0.4.61
+    dev: false
+    peerDependencies:
+      immutable: '>=3.8.1'
+      react: '>=0.14.0'
+      react-dom: '>=0.14.0'
+      slate: '>=0.32.0'
+    resolution:
+      integrity: sha1-bYPmBGNHBHV2kKV9vWqrKCqWStM=
+  /slate-schema-violations/0.1.39:
+    dev: false
+    resolution:
+      integrity: sha512-SNRoV9Ii5UqjNqAKcIw7aAOMwgI45zsn86ue2n8NVLNOCe3fUI35cjq6l3fdvmRYw4X/GcZqzhpQsizHD3ts6A==
+  /slate-soft-break/0.6.1:
+    dev: false
+    peerDependencies:
+      slate: '>=0.29.0'
+      slate-react: '>=0.9.0'
+    resolution:
+      integrity: sha512-PTujwU6B8vKO86Yqj2TXcryxkal6PBmFrUhZwZF6fQlhlLUaJAMYQX60blGvO7tncDxyofxxIkBKdGdjL3JldA==
+  /slate-trailing-block/0.5.0:
+    dev: false
+    peerDependencies:
+      slate: ^0.32.0
+    resolution:
+      integrity: sha512-CrN+bBzo//CRwcVyIBaWSKyi7yiYjcc8wIKoiqpIbXDEUHEF++NCO8zr/j5PzelzqltTj9tg4n18d/f1/SLfLQ==
+  /slate/0.33.8:
+    dependencies:
+      debug: 3.1.0
+      direction: 0.1.5
+      esrever: 0.2.0
+      is-empty: 1.2.0
+      is-plain-object: 2.0.4
+      lodash: 4.17.10
+      slate-dev-logger: 0.1.43
+      slate-schema-violations: 0.1.39
+      type-of: 2.0.1
+    dev: false
+    peerDependencies:
+      immutable: '>=3.8.1'
+      react: '>=0.14.0'
+    resolution:
+      integrity: sha1-ws2ZBsRG0BCxXp4o9tGgF5LHoRM=
+  /tiny-emitter/2.0.2:
+    dev: true
+    optional: true
+    resolution:
+      integrity: sha512-2NM0auVBGft5tee/OxP4PI3d8WItkDM+fPnaRAVo6xTDI2knbz9eC5ArWGqtGlYqiH3RU5yMpdyTTO7MguC4ow==
+  /to-fast-properties/1.0.3:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-uDVx+k2MJbguIxsG46MFXeTKGkc=
+  /to-no-case/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-xyKQcWTvaxeBMsjmmTAhLRtKoWo=
+  /to-pascal-case/1.0.0:
+    dependencies:
+      to-space-case: 1.0.0
+    dev: false
+    resolution:
+      integrity: sha1-C73I30SIhroBU15UMycEjQqhzng=
+  /to-space-case/1.0.0:
+    dependencies:
+      to-no-case: 1.0.2
+    dev: false
+    resolution:
+      integrity: sha1-sFLar7Gysp3HcM6gFj5ewOvJ/Bc=
+  /token-stream/0.0.1:
+    dev: true
+    resolution:
+      integrity: sha1-zu78cXp2xDFvEm0LnbqlXX598Bo=
+  /type-of/2.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-5yoXQYllaOn2KDeNgW1pEvfyOXI=
+registry: 'https://registry.npmjs.org/'
+shrinkwrapMinorVersion: 9
+shrinkwrapVersion: 3
+specifiers:
+  immutable: ^3.8.2
+  is-hotkey: ^0.1.3
+  prismjs: ^1.14.0
+  pug-lexer: ^4.0.0
+  pug-parser: ^5.0.0
+  pug-source-gen: 0.0.2
+  slate: ^0.33.6
+  slate-auto-replace: ^0.9.1
+  slate-base64-serializer: ^0.2.31
+  slate-collapse-on-escape: ^0.6.1
+  slate-edit-blockquote: ^0.6.0
+  slate-edit-code: ^0.15.0
+  slate-edit-list: ^0.11.3
+  slate-edit-table: ^0.15.0-alpha.4
+  slate-hyperscript: ^0.5.12
+  slate-paste-linkify: ^0.5.1
+  slate-plain-serializer: ^0.5.12
+  slate-prism: ^0.5.0
+  slate-react: ^0.12.6
+  slate-soft-break: ^0.6.1
+  slate-trailing-block: ^0.5.0
