@@ -34,7 +34,7 @@ export default ({ ua, monolithic = false } = {}) => {
   };
 
   const renderer = createRenderer({
-    selectorPrefix: 'o-',
+    // selectorPrefix: 'o-',
     plugins: [
       extend(),
       embedded(),
