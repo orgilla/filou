@@ -22,6 +22,6 @@ const compile = (glp, force) =>
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(dest));
 
-gulp.task('watch', () => compile(watch(src, { ignoreInitial: false, base: dest, dot: true }), true));
+gulp.task('watch', () => compile(watch(src, { ignoreInitial: false, base: dest, dot: true })));
 
 gulp.task('build', () => compile(gulp.src(src)));
