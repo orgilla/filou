@@ -1,5 +1,5 @@
 {
-  "version": "0.12.0",
+  "version": "0.12.8",
   "name": "@filou/core",
   "description": "",
   "author": "Philipp Achenbach <olymp@philipp-achenbach.de>",
@@ -10,10 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.6",
-    "react-gravatar": "^2.6.3",
-    "scrollparent": "^2.0.1",
-    "shortid": "^2.2.13",
-    "tinycolor2": "^1.4.1",
     "fela": "^6.2.0",
     "fela-monolithic": "^5.0.24",
     "fela-plugin-custom-property": "^7.0.3",
@@ -23,11 +19,15 @@
     "fela-plugin-friendly-pseudo-class": "^5.0.17",
     "fela-plugin-named-keys": "^1.0.3",
     "fela-plugin-prefixer": "^5.0.19",
-    "fela-plugin-unit": "^5.0.17"
+    "fela-plugin-unit": "^5.0.17",
+    "react-gravatar": "^2.6.3",
+    "scrollparent": "^2.0.1",
+    "shortid": "^2.2.13",
+    "tinycolor2": "^1.4.1"
   },
   "peerDependencies": {
     "react": "^16.4.2",
-    "react-fela": "^8.0.0",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-fela": "^8.0.0"
   }
 }
