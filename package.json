@@ -12,6 +12,7 @@
     "clean": "del packages/**/*.js && del packages/**/*.js.map",
     "prepublishOnly": "npm run build",
     "up": "yarn upgrade-interactive --latest",
+    "bumpo": "lerna exec -- npm version patch",
     "publish": "lerna publish",
     "rename": "rename packages/**/*.js {{f}}.es6"
   },
