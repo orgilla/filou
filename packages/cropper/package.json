@@ -1,14 +1,13 @@
 {
   "version": "0.12.10",
-  "name": "@filou/edits",
+  "name": "@filou/cropper",
   "description": "",
-  "author": "Philipp Achenbach <olymp@philipp-achenbach.de>",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
   "contributors": [
     "Benjamin Kniffler <bkniffler@me.com>",
     "Philipp Achenbach <olymp@philipp-achenbach.de>"
   ],
   "license": "MIT",
-  "dependencies": {
-    "antd": "^3.8.4"
-  }
+  "dependencies": {},
+  "peerDependencies": {}
 }
