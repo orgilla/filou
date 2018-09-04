@@ -6063,26 +6063,6 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
-filou@^0.12.7:
-  version "0.12.7"
-  resolved "https://registry.yarnpkg.com/filou/-/filou-0.12.7.tgz#2b37193c5254d84c083cc62b332336b8887d561e"
-  dependencies:
-    "@filou/core" "^0.12.0"
-    fela "^6.2.0"
-    fela-monolithic "^5.0.24"
-    fela-plugin-custom-property "^7.0.3"
-    fela-plugin-embedded "^5.2.10"
-    fela-plugin-extend "^6.0.8"
-    fela-plugin-fallback-value "^5.0.18"
-    fela-plugin-friendly-pseudo-class "^5.0.17"
-    fela-plugin-named-keys "^1.0.3"
-    fela-plugin-prefixer "^5.0.19"
-    fela-plugin-unit "^5.0.17"
-    react "^16.4.2"
-    react-dom "^16.4.2"
-    react-fela "^8.0.0"
-    tinycolor2 "^1.4.1"
-
 finalhandler@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-1.1.1.tgz#eebf4ed840079c83f4249038c9d703008301b105"
@@ -11211,7 +11191,7 @@ react-dev-utils@^5.0.1:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dom@^16, react-dom@^16.4.0, react-dom@^16.4.2:
+react-dom@^16, react-dom@^16.4.0:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.2.tgz#4afed569689f2c561d2b8da0b819669c38a0bda4"
   dependencies:
@@ -11535,7 +11515,7 @@ react-universal-component@^2.8.1, react-universal-component@^2.9.0:
     hoist-non-react-statics "^2.2.1"
     prop-types "^15.5.10"
 
-react@^16, react@^16.4.0, react@^16.4.2:
+react@^16, react@^16.4.0:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
   dependencies:

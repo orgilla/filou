@@ -1,6 +1,6 @@
 import React from 'react';
 import Drawer from '@filou/portal/drawer';
-import { createComponent } from 'filou';
+import { createComponent } from 'react-static';
 import get from 'lodash/get';
 import LinkConsumer from '../link';
 

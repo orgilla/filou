@@ -38,11 +38,6 @@ module.exports = {
           transform: 'date-fns/${member}',
           preventFullImport: true,
           camelCase: true
-        },
-        filou: {
-          transform: 'filou/es/${member}',
-          kebabCase: true,
-          preventFullImport: true
         }
       }
     ]

@@ -4,14 +4,14 @@ import {
   createRenderer,
   createComponent,
   ThemeProvider,
-  Provider,
-} from 'filou';
+  Provider
+} from '@filou/core';
 
 const Container = createComponent(
   ({ theme }) => ({
     backgroundColor: theme.color,
     color: 'white',
-    minHeight: 300,
+    minHeight: 300
   }),
   'div'
 );
@@ -20,7 +20,7 @@ ReactDOM.render(
   <Provider renderer={createRenderer()}>
     <ThemeProvider
       theme={{
-        color: '#222233',
+        color: '#222233'
       }}
     >
       <Container>Hi</Container>

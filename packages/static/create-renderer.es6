@@ -1,4 +1,4 @@
-import { createRenderer } from 'filou';
+import { createRenderer } from '@filou/core';
 
 export default (typography, options) => {
   const renderer = createRenderer(options);

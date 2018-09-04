@@ -1,6 +1,6 @@
 import React, { Fragment, cloneElement } from 'react';
 import { createComponent } from 'react-fela';
-import withStyle from 'filou/with-style';
+import withStyle from '@filou/core/with-style';
 import { withState, compose } from 'recompose';
 import Swipeable from 'react-swipeable';
 import ScrollLock from 'react-scrolllock';

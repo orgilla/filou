@@ -11,13 +11,15 @@ const Panel = createComponent(
   ({ image, theme }) => ({
     padding: '0 16px 24px 16px',
     '> a': {
-      '> div': image ? {
-        height: 150,
-        backgroundColor: 'lightgray',
-        width: '100%',
-        backgroundImage: `url(${getSrc(image)})`,
-        backgroundSize: 'cover'
-      } : null,
+      '> div': image
+        ? {
+            height: 150,
+            backgroundColor: 'lightgray',
+            width: '100%',
+            backgroundImage: `url(${getSrc(image)})`,
+            backgroundSize: 'cover'
+          }
+        : null,
       display: 'block',
       backgroundColor: '#FFFFFF',
       borderRadius: theme.borderRadius,
@@ -74,7 +76,7 @@ const GridPanels = ({ items }) => (
   <Container>
     <Grid size={4} marginX={-27}>
       {items.map((item, i) => (
-        <Grid.Item  small={1} key={item.to || item.id || i}>
+        <Grid.Item small={1} key={item.to || item.id || i}>
           <Panel {...item} />
         </Grid.Item>
       ))}
