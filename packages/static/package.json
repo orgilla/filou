@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@filou/core": "^0.14.6",
+    "@filou/core": "^0.14.8",
     "google-map-react": "^1.0.6",
     "react-markdown": "^3.4.1",
     "react-sticky": "^6.0.3",
