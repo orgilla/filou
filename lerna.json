@@ -1,9 +1,8 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "lerna": "2.0.0",
-  "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "0.12.9"
+  "version": "0.13.20",
+  "npmClient": "npm",
+  "registry": "https://registry.npmjs.org/"
 }

@@ -10,9 +10,9 @@
     "build": "gulp build",
     "watch": "gulp watch",
     "clean": "del packages/**/*.js && del packages/**/*.js.map",
-    "prepublishOnly": "npm run build",
+    "clean2": "del-cli packages/**/node_modules",
     "up": "yarn upgrade-interactive --latest",
-    "bumpo": "lerna exec --concurrency 1 -- yarn publish --new-version 0.13.2",
+    "bumpo": "lerna exec --concurrency 1 -- yarn publish",
     "publish": "lerna publish",
     "rename": "rename packages/**/*.js {{f}}.es6"
   },
