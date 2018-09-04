@@ -1,5 +1,5 @@
 {
-  "version": "0.14.0",
+  "version": "0.14.1",
   "name": "@filou/slate",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -36,5 +36,6 @@
     "pug-parser": "^5.0.0",
     "pug-source-gen": "0.0.2",
     "slate-prism": "^0.5.0"
-  }
+  },
+  "gitHead": "ac953f312ef0ed13d02ac2ebf52105f9411a6787"
 }

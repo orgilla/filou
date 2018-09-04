@@ -1,8 +1,9 @@
 {
-  "version": "0.14.0",
+  "version": "0.14.1",
   "name": "@filou/cloudinary",
   "description": "",
   "main": "./index",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "ac953f312ef0ed13d02ac2ebf52105f9411a6787"
 }

@@ -1,5 +1,5 @@
 {
-  "version": "0.14.0",
+  "version": "0.14.1",
   "name": "@filou/antd",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -14,5 +14,6 @@
     "react-color": "^2.14.1",
     "text-mask-addons": "^3.8.0",
     "text-mask-core": "^5.1.2"
-  }
+  },
+  "gitHead": "ac953f312ef0ed13d02ac2ebf52105f9411a6787"
 }

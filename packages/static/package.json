@@ -1,5 +1,5 @@
 {
-  "version": "0.14.0",
+  "version": "0.14.1",
   "name": "@filou/static",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -19,5 +19,6 @@
   },
   "devDependencies": {
     "react-static": "^6.0.0-beta.14"
-  }
+  },
+  "gitHead": "ac953f312ef0ed13d02ac2ebf52105f9411a6787"
 }

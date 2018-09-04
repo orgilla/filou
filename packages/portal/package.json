@@ -1,5 +1,5 @@
 {
-  "version": "0.14.0",
+  "version": "0.14.1",
   "name": "@filou/portal",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -13,5 +13,6 @@
     "antd": "^3.8.4",
     "react-scrolllock": "^3.0.1",
     "react-swipeable": "^4.3.0"
-  }
+  },
+  "gitHead": "ac953f312ef0ed13d02ac2ebf52105f9411a6787"
 }
