@@ -1,5 +1,5 @@
 {
-  "version": "0.14.9",
+  "version": "0.14.10",
   "name": "@filou/loader",
   "description": "",
   "author": "Philipp Achenbach <olymp@philipp-achenbach.de>",
@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@filou/grid": "^0.14.8",
+    "@filou/grid": "^0.14.10",
     "react-fela": "^8.0.0",
     "react-swipeable": "^4.3.0",
     "tinycolor2": "^1.4.1"

@@ -1,5 +1,5 @@
 {
-  "version": "0.14.9",
+  "version": "0.14.10",
   "name": "@filou/portal",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@filou/core": "^0.14.8",
+    "@filou/core": "^0.14.10",
     "antd": "^3.8.4",
     "react-scrolllock": "^3.0.1",
     "react-swipeable": "^4.3.0"
