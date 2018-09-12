@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@filou/grid": "^0.14.10",
+    "@filou/grid": "^0.14.11",
     "react-fela": "^8.0.0",
     "react-swipeable": "^4.3.0",
     "tinycolor2": "^1.4.1"

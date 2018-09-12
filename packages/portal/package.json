@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@filou/core": "^0.14.10",
+    "@filou/core": "^0.14.11",
     "antd": "^3.8.4",
     "react-scrolllock": "^3.0.1",
     "react-swipeable": "^4.3.0"
