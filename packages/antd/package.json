@@ -1,5 +1,5 @@
 {
-  "version": "0.14.8",
+  "version": "0.14.9",
   "name": "@filou/antd",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "antd": "^3.8.4",
+    "antd": "^3.9.2",
     "moment": "^2.22.2",
     "react-color": "^2.14.1",
     "text-mask-addons": "^3.8.0",

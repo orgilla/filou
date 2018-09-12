@@ -17,7 +17,7 @@ const Inner = createComponent(
     flexGrow: 1,
     flexDirection: 'column',
     overflowY,
-    overflowX: 'hidden',
+    overflowX: 'hidden'
     // justifyContent: 'space-between',
   }),
   'div',
@@ -32,7 +32,7 @@ const Menu = createComponent(
     paddingY = theme.space2,
     width,
     overflowY = 'auto',
-    collapsed,
+    collapsed
   }) => ({
     display: 'flex',
     flexGrow: collapsed ? 0 : 1,
@@ -47,7 +47,7 @@ const Menu = createComponent(
     paddingX,
     overflowY,
     overflowX: 'hidden',
-    transition: 'all 200ms cubic-bezier(0.165, 0.84, 0.44, 1)',
+    transition: 'all 200ms cubic-bezier(0.165, 0.84, 0.44, 1)'
   }),
   ({
     className,
@@ -101,6 +101,7 @@ const Component = useTheme(
     </ThemeProvider>
   )
 );
+
 
 Component.Header = Header;
 Component.Divider = Divider;

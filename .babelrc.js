@@ -19,7 +19,7 @@ module.exports = {
     '@babel/plugin-proposal-json-strings',
     '@babel/plugin-transform-runtime',
     [
-      'import',
+      'import-7',
       {
         libraryName: 'antd',
         style: true

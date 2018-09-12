@@ -12,7 +12,7 @@
     "clean": "del packages/**/*.js && del packages/**/*.js.map",
     "clean2": "del-cli packages/**/node_modules",
     "up": "yarn upgrade-interactive --latest",
-    "bumpo": "lerna exec --concurrency 1 -- npm version patch",
+    "bump": "lerna exec --concurrency 1 -- npm version patch",
     "publish": "lerna publish",
     "rename": "rename packages/**/*.js {{f}}.es6"
   },
@@ -65,7 +65,8 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
-    "babel-plugin-import": "^1.8.0",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-import-7": "^1.6.7",
     "babel-plugin-lodash": "3.3.4",
     "babel-plugin-transform-imports": "^1.5.0",
     "eslint": "^5.5.0",

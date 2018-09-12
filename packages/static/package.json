@@ -1,5 +1,5 @@
 {
-  "version": "0.14.9",
+  "version": "0.14.10",
   "name": "@filou/static",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -16,8 +16,6 @@
     "slugify": "^1.3.1",
     "webfontloader": "^1.6.28"
   },
-  "devDependencies": {
-    "react-static": "^6.0.0-beta.14"
-  },
+  "devDependencies": {},
   "gitHead": "ac953f312ef0ed13d02ac2ebf52105f9411a6787"
 }
