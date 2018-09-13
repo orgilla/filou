@@ -14,7 +14,8 @@
     "up": "yarn upgrade-interactive --latest",
     "bump": "lerna exec --concurrency 1 -- npm version patch",
     "publish": "lerna publish",
-    "rename": "rename packages/**/*.js {{f}}.es6"
+    "rename": "rename packages/**/*.js {{f}}.es6",
+    "github": "ssh -T git@github.com"
   },
   "repository": {
     "type": "git",
