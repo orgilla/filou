@@ -1,6 +1,5 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
-import { Icon } from 'antd';
 import tinycolor from 'tinycolor2';
 import { getColor } from '@filou/core/colors-provider';
 import Image from './image';
@@ -131,9 +130,7 @@ export default createComponent(
         )}
       {loading && (
         <Image collapsed={collapsed} extra inverted={inverted}>
-          <LoaderContainer>
-            <Icon type="loading" />
-          </LoaderContainer>
+          <LoaderContainer>...</LoaderContainer>
         </Image>
       )}
     </div>
