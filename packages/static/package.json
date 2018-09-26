@@ -11,7 +11,7 @@
   "dependencies": {
     "@filou/core": "^0.14.12",
     "google-map-react": "^1.0.6",
-    "react-markdown": "^3.4.1",
+    "react-markdown": "^3.6.0",
     "react-sticky": "^6.0.3",
     "slugify": "^1.3.1",
     "webfontloader": "^1.6.28"

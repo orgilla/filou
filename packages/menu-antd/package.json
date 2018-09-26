@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "antd": "^3.8.4"
+    "antd": "^3.9.2"
   },
   "gitHead": "ac953f312ef0ed13d02ac2ebf52105f9411a6787"
 }
