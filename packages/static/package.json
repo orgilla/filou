@@ -1,5 +1,5 @@
 {
-  "version": "0.14.12",
+  "version": "0.15.1",
   "name": "@filou/static",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@filou/core": "^0.14.12",
+    "@filou/core": "^0.15.1",
     "google-map-react": "^1.0.6",
     "react-markdown": "^3.6.0",
     "react-sticky": "^6.0.3",
