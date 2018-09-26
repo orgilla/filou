@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '../styled';
 const icon = ({ color, width, height, size, ...rest }) => (
-  <svg fill={color} width={size || width} height={size || height} {...rest} viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1280 32v1339l-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41z"/></svg>
+  <svg fill={color} width={size || width} height={size || height} {...rest} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M288 403.4l-145.5 76.5 27.8-162L52.5 203.1l162.7-23.6L288 32V0c-11.4 0-22.8 5.9-28.7 17.8L194 150.2 47.9 171.4c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.1 23 46 46.4 33.7L288 439.6v-36.2z"/></svg>
 );
 icon.defaultProps = { width: 100, height: 100 };
 icon.displayName = 'FaStarHalf';

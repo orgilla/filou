@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '../styled';
 const icon = ({ color, width, height, size, ...rest }) => (
-  <svg fill={color} width={size || width} height={size || height} {...rest} viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M621 1280h595v-595zm-45-45l595-595h-595v595zm1152 77v192q0 14-9 23t-23 9h-224v224q0 14-9 23t-23 9h-192q-14 0-23-9t-9-23v-224h-864q-14 0-23-9t-9-23v-864h-224q-14 0-23-9t-9-23v-192q0-14 9-23t23-9h224v-224q0-14 9-23t23-9h192q14 0 23 9t9 23v224h851l246-247q10-9 23-9t23 9q9 10 9 23t-9 23l-247 246v851h224q14 0 23 9t9 23z"/></svg>
+  <svg fill={color} width={size || width} height={size || height} {...rest} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M488 320h-72V118.62l93.66-93.66c3.12-3.12 3.12-8.19 0-11.31L498.35 2.34c-3.12-3.12-8.19-3.12-11.31 0L393.37 96H192V24c0-13.26-10.75-24-24-24h-48c-13.25 0-24 10.74-24 24v72H24c-13.25 0-24 10.74-24 24v48c0 13.25 10.75 24 24 24h72v192c0 17.67 14.33 32 32 32h192v72c0 13.25 10.75 24 24 24h48c13.25 0 24-10.75 24-24v-72h72c13.25 0 24-10.75 24-24v-48c0-13.25-10.75-24-24-24zM96 160H32v-32h64v32zm96-32h169.37l-32 32H192v-32zm105.38 64L192 297.38V192h105.38zM320 384H128V32h32v320h160v32zm-105.38-64L320 214.63V320H214.62zM352 480V182.63l32-32V480h-32zm128-96h-64v-32h64v32z"/></svg>
 );
 icon.defaultProps = { width: 100, height: 100 };
 icon.displayName = 'FaCrop';

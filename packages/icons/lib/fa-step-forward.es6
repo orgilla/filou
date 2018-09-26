@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '../styled';
 const icon = ({ color, width, height, size, ...rest }) => (
-  <svg fill={color} width={size || width} height={size || height} {...rest} viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M429 1651q-19 19-32 13t-13-32v-1472q0-26 13-32t32 13l710 710q9 9 13 19v-678q0-26 19-45t45-19h128q26 0 45 19t19 45v1408q0 26-19 45t-45 19h-128q-26 0-45-19t-19-45v-678q-4 10-13 19z"/></svg>
+  <svg fill={color} width={size || width} height={size || height} {...rest} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M372 31h-8c-6.6 0-12 5.4-12 12v190.3c-1.1-1.2-2.2-2.4-3.5-3.4l-232-191.4C95.9 21.3 64 35.6 64 63v384c0 27.4 31.9 41.8 52.5 24.6l232-192.6c1.3-1.1 2.4-2.2 3.5-3.4V467c0 6.6 5.4 12 12 12h8c6.6 0 12-5.4 12-12V43c0-6.6-5.4-12-12-12zm-40.5 223.4L96.2 446.8l-.1.1-.1.1V63l.1.1.2.1 235.2 191.2z"/></svg>
 );
 icon.defaultProps = { width: 100, height: 100 };
 icon.displayName = 'FaStepForward';

@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from '../styled';
-
 const icon = ({ color, width, height, size, ...rest }) => (
-  <svg fill={color} width={size || width} height={size || height} {...rest}  viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg"><path d="M212 768l623 665-300-665h-323zm812 772l349-772h-698zm-486-900l204-384h-262l-288 384h346zm675 793l623-665h-323zm-530-793h682l-204-384h-274zm827 0h346l-288-384h-262zm141-486l384 512q14 18 13 41.5t-17 40.5l-960 1024q-18 20-47 20t-47-20l-960-1024q-16-17-17-40.5t13-41.5l384-512q18-26 51-26h1152q33 0 51 26z" /></svg>
+  <svg fill={color} width={size || width} height={size || height} {...rest} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M253 13.4c-15.3-17.9-42.8-17.9-58.1 0L9.3 230.9c-12.4 14.5-12.4 35.6 0 50.2L195 498.6c15.3 17.9 42.8 17.9 58.1 0l185.6-217.5c12.4-14.5 12.4-35.6 0-50.2L253 13.4zm161.4 246.9L228.7 477.8c-2.5 2.9-6.9 2.9-9.4 0L33.6 260.3c-2.1-2.5-2.1-6.2 0-8.6L219.3 34.2c2.5-2.9 6.9-2.9 9.4 0l185.7 217.5c2.1 2.5 2.1 6.1 0 8.6z"/></svg>
 );
 icon.defaultProps = { width: 100, height: 100 };
 icon.displayName = 'FaDiamond';

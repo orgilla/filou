@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '../styled';
 const icon = ({ color, width, height, size, ...rest }) => (
-  <svg fill={color} width={size || width} height={size || height} {...rest} viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1755 453q37 38 37 90.5t-37 90.5l-401 400 150 150-160 160q-163 163-389.5 186.5t-411.5-100.5l-362 362h-181v-181l362-362q-124-185-100.5-411.5t186.5-389.5l160-160 150 150 400-401q38-37 91-37t90 37 37 90.5-37 90.5l-400 401 234 234 401-400q38-37 91-37t90 37z"/></svg>
+  <svg fill={color} width={size || width} height={size || height} {...rest} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M360 160H24c-13.255 0-24 10.745-24 24v48c0 13.255 10.745 24 24 24h8c0 82.965 63.147 151.178 144 159.206V512h32v-96.794c80.853-8.028 144-76.241 144-159.206h8c13.255 0 24-10.745 24-24v-48c0-13.255-10.745-24-24-24zm-8 64h-32v32c0 70.74-57.249 128-128 128-70.74 0-128-57.249-128-128v-32H32v-32h320v32zm-80-80V16c0-8.837 7.163-16 16-16s16 7.163 16 16v128h-32zm-192 0V16c0-8.837 7.163-16 16-16s16 7.163 16 16v128H80z"/></svg>
 );
 icon.defaultProps = { width: 100, height: 100 };
 icon.displayName = 'FaPlug';

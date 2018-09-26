@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '../styled';
 const icon = ({ color, width, height, size, ...rest }) => (
-  <svg fill={color} width={size || width} height={size || height} {...rest} viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1534 189v73q0 29-18.5 61t-42.5 32q-50 0-54 1-26 6-32 31-3 11-3 64v1152q0 25-18 43t-43 18h-108q-25 0-43-18t-18-43v-1218h-143v1218q0 25-17.5 43t-43.5 18h-108q-26 0-43.5-18t-17.5-43v-496q-147-12-245-59-126-58-192-179-64-117-64-259 0-166 88-286 88-118 209-159 111-37 417-37h479q25 0 43 18t18 43z"/></svg>
+  <svg fill={color} width={size || width} height={size || height} {...rest} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M372 32H159.529C72.194 32 .245 102.216.001 189.551-.243 276.877 70.729 348 158 348v120c0 6.627 5.373 12 12 12h12c6.627 0 12-5.373 12-12V68h60v400c0 6.627 5.373 12 12 12h12c6.627 0 12-5.373 12-12V68h82c6.627 0 12-5.373 12-12V44c0-6.627-5.373-12-12-12zM158 312c-67.271 0-122-54.729-122-122S90.729 68 158 68v244z"/></svg>
 );
 icon.defaultProps = { width: 100, height: 100 };
 icon.displayName = 'FaParagraph';

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '../styled';
 const icon = ({ color, width, height, size, ...rest }) => (
-  <svg fill={color} width={size || width} height={size || height} {...rest} viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1747 141q19-19 32-13t13 32v1472q0 26-13 32t-32-13l-710-710q-9-9-13-19v710q0 26-13 32t-32-13l-710-710q-9-9-13-19v678q0 26-19 45t-45 19h-128q-26 0-45-19t-19-45v-1408q0-26 19-45t45-19h128q26 0 45 19t19 45v678q4-10 13-19l710-710q19-19 32-13t13 32v710q4-10 13-19z"/></svg>
+  <svg fill={color} width={size || width} height={size || height} {...rest} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M12 447h8c6.6 0 12-5.4 12-12V277.3c.9 1 1.9 2 3 2.9l200.5 159.4c20.6 17.2 52.5 2.8 52.5-24.6V297.2l171.5 142.4c20.6 17.2 52.5 2.8 52.5-24.6V95c0-27.4-31.9-41.8-52.5-24.6L288 213.9V95.1c0-27.4-31.9-41.8-52.5-24.6L35 231c-1.1.9-2.1 1.9-3 2.9V75c0-6.6-5.4-12-12-12h-8C5.4 63 0 68.4 0 75v360c0 6.6 5.4 12 12 12zm280.5-191.4l.2-.1.2-.1L480 95v320L292.7 255.8l-.1-.1-.1-.1zM61 255.2l194.8-160 .1-.1.1-.1v320l-.1-.1-.1-.1L61 256v-.8z"/></svg>
 );
 icon.defaultProps = { width: 100, height: 100 };
 icon.displayName = 'FaFastBackward';

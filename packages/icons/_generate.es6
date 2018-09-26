@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { upperFirst, camelCase } = require('lodash');
 
-const arr = [path.resolve(__dirname, 'svg')];
+const arr = [path.resolve('xzy\\svgs\\light')];
 
 let index = '';
 arr.forEach(readFrom => {
@@ -12,17 +12,27 @@ arr.forEach(readFrom => {
       const name = `${upperFirst(camelCase(fileName))}`;
       const content = fs
         .readFileSync(path.resolve(readFrom, file), {
-          encoding: 'utf8',
+          encoding: 'utf8'
         })
         .replace('<?xml version="1.0" encoding="utf-8"?>', '')
         .replace(' width="2048"', '')
         .replace(' width="2304"', '')
         .replace(' width="1792"', '')
+        .replace(`<!--`, '')
+        .replace(
+          `Font Awesome Pro 5.3.1 by @fontawesome - https://fontawesome.com`,
+          ''
+        )
+        .replace(
+          `License - https://fontawesome.com/license (Commercial License)`,
+          ''
+        )
+        .replace(`-->`, '')
         .replace(' height="1792"', '')
         .trim();
       fs.writeFileSync(
         path.resolve(__dirname, 'lib', `${fileName}.es6`),
-        generate(content, name).trim(),
+        generate(content, name).trim()
       );
       index += `\nexport { default as ${name} } from './lib/${fileName}';`;
     });
@@ -37,7 +47,7 @@ const icon = ({ color, width, height, size, ...rest }) => (
   ${content
     .split('<svg ')
     .join(
-      '<svg fill={color} width={size || width} height={size || height} {...rest} ',
+      '<svg fill={color} width={size || width} height={size || height} {...rest} '
     )}
 );
 icon.defaultProps = { width: 100, height: 100 };
