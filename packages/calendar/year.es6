@@ -16,7 +16,6 @@ import {
   isSameDay,
   startOfDay
 } from 'date-fns';
-import { Dropdown } from 'antd';
 import { compose, withPropsOnChange } from 'recompose';
 import { FaChevronLeft, FaChevronRight } from '@filou/icons';
 import Swipeable from 'react-swipeable';

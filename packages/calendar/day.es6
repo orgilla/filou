@@ -26,7 +26,7 @@ export default createComponent(
         (!!active && theme.color) ||
         (!!today && theme.dark4),
       fontWeight: bold ? 'bold' : undefined,
-      borderRadius: '50%',
+      // borderRadius: '50%',
       cursor: 'pointer',
       '> .content': {
         '> .points': {
@@ -55,7 +55,9 @@ export default createComponent(
       {children}
       {!!points && (
         <div className="points">
-          {Array.from(Array(points)).map((x, y) => <span key={y}>&bull;</span>)}
+          {Array.from(Array(points)).map((x, y) => (
+            <span key={y}>&bull;</span>
+          ))}
         </div>
       )}
     </Field>

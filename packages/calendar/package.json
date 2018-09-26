@@ -1,5 +1,5 @@
 {
-  "version": "0.14.11",
+  "version": "0.14.12",
   "name": "@filou/calendar",
   "description": "",
   "author": "Philipp Achenbach <olymp@philipp-achenbach.de>",
@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "antd": "^3.8.4"
+    "date-fns": "^2.0.0-alpha.16"
   },
   "gitHead": "ac953f312ef0ed13d02ac2ebf52105f9411a6787"
 }

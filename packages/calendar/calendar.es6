@@ -1,6 +1,5 @@
 import React from 'react';
 import { createComponent } from 'react-fela';
-import locale from 'date-fns/locale/de';
 import {
   format,
   startOfWeek,
@@ -19,7 +18,6 @@ import {
   isSameDay,
   startOfDay
 } from 'date-fns';
-import { Menu, Dropdown } from 'antd';
 import { compose, withPropsOnChange } from 'recompose';
 import { FaChevronLeft, FaChevronRight } from '@filou/icons';
 import Swipeable from 'react-swipeable';
@@ -28,32 +26,10 @@ import Header from './header';
 import KW from './kw';
 import Day from './day';
 import Container from './container';
-
-const menuMonths = (date, setDate) => (
-  <Menu onClick={({ key }) => setDate(setMonth(date, key))}>
-    <Menu.Item key={0}>Januar</Menu.Item>
-    <Menu.Item key={1}>Februar</Menu.Item>
-    <Menu.Item key={2}>März</Menu.Item>
-    <Menu.Item key={3}>April</Menu.Item>
-    <Menu.Item key={4}>Mai</Menu.Item>
-    <Menu.Item key={5}>Juni</Menu.Item>
-    <Menu.Item key={6}>Juli</Menu.Item>
-    <Menu.Item key={7}>August</Menu.Item>
-    <Menu.Item key={8}>September</Menu.Item>
-    <Menu.Item key={9}>Oktober</Menu.Item>
-    <Menu.Item key={10}>November</Menu.Item>
-    <Menu.Item key={11}>Dezember</Menu.Item>
-  </Menu>
-);
+import Select from './select';
 
 export const menuYears = (date, setDate) => (
-  <Menu onClick={({ key }) => setDate(setYear(date, key))}>
-    {Array.from(Array(10)).map((x, y) => {
-      const year = parseInt(getYear(date), 10) - 4 + y;
-
-      return <Menu.Item key={year}>{year}</Menu.Item>;
-    })}
-  </Menu>
+  <Menu onClick={({ key }) => setDate(setYear(date, key))} />
 );
 
 const enhance = (...enhancers) =>
@@ -79,8 +55,8 @@ const enhance = (...enhancers) =>
           days.push({
             date: date2,
             isSunday: true,
-            key: format(addDays(start, i), 'WW'),
-            label: format(addDays(start, i), 'WW')
+            key: format(addDays(start, i), 'ww'),
+            label: format(addDays(start, i), 'ww')
           });
         } else {
           days.push({
@@ -88,8 +64,8 @@ const enhance = (...enhancers) =>
             disabled: !isSameMonth(date2, new Date(year, month, 1)),
             today: isSameDay(date2, new Date()),
             onClick: () => onChange(date2),
-            key: format(date2, 'X'),
-            label: format(date2, 'DD')
+            key: +date2,
+            label: date2.getDate()
           });
         }
         i += 1;
@@ -144,7 +120,6 @@ const Calendar = (...enhancers) =>
           textAlign: 'center',
           marginY: theme.space1,
           position: 'relative',
-          fontWeight: 300,
           '> svg': {
             centerY: true,
             cursor: 'pointer',
@@ -172,12 +147,36 @@ const Calendar = (...enhancers) =>
           }}
         >
           <h4>
-            <Dropdown overlay={menuMonths(date, setDate)}>
-              <span>{format(date, 'MMMM', { locale })}</span>
-            </Dropdown>{' '}
-            <Dropdown overlay={menuYears(date, setDate)}>
-              <span>{format(date, 'YYYY', { locale })}</span>
-            </Dropdown>
+            <Select
+              value={new Date(date).getMonth()}
+              onChange={e => setDate(setMonth(date, e.target.value))}
+            >
+              <option value={0}>Januar</option>
+              <option value={1}>Februar</option>
+              <option value={2}>März</option>
+              <option value={3}>April</option>
+              <option value={4}>Mai</option>
+              <option value={5}>Juni</option>
+              <option value={6}>Juli</option>
+              <option value={7}>August</option>
+              <option value={8}>September</option>
+              <option value={9}>Oktober</option>
+              <option value={10}>November</option>
+              <option value={11}>Dezember</option>
+            </Select>
+            <Select
+              value={new Date(date).getYear()}
+              onChange={e => setDate(setMonth(date, e.target.value))}
+            >
+              {Array.from(Array(10)).map((x, y) => {
+                const year = parseInt(getYear(date), 10) - 4 + y;
+                return (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                );
+              })}
+            </Select>
             {!!arrows && (
               <FaChevronLeft
                 size={12}
